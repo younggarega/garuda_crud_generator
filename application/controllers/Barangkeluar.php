@@ -3,7 +3,7 @@
 if (!defined('BASEPATH'))
     exit('No direct script access allowed');
 
-class Penjualan extends CI_Controller
+class Barangkeluar extends CI_Controller
 {
     function __construct()
     {
@@ -16,14 +16,14 @@ class Penjualan extends CI_Controller
     public function index()
     {
         $data['setting'] = $this->db->get_where('tbl_setting',array('id_setting'=>1))->row_array();
-        $this->template->load('template','penjualan/tbl_menu_list',$data);
+        $this->template->load('template','barangkeluar/tbl_menu_list',$data);
     }
     
     function simpan_setting(){
         $value = $this->input->post('tampil_menu');
         $this->db->where('id_setting',1);
         $this->db->update('tbl_setting',array('value'=>$value));
-        redirect('penjualan');
+        redirect('barangkeluar');
     }
     
     public function json() {
@@ -43,10 +43,10 @@ class Penjualan extends CI_Controller
 		'is_main_menu' => $row->is_main_menu,
 		'is_aktif' => $row->is_aktif,
 	    );
-            $this->template->load('template','penjualan/tbl_menu_read', $data);
+            $this->template->load('template','barangkeluar/tbl_menu_read', $data);
         } else {
             $this->session->set_flashdata('message', 'Record Not Found');
-            redirect(site_url('penjualan'));
+            redirect(site_url('barangkeluar'));
         }
     }
 
@@ -54,7 +54,7 @@ class Penjualan extends CI_Controller
     {
         $data = array(
             'button' => 'Create',
-            'action' => site_url('penjualan/create_action'),
+            'action' => site_url('pebarangkeluarnjualan/create_action'),
 	    'id_menu' => set_value('id_menu'),
 	    'title' => set_value('title'),
 	    'url' => set_value('url'),
@@ -62,7 +62,7 @@ class Penjualan extends CI_Controller
 	    'is_main_menu' => set_value('is_main_menu'),
 	    'is_aktif' => set_value('is_aktif'),
 	);
-        $this->template->load('template','penjualan/tbl_menu_form', $data);
+        $this->template->load('template','barangkeluar/tbl_menu_form', $data);
     }
     
     public function create_action() 
@@ -82,7 +82,7 @@ class Penjualan extends CI_Controller
 
             $this->Menu_model->insert($data);
             $this->session->set_flashdata('message', 'Create Record Success');
-            redirect(site_url('penjualan'));
+            redirect(site_url('barangkeluar'));
         }
     }
     
@@ -93,7 +93,7 @@ class Penjualan extends CI_Controller
         if ($row) {
             $data = array(
                 'button' => 'Update',
-                'action' => site_url('penjualan/update_action'),
+                'action' => site_url('barangkeluar/update_action'),
 		'id_menu' => set_value('id_menu', $row->id_menu),
 		'title' => set_value('title', $row->title),
 		'url' => set_value('url', $row->url),
@@ -101,10 +101,10 @@ class Penjualan extends CI_Controller
 		'is_main_menu' => set_value('is_main_menu', $row->is_main_menu),
 		'is_aktif' => set_value('is_aktif', $row->is_aktif),
 	    );
-            $this->template->load('template','penjualan/tbl_menu_form', $data);
+            $this->template->load('template','barangkeluar/tbl_menu_form', $data);
         } else {
             $this->session->set_flashdata('message', 'Record Not Found');
-            redirect(site_url('penjualan'));
+            redirect(site_url('barangkeluar'));
         }
     }
     
@@ -125,7 +125,7 @@ class Penjualan extends CI_Controller
 
             $this->Menu_model->update($this->input->post('id_menu', TRUE), $data);
             $this->session->set_flashdata('message', 'Update Record Success');
-            redirect(site_url('penjualan'));
+            redirect(site_url('barangkeluar'));
         }
     }
     
@@ -136,10 +136,10 @@ class Penjualan extends CI_Controller
         if ($row) {
             $this->Menu_model->delete($id);
             $this->session->set_flashdata('message', 'Delete Record Success');
-            redirect(site_url('penjualan'));
+            redirect(site_url('barangkeluar'));
         } else {
             $this->session->set_flashdata('message', 'Record Not Found');
-            redirect(site_url('penjualan'));
+            redirect(site_url('barangkeluar'));
         }
     }
 
@@ -212,7 +212,7 @@ class Penjualan extends CI_Controller
             'start' => 0
         );
         
-        $this->load->view('penjualan/tbl_menu_doc',$data);
+        $this->load->view('barangkeluar/tbl_menu_doc',$data);
     }
 
 }

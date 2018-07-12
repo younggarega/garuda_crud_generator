@@ -9,10 +9,10 @@
             
 <table class='table table-bordered>'        
 
-	    <tr><td width='200'>Title <?php echo form_error('title') ?></td><td><input type="text" class="form-control" name="title" id="title" placeholder="Title" value="<?php echo $title; ?>" /></td></tr>
-	    <tr><td width='200'>Url <?php echo form_error('url') ?></td><td><input type="text" class="form-control" name="url" id="url" placeholder="Url" value="<?php echo $url; ?>" /></td></tr>
-	    <tr><td width='200'>Icon <?php echo form_error('icon') ?></td><td><input type="text" class="form-control" name="icon" id="icon" placeholder="Icon" value="<?php echo $icon; ?>" /></td></tr>
-	    <tr><td width='200'>Is Main Menu <?php echo form_error('is_main_menu') ?></td><td>                            <select name="is_main_menu" class="form-control">
+	    <tr><td width='200'>Tanggal <?php echo form_error('tgl_masuk_i') ?></td><td><input type="date" class="form-control" name="tgl_masuk_i" id="tgl_masuk_i" placeholder="Tanggal Masuk Barang" value="<?php echo $tgl_masuk_i; ?>" /></td></tr>
+	    <tr><td width='200'>Url <?php echo form_error('url') ?></td><td><input type="text" class="form-control" name="id_barang_i" id="id_barang_i" placeholder="ID Barang" value="<?php echo $id_barang_i; ?>" /></td></tr>
+	    <tr><td width='200'>Icon <?php echo form_error('nama_barang_i') ?></td><td><input type="text" class="form-control" name="nama_barang_i" id="nama_barang_i" placeholder="Nama Barang" value="<?php echo $nama_barang_i; ?>" /></td></tr>
+	    <tr><td width='200'>Is Main Menu <?php echo form_error('stock_masuk_i') ?></td><td>                            <select name="stock_masuk_i" class="form-control">
                                 <option value="0">MAIN MENU</option>
                                 <?php
                                 $menu = $this->db->get('tbl_menu')->result();

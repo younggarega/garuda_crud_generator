@@ -11,7 +11,7 @@
                     </div>
 
                     <div class="box-body">
-                        <?php echo form_open('kelolamenu/simpan_setting')?>
+                        <?php echo form_open('barangmasuk/simpan_setting')?>
                         <table class="table table-bordered">
                             <tr><td width="250">Tampilkan Menu Berdasarkan Level</td><td>
                                     
@@ -37,7 +37,7 @@
 
                     <div class="box-body">
                         <div style="padding-bottom: 10px;"'>
-                            <?php echo anchor(site_url('kelolamenu/create'), '<i class="fa fa-wpforms" aria-hidden="true"></i> Tambah Data', 'class="btn btn-danger btn-sm"'); ?>
+                            <?php echo anchor(site_url('barangmasuk/create'), '<i class="fa fa-wpforms" aria-hidden="true"></i> Tambah Data', 'class="btn btn-danger btn-sm"'); ?>
                             <?php //echo anchor(site_url('kelolamenu/excel'), '<i class="fa fa-file-excel-o" aria-hidden="true"></i> Export Ms Excel', 'class="btn btn-success btn-sm"'); ?>
                             <?php //echo anchor(site_url('kelolamenu/word'), '<i class="fa fa-file-word-o" aria-hidden="true"></i> Export Ms Word', 'class="btn btn-primary btn-sm"'); ?></div>
                         <table class="table table-bordered table-striped" id="mytable">
@@ -94,7 +94,7 @@
             },
             processing: true,
             serverSide: true,
-            ajax: {"url": "kelolamenu/json", "type": "POST"},
+            ajax: {"url": "barangmasuk/json", "type": "POST"},
             columns: [
                 {
                     "data": "id_menu",

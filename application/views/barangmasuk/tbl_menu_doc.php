@@ -27,16 +27,16 @@
 		<th>Is Aktif</th>
 		
             </tr><?php
-            foreach ($kelolamenu_data as $kelolamenu)
+            foreach ($barangmasuk_data as $barangmasuk)
             {
                 ?>
                 <tr>
 		      <td><?php echo ++$start ?></td>
-		      <td><?php echo $kelolamenu->title ?></td>
-		      <td><?php echo $kelolamenu->url ?></td>
-		      <td><?php echo $kelolamenu->icon ?></td>
-		      <td><?php echo $kelolamenu->is_main_menu ?></td>
-		      <td><?php echo $kelolamenu->is_aktif ?></td>	
+		      <td><?php echo $barangmasuk->title ?></td>
+		      <td><?php echo $barangmasuk->url ?></td>
+		      <td><?php echo $barangmasuk->icon ?></td>
+		      <td><?php echo $barangmasuk->is_main_menu ?></td>
+		      <td><?php echo $barangmasuk->is_aktif ?></td>	
                 </tr>
                 <?php
             }

@@ -4,25 +4,9 @@
 
         <div class="row">
             <div class="col-xs-12">
-                <div class="box box-warning box-solid">
-
-                    <div class="box-header">
-                        <h3 class="box-title">SETTING TAMPILAN MENU</h3>
-                    </div>
-
-                    <div class="box-body">
-                        <?php echo form_open('kelolamenu/simpan_setting')?>
-                        <table class="table table-bordered">
-                            <tr><td width="250">Tampilkan Menu Berdasarkan Level</td><td>
-                                    
-                                    <?php
-                                    echo form_dropdown('tampil_menu',array('ya'=>'YA','tidak'=>'TIDAK'),$setting['value'],array('class'=>'form-control'));
-                                    ?>
-                                </td></tr>
-                            <tr><td></td><td><button type="submit" class="btn btn-danger btn-sm">Simpan Perubahan</button></td></tr>
-                        </table>
-                    </form>
-                    </div>
+                <div class="caption">
+                        <i class="fa fa-table font-blue"></i>
+                        <span class="caption-subject font-blue sbold uppercase"> <?php echo $pagetitle ?></span>
                 </div>
             </div>
         </div>
@@ -32,23 +16,23 @@
                 <div class="box box-warning box-solid">
 
                     <div class="box-header">
-                        <h3 class="box-title">KELOLA DATA MENU</h3>
+                        <h3 class="box-title">STOCK KOMPONEN</h3>
                     </div>
 
                     <div class="box-body">
                         <div style="padding-bottom: 10px;"'>
-                            <?php echo anchor(site_url('kelolamenu/create'), '<i class="fa fa-wpforms" aria-hidden="true"></i> Tambah Data', 'class="btn btn-danger btn-sm"'); ?>
+                            <?php echo anchor(site_url('stockkomponen/create'), '<i class="fa fa-wpforms" aria-hidden="true"></i> Tambah Data', 'class="btn btn-danger btn-sm"'); ?>
                             <?php //echo anchor(site_url('kelolamenu/excel'), '<i class="fa fa-file-excel-o" aria-hidden="true"></i> Export Ms Excel', 'class="btn btn-success btn-sm"'); ?>
                             <?php //echo anchor(site_url('kelolamenu/word'), '<i class="fa fa-file-word-o" aria-hidden="true"></i> Export Ms Word', 'class="btn btn-primary btn-sm"'); ?></div>
                         <table class="table table-bordered table-striped" id="mytable">
                             <thead>
                                 <tr>
-                                    <th width="30px">No</th>
-                                    <th>Title</th>
-                                    <th>Url</th>
-                                    <th>Icon</th>
-                                    <th>Is Main Menu</th>
-                                    <th>Is Aktif</th>
+                                    <th>NO</th>
+                                    <th>ID Komponen</th>
+                                    <th>Nama Komponen</th>
+                                    <th>Jenis Komponen</th>
+                                    <th>Stock</th>
+                                    <th>Gambar</th>
                                     <th width="100px">Action</th>
                                 </tr>
                             </thead>
@@ -94,12 +78,16 @@
             },
             processing: true,
             serverSide: true,
-            ajax: {"url": "kelolamenu/json", "type": "POST"},
+            ajax: {"url": "stockkomponen/json", "type": "POST"},
             columns: [
                 {
-                    "data": "id_menu",
+                    "data": "id_komponen",
                     "orderable": false
-                },{"data": "title"},{"data": "url"},{"data": "icon"},{"data": "is_main_menu"},{"data": "is_aktif"},
+                },
+                {
+                    "data": "id_komponen",
+                    "orderable": false
+                },{"data": "nama_komponen"},{"data": "jenis_komponen"},{"data": "stock_komponen"},{"data": "gambar_komponen"},
                 {
                     "data" : "action",
                     "orderable": false,

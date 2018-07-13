@@ -2,7 +2,7 @@
     <section class="content">
 
 
-        <div class="row">
+        <!-- <div class="row">
             <div class="col-xs-12">
                 <div class="box box-warning box-solid">
 
@@ -25,14 +25,14 @@
                     </div>
                 </div>
             </div>
-        </div>
+        </div> -->
 
         <div class="row">
             <div class="col-xs-12">
                 <div class="box box-warning box-solid">
 
                     <div class="box-header">
-                        <h3 class="box-title">KELOLA DATA MENU</h3>
+                        <h3 class="box-title">DATA KOMPONEN MASUK</h3>
                     </div>
 
                     <div class="box-body">
@@ -44,11 +44,10 @@
                             <thead>
                                 <tr>
                                     <th width="30px">No</th>
-                                    <th>Title</th>
-                                    <th>Url</th>
-                                    <th>Icon</th>
-                                    <th>Is Main Menu</th>
-                                    <th>Is Aktif</th>
+                                    <th>Tanggal</th>
+                                    <th>ID Komponen</th>
+                                    <th>Nama Komponen</th>
+                                    <th>Stock Masuk</th>                                    
                                     <th width="100px">Action</th>
                                 </tr>
                             </thead>
@@ -99,7 +98,7 @@
                 {
                     "data": "id_menu",
                     "orderable": false
-                },{"data": "title"},{"data": "url"},{"data": "icon"},{"data": "is_main_menu"},{"data": "is_aktif"},
+                },{"data": "tgl_masuk"},{"data": "id_komponen"},{"data": "nama_komponen"},{"data": "stock_masuk"},
                 {
                     "data" : "action",
                     "orderable": false,

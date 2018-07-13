@@ -15,14 +15,14 @@ class Barangmasuk extends CI_Controller
 
     public function index()
     {
-        $data['setting'] = $this->db->get_where('tbl_setting',array('id_setting'=>1))->row_array();
+        $data['setting'] = $this->db->get_where('tbl_komponen_masuk',array('id_komponen'=>1))->row_array();
         $this->template->load('template','barangmasuk/tbl_menu_list',$data);
     }
     
     function simpan_setting(){
         $value = $this->input->post('tampil_menu');
-        $this->db->where('id_setting',1);
-        $this->db->update('tbl_setting',array('value'=>$value));
+        $this->db->where('id_barang',1);
+        $this->db->update('tbl_komponen_masuk',array('value'=>$value));
         redirect('barangmasuk');
     }
     
@@ -36,8 +36,8 @@ class Barangmasuk extends CI_Controller
         $row = $this->Menu_model->get_by_id($id);
         if ($row) {
             $data = array(
-		'id_menu' => $row->id_menu,
-		'title' => $row->title,
+		'tgl_masuk' => $row->tgl_masuk_i,
+		'id_komponen_i' => $row->id_komponen,
 		'url' => $row->url,
 		'icon' => $row->icon,
 		'is_main_menu' => $row->is_main_menu,
@@ -53,14 +53,15 @@ class Barangmasuk extends CI_Controller
     public function create() 
     {
         $data = array(
-            'button' => 'Create',
-            'action' => site_url('barangmasuk/create_action'),
-	    'id_menu' => set_value('id_menu'),
-	    'title' => set_value('title'),
-	    'url' => set_value('url'),
-	    'icon' => set_value('icon'),
-	    'is_main_menu' => set_value('is_main_menu'),
-	    'is_aktif' => set_value('is_aktif'),
+            'button'  => 'Create',
+            'action'  => site_url('barangmasuk/create_action'),
+	    'tgl_masuk_i'      => set_value('tgl_masuk'),
+	    'id_komponen_i'    => set_value('id_komponen'),
+	    'nama_komponen_i'  => set_value('nama_komponen'),
+	    'stock_masuk_i'    => set_value('stock_masuk'),
+	    'is_main_menu'     => set_value('is_main_menu'),
+	    'is_aktif'         => set_value('is_aktif'),
+        //Kiri value form  => Field di database (Keterangan)
 	);
         $this->template->load('template','barangmasuk/tbl_menu_form', $data);
     }
@@ -73,8 +74,8 @@ class Barangmasuk extends CI_Controller
             $this->create();
         } else {
             $data = array(
-		'title' => $this->input->post('title',TRUE),
-		'url' => $this->input->post('url',TRUE),
+		'tgl_masuk' => $this->input->post('tgl_masuk_i',TRUE),
+		'id_barang' => $this->input->post('id_barang_i',TRUE),
 		'icon' => $this->input->post('icon',TRUE),
 		'is_main_menu' => $this->input->post('is_main_menu',TRUE),
 		'is_aktif' => $this->input->post('is_aktif',TRUE),

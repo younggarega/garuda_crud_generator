@@ -48,7 +48,7 @@
                                     <th>ID Komponen</th>
                                     <th>Nama Komponen</th>
                                     <th>Stock Masuk</th>                                    
-                                    <th width="100px">Action</th>
+                                   
                                 </tr>
                             </thead>
 
@@ -98,12 +98,8 @@
                 {
                     "data": "id_menu",
                     "orderable": false
-                },{"data": "tgl_masuk"},{"data": "id_komponen"},{"data": "nama_komponen"},{"data": "stock_masuk"},
-                {
-                    "data" : "action",
-                    "orderable": false,
-                    "className" : "text-center"
-                }
+                },{"data": "tgl_masuk"},{"data": "id_komponen"},{"data": "nama_komponen"},{"data": "stock_masuk"}
+
             ],
             order: [[0, 'desc']],
             rowCallback: function(row, data, iDisplayIndex) {

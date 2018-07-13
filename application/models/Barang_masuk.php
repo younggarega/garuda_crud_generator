@@ -17,13 +17,13 @@ class Barang_masuk extends CI_Model
 
     // datatables
     function json() {
-        $this->datatables->select('id_menu,title,url,icon,is_main_menu,is_aktif');
-        $this->datatables->from('tbl_menu');
-        $this->datatables->add_column('is_aktif', '$1', 'rename_string_is_aktif(is_aktif)');
+        $this->datatables->select('tgl_masuk,id_komponen,nama_komponen,stock_masuk');
+        $this->datatables->from('tbl_komponen_masuk');
+        //$this->datatables->add_column('is_aktif', '$1', 'rename_string_is_aktif(is_aktif)');
         //add this line for join
         //$this->datatables->join('table2', 'tbl_menu.field = table2.field');
-        $this->datatables->add_column('action',anchor(site_url('kelolamenu/update/$1'),'<i class="fa fa-pencil-square-o" aria-hidden="true"></i>', array('class' => 'btn btn-danger btn-sm'))." 
-                ".anchor(site_url('kelolamenu/delete/$1'),'<i class="fa fa-trash-o" aria-hidden="true"></i>','class="btn btn-danger btn-sm" onclick="javasciprt: return confirm(\'Are You Sure ?\')"'), 'id_menu');
+        /*$this->datatables->add_column('action',anchor(site_url('kelolamenu/update/$1'),'<i class="fa fa-pencil-square-o" aria-hidden="true"></i>', array('class' => 'btn btn-danger btn-sm'))." 
+                ".anchor(site_url('kelolamenu/delete/$1'),'<i class="fa fa-trash-o" aria-hidden="true"></i>','class="btn btn-danger btn-sm" onclick="javasciprt: return confirm(\'Are You Sure ?\')"'), 'id_menu');*/
         return $this->datatables->generate();
     }
     

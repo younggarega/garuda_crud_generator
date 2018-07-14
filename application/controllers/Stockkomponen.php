@@ -80,7 +80,7 @@ class Stockkomponen extends CI_Controller
     
     public function update($id) 
     {
-        $row = $this->Menu_model->get_by_id($id);
+        $row = $this->Stock_Komponen_Model->get_by_id($id);
 
         if ($row) {
             $data = array(
@@ -114,7 +114,7 @@ class Stockkomponen extends CI_Controller
 		'gambar_komponen' => $this->input->post('gambar_komponen',TRUE),
 	    );
 
-            $this->Menu_model->update($this->input->post('id_menu', TRUE), $data);
+            $this->Stock_Komponen_Model->update($this->input->post('id_komponen', TRUE), $data);
             $this->session->set_flashdata('message', 'Update Record Success');
             redirect(site_url('stockkomponen'));
         }
@@ -140,7 +140,7 @@ class Stockkomponen extends CI_Controller
 	$this->form_validation->set_rules('nama_komponen', 'Nama Komponen', 'trim|required');
 	$this->form_validation->set_rules('jenis_komponen', 'Jenis Komponen', 'trim|required');
 	$this->form_validation->set_rules('Stock_komponen', 'Stock Komponen', 'trim');
-	$this->form_validation->set_rules('gambar_komponen', 'Gambar Komponen', 'trim|required');
+	$this->form_validation->set_rules('gambar_komponen', 'Gambar Komponen', 'trim');
 
 	$this->form_validation->set_error_delimiters('<span class="text-danger">', '</span>');
     }

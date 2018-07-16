@@ -14,7 +14,7 @@
         <table class="table">
 	    <tr><td>ID Komponen</td><td><?php echo $id_komponen; ?></td></tr>
 	    <tr><td>Nama Komponen</td><td><?php echo $nama_komponen; ?></td></tr>
-	    <tr><td>Jenis Komponen</td><td><?php echo $jenis_komponen; ?></td></tr>
+	    <tr><td>Keterangan</td><td><?php echo $keterangan; ?></td></tr>
 	    <tr><td>Stock</td><td><?php echo $stock_komponen; ?></td></tr>
 	    <tr><td>Gambar Komponen</td><td><?php echo $gambar_komponen; ?></td></tr>
 	    <tr><td></td><td><a href="<?php echo site_url('stockkomponen') ?>" class="btn btn-default">Cancel</a></td></tr>

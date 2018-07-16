@@ -17,7 +17,7 @@ class Stock_Komponen_Model extends CI_Model
 
     // datatables
     function json() {
-        $this->datatables->select('id_komponen,nama_komponen,jenis_komponen,stock_komponen,gambar_komponen');
+        $this->datatables->select('id_komponen,nama_komponen,keterangan,stock_komponen,gambar_komponen');
         $this->datatables->from('tbl_komponen');
         //add this line for join
         //$this->datatables->join('table2', 'tbl_menu.field = table2.field');
@@ -45,7 +45,7 @@ class Stock_Komponen_Model extends CI_Model
     function total_rows($q = NULL) {
     $this->db->like('id_komponen', $q);
 	$this->db->or_like('nama_komponen', $q);
-	$this->db->or_like('jenis_komponen', $q);
+	$this->db->or_like('keterangan', $q);
 	$this->db->or_like('stock_komponen', $q);
 	$this->db->or_like('gambar_komponen', $q);
 	$this->db->from($this->table);
@@ -57,7 +57,7 @@ class Stock_Komponen_Model extends CI_Model
     $this->db->order_by($this->id, $this->order);
     $this->db->like('id_komponen', $q);
 	$this->db->or_like('nama_komponen', $q);
-	$this->db->or_like('jenis_komponen', $q);
+	$this->db->or_like('keterangan', $q);
 	$this->db->or_like('stock_komponen', $q);
 	$this->db->or_like('gambar_komponen', $q);
 	$this->db->limit($limit, $start);

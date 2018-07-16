@@ -32,7 +32,7 @@ class Stockkomponen extends CI_Controller
             $data = array(
 		'id_komponen' => $row->id_komponen,
 		'nama_komponen' => $row->nama_komponen,
-		'jenis_komponen' => $row->jenis_komponen,
+		'keterangan' => $row->keterangan,
 		'stock_komponen' => $row->stock_komponen,
 		'gambar_komponen' => $row->gambar_komponen,
 	    );
@@ -50,7 +50,7 @@ class Stockkomponen extends CI_Controller
         'action' => site_url('stockkomponen/create_action'),
 	    'id_komponen' => set_value('id_komponen'),
 	    'nama_komponen' => set_value('nama_komponen'),
-	    'jenis_komponen' => set_value('jenis_komponen'),
+	    'keterangan' => set_value('keterangan'),
 	    'stock_komponen' => set_value('stock_komponen'),
 	    'gambar_komponen' => set_value('gambar_komponen'),
 	);
@@ -67,7 +67,7 @@ class Stockkomponen extends CI_Controller
             $data = array(
 		'id_komponen' => $this->input->post('id_komponen',TRUE),
 		'nama_komponen' => $this->input->post('nama_komponen',TRUE),
-		'jenis_komponen' => $this->input->post('jenis_komponen',TRUE),
+		'keterangan' => $this->input->post('keterangan',TRUE),
 		'stock_komponen' => $this->input->post('Stock_komponen',TRUE),
 		'gambar_komponen' => $this->input->post('gambar_komponen',TRUE),
 	    );
@@ -88,7 +88,7 @@ class Stockkomponen extends CI_Controller
         'action' => site_url('stockkomponen/update_action'),
 		'id_komponen' => set_value('id_komponen', $row->id_komponen),
 		'nama_komponen' => set_value('nama_komponen', $row->nama_komponen),
-		'jenis_komponen' => set_value('jenis_komponen', $row->jenis_komponen),
+		'keterangan' => set_value('keterangan', $row->keterangan),
 		'stock_komponen' => set_value('stock_komponen', $row->stock_komponen),
 		'gambar_komponen' => set_value('gambar_komponen', $row->gambar_komponen),
 	    );
@@ -109,7 +109,7 @@ class Stockkomponen extends CI_Controller
             $data = array(
 		'id_komponen' => $this->input->post('id_komponen',TRUE),
 		'nama_komponen' => $this->input->post('nama_komponen',TRUE),
-		'jenis_komponen' => $this->input->post('jenis_komponen',TRUE),
+		'keterangan' => $this->input->post('keterangan',TRUE),
 		'stock_komponen' => $this->input->post('stock_komponen',TRUE),
 		'gambar_komponen' => $this->input->post('gambar_komponen',TRUE),
 	    );
@@ -138,7 +138,7 @@ class Stockkomponen extends CI_Controller
     {
 	$this->form_validation->set_rules('id_komponen', 'ID Komponen', 'trim|required');
 	$this->form_validation->set_rules('nama_komponen', 'Nama Komponen', 'trim|required');
-	$this->form_validation->set_rules('jenis_komponen', 'Jenis Komponen', 'trim|required');
+	$this->form_validation->set_rules('keterangan', 'Keterangan', 'trim');
 	$this->form_validation->set_rules('Stock_komponen', 'Stock Komponen', 'trim');
 	$this->form_validation->set_rules('gambar_komponen', 'Gambar Komponen', 'trim');
 

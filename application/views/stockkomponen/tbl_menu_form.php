@@ -25,9 +25,9 @@
         </tr>
 
 	    <tr>
-            <td width='200'>Jenis Komponen <?php echo form_error('jenis_komponen') ?>
+            <td width='200'>Keterangan <?php echo form_error('keterangan') ?>
             </td>
-            <td><input type="text" class="form-control" name="jenis_komponen" id="jenis_komponen" placeholder="Jenis Komponen" value="<?php echo $jenis_komponen; ?>" />
+            <td><input type="text" class="form-control" name="keterangan" id="keterangan" placeholder="Jenis Komponen" value="<?php echo $keterangan; ?>" />
             </td>
         </tr>
 

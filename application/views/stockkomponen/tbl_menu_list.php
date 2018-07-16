@@ -30,7 +30,7 @@
                                     <th>NO</th>
                                     <th>ID Komponen</th>
                                     <th>Nama Komponen</th>
-                                    <th>Jenis Komponen</th>
+                                    <th>Keterangan</th>
                                     <th>Stock</th>
                                     <th>Gambar</th>
                                     <th width="100px">Action</th>
@@ -87,7 +87,7 @@
                 {
                     "data": "id_komponen",
                     "orderable": false
-                },{"data": "nama_komponen"},{"data": "jenis_komponen"},{"data": "stock_komponen"},{"data": "gambar_komponen"},
+                },{"data": "nama_komponen"},{"data": "keterangan"},{"data": "stock_komponen"},{"data": "gambar_komponen"},
                 {
                     "data" : "action",
                     "orderable": false,

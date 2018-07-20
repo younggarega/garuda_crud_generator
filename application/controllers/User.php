@@ -127,7 +127,7 @@ class User extends CI_Controller
                 $data = array(
 		'full_name'     => $this->input->post('full_name',TRUE),
 		'email'         => $this->input->post('email',TRUE),
-                'images'        =>$foto['file_name'],
+        'images'        =>$foto['file_name'],
 		'id_user_level' => $this->input->post('id_user_level',TRUE),
 		'is_aktif'      => $this->input->post('is_aktif',TRUE));
                 

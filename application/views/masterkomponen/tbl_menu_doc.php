@@ -16,27 +16,27 @@
         </style>
     </head>
     <body>
-        <h2>Tbl_menu List</h2>
+        <h2>Master Komponen List</h2>
         <table class="word-table" style="margin-bottom: 10px">
             <tr>
-                <th>No</th>
-		<th>Title</th>
-		<th>Url</th>
-		<th>Icon</th>
-		<th>Is Main Menu</th>
-		<th>Is Aktif</th>
+        <th>No</th>
+		<th>ID Komponen</th>
+		<th>Nama Komponen</th>
+		<th>Jenis Komponen</th>
+		<th>Keterangan</th>
+		<!-- <th>Gambar</th> -->
 		
             </tr><?php
-            foreach ($kelolamenu_data as $kelolamenu)
+            foreach ($masterkomponen_data as $masterkomponen)
             {
                 ?>
                 <tr>
 		      <td><?php echo ++$start ?></td>
-		      <td><?php echo $kelolamenu->title ?></td>
-		      <td><?php echo $kelolamenu->url ?></td>
-		      <td><?php echo $kelolamenu->icon ?></td>
-		      <td><?php echo $kelolamenu->is_main_menu ?></td>
-		      <td><?php echo $kelolamenu->is_aktif ?></td>	
+		      <td><?php echo $masterkomponen->id_komponen ?></td>
+		      <td><?php echo $masterkomponen->nama_komponen ?></td>
+		      <td><?php echo $masterkomponen->jenis_komponen ?></td>
+		      <td><?php echo $masterkomponen->keterangan ?></td>
+		      <!-- <td><?php echo $masterkomponen->gambar_komponen ?></td> -->	
                 </tr>
                 <?php
             }

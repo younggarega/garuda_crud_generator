@@ -44,8 +44,7 @@
                             <thead>
                                 <tr>
                                     <th width="30px">No</th>
-                                    <th>Tanggal</th>
-                                    <th>ID Komponen</th>
+                                    <th>Tanggal</th>                                    
                                     <th>Nama Komponen</th>
                                     <th>Stock Masuk</th>                                    
                                    
@@ -96,9 +95,9 @@
             ajax: {"url": "barangmasuk/json", "type": "POST"},
             columns: [
                 {
-                    "data": "id_menu",
+                    "data": "id_masuk",
                     "orderable": false
-                },{"data": "tgl_masuk"},{"data": "id_komponen"},{"data": "nama_komponen"},{"data": "stock_masuk"}
+                },{"data": "tgl_masuk"},{"data": "id_komponen"},{"data": "stock_masuk"}
 
             ],
             order: [[0, 'desc']],

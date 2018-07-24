@@ -8,40 +8,40 @@ class Barangmasuk extends CI_Controller
     function __construct()
     {
         parent::__construct();
-        $this->load->model('Menu_model');
+        $this->load->model('Barangmasuk_model');
         $this->load->library('form_validation');        
 	$this->load->library('datatables');
     }
 
     public function index()
     {
-        $data['setting'] = $this->db->get_where('tbl_komponen_masuk',array('id_komponen'=>1))->row_array();
-        $this->template->load('template','barangmasuk/tbl_menu_list',$data);
+        // $data['setting'] = $this->db->get_where('tbl_komponen_masuk',array('id_masuk'=>1))->row_array();
+        $this->template->load('template','barangmasuk/tbl_menu_list');
     }
     
-    function simpan_setting(){
-        $value = $this->input->post('tampil_menu');
-        $this->db->where('id_barang',1);
-        $this->db->update('tbl_komponen_masuk',array('value'=>$value));
-        redirect('barangmasuk');
-    }
+    // function simpan_setting(){
+    //     $value = $this->input->post('tampil_menu');
+    //     $this->db->where('id_masuk',1);
+    //     $this->db->update('tbl_komponen_masuk',array('value'=>$value));
+    //     redirect('barangmasuk');
+    // }
     
     public function json() {
         header('Content-Type: application/json');
-        echo $this->Menu_model->json();
+        echo $this->Barangmasuk_model->json();
     }
 
     public function read($id) 
     {
-        $row = $this->Menu_model->get_by_id($id);
+        $row = $this->Barangmasuk_model->get_by_id($id);
         if ($row) {
             $data = array(
-		'tgl_masuk' => $row->tgl_masuk_i,
-		'id_komponen_i' => $row->id_komponen,
-		'url' => $row->url,
-		'icon' => $row->icon,
-		'is_main_menu' => $row->is_main_menu,
-		'is_aktif' => $row->is_aktif,
+		'tgl_masuk_i'       => $row->tgl_masuk,
+		'id_komponen_i'   => $row->id_komponen,
+		'stock_masuk_i'   => $row->stock_masuk,
+		//'icon' => $row->icon,
+		//'is_main_menu' => $row->is_main_menu,
+		//'is_aktif' => $row->is_aktif,
 	    );
             $this->template->load('template','barangmasuk/tbl_menu_read', $data);
         } else {
@@ -55,12 +55,13 @@ class Barangmasuk extends CI_Controller
         $data = array(
             'button'  => 'Create',
             'action'  => site_url('barangmasuk/create_action'),
-	    'tgl_masuk_i'      => set_value('tgl_masuk'),
+	    //'id_masuk_i'     => set_value('id_masuk'),
+        'tgl_masuk_i'      => set_value('tgl_masuk'),
 	    'id_komponen_i'    => set_value('id_komponen'),
-	    'nama_komponen_i'  => set_value('nama_komponen'),
 	    'stock_masuk_i'    => set_value('stock_masuk'),
-	    'is_main_menu'     => set_value('is_main_menu'),
-	    'is_aktif'         => set_value('is_aktif'),
+        //'nama_komponen_i'  => set_value(''),
+	    //'is_main_menu'     => set_value('is_main_menu'),
+	    //'is_aktif'         => set_value('is_aktif'),
         //Kiri value form  => Field di database (Keterangan)
 	);
         $this->template->load('template','barangmasuk/tbl_menu_form', $data);
@@ -74,14 +75,15 @@ class Barangmasuk extends CI_Controller
             $this->create();
         } else {
             $data = array(
-		'tgl_masuk' => $this->input->post('tgl_masuk_i',TRUE),
-		'id_barang' => $this->input->post('id_barang_i',TRUE),
-		'icon' => $this->input->post('icon',TRUE),
-		'is_main_menu' => $this->input->post('is_main_menu',TRUE),
-		'is_aktif' => $this->input->post('is_aktif',TRUE),
+		//'id_masuk'    => $this->input->post('id_masuk_i',TRUE),
+        'tgl_masuk'   => $this->input->post('tgl_masuk_i',TRUE),
+        'id_komponen' => $this->input->post('id_komponen_i',TRUE),
+		'stock_masuk' => $this->input->post('stock_masuk_i',TRUE),
+		//'is_main_menu' => $this->input->post('is_main_menu',TRUE),
+		//'is_aktif' => $this->input->post('is_aktif',TRUE),
 	    );
 
-            $this->Menu_model->insert($data);
+            $this->Barangmasuk_model->insert($data);
             $this->session->set_flashdata('message', 'Create Record Success');
             redirect(site_url('barangmasuk'));
         }
@@ -146,13 +148,13 @@ class Barangmasuk extends CI_Controller
 
     public function _rules() 
     {
-	$this->form_validation->set_rules('title', 'title', 'trim|required');
-	$this->form_validation->set_rules('url', 'url', 'trim|required');
-	$this->form_validation->set_rules('icon', 'icon', 'trim|required');
-	$this->form_validation->set_rules('is_main_menu', 'is main menu', 'trim|required');
-	$this->form_validation->set_rules('is_aktif', 'is aktif', 'trim|required');
+	$this->form_validation->set_rules('tgl_masuk', 'Tanggal', 'trim|required');
+	$this->form_validation->set_rules('id_komponen', 'ID Komponen', 'trim|required');
+	$this->form_validation->set_rules('stock_masuk', 'stock_masuk', 'trim|required');
+	//$this->form_validation->set_rules('is_main_menu', 'is main menu', 'trim|required');
+	//$this->form_validation->set_rules('is_aktif', 'is aktif', 'trim|required');
 
-	$this->form_validation->set_rules('id_menu', 'id_menu', 'trim');
+	//$this->form_validation->set_rules('id', 'id', 'trim');
 	$this->form_validation->set_error_delimiters('<span class="text-danger">', '</span>');
     }
 

@@ -29,7 +29,6 @@
                                     <th>ID Komponen</th>
                                     <th>Nama Komponen</th>
                                     <th>Jenis Komponen</th>
-                                    <th>Keterangan</th>
                                     <th>Gambar</th>
                                     <th width="100px">Action</th>
                                 </tr>
@@ -46,8 +45,7 @@
                                     <td><?php echo $masterkomponen->id_komponen ?></td>
                                     <td ><?php echo $masterkomponen->nama_komponen ?></td>
                                     <td><?php  echo $masterkomponen->nama_kategori?></td>
-                                    <td><?php  echo $masterkomponen->keterangan?></td>
-                                    <td><img  src=".base_url(assets/images/.$masterkomponen->gambar_komponen)."></td>
+                                    <td><img  src=".base_url(assets/images/.$foto['filename'])."></td>
 
                                     <td style="text-align:center" width="140px">
                                     <?php 
@@ -76,7 +74,7 @@
                         <script src="<?php echo base_url('assets/js/jquery-1.11.2.min.js') ?>"></script>
                                 <script type="text/javascript">
                             $(function() {
-                            $('#id_produk').keyup(function() {
+                            $('#id_komponen').keyup(function() {
                                 this.value = this.value.toUpperCase();
                             });
                         });

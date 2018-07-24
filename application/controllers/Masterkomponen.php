@@ -65,8 +65,9 @@ class Masterkomponen extends CI_Controller
 	    'id_komponen' => set_value('id_komponen'),
         'jenis_komponen' => set_value('jenis_komponen'),
 	    'nama_komponen' => set_value('nama_komponen'),
-	    'gambar_komponen' => set_value('gambar_komponen'),
         'keterangan' => set_value('keterangan'),
+	    'gambar_komponen' => set_value('gambar_komponen'),
+        
 	);
         $this->template->load('template','masterkomponen/tbl_menu_form', $data);
     }
@@ -82,8 +83,9 @@ class Masterkomponen extends CI_Controller
 		$data['id_komponen'] = $this->input->post('id_komponen',TRUE);
         $data['jenis_komponen'] = $this->input->post('jenis_komponen',TRUE);
 		$data['nama_komponen'] = $this->input->post('nama_komponen',TRUE);
+        $data['keterangan'] = $this->input->post('keterangan',TRUE);
         $data['gambar_komponen'] = $foto['file_name'];
-		$data['keterangan'] = $this->input->post('keterangan',TRUE);
+		
 		
 
             $this->Master_Komponen_Model->insert($data);

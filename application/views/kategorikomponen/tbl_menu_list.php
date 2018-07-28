@@ -20,8 +20,10 @@
                     <div class="box-body">
                         <div style="padding-bottom: 10px;"'>
                             <?php echo anchor(site_url('kategorikomponen/create'), '<i class="fa fa-wpforms" aria-hidden="true"></i> Tambah Data', 'class="btn btn-danger btn-sm"'); ?>
-                            <?php //echo anchor(site_url('kelolamenu/excel'), '<i class="fa fa-file-excel-o" aria-hidden="true"></i> Export Ms Excel', 'class="btn btn-success btn-sm"'); ?>
-                            <?php //echo anchor(site_url('kelolamenu/word'), '<i class="fa fa-file-word-o" aria-hidden="true"></i> Export Ms Word', 'class="btn btn-primary btn-sm"'); ?></div>
+                            <?php echo anchor(site_url('kategorikomponen/excel'), '<i class="fa fa-file-excel-o" aria-hidden="true"></i> Export Ms Excel', 'class="btn btn-success btn-sm"'); ?>
+                            <?php echo anchor(site_url('kategorikomponen/word'), '<i class="fa fa-file-word-o" aria-hidden="true"></i> Export Ms Word', 'class="btn btn-primary btn-sm"'); ?>
+                            <?php echo anchor(site_url('kategorikomponen/pdf'), '<i class="btn btn-danger btn-sm "> Export To PDF</i>',array('target'=>'_blank')); ?>
+                            </div>
                         <table class="table table-bordered table-striped" id="mytable">
                             <thead>
                                 <tr>

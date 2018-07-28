@@ -16,7 +16,7 @@
         </style>
     </head>
     <body>
-        <h2>Tbl_menu List</h2>
+        <h2>Tabel Kategori Komponen</h2>
         <table class="word-table" style="margin-bottom: 10px">
             <tr>
                 <th>No</th>
@@ -25,11 +25,12 @@
 		<th>Keterangan</th>
 		
             </tr><?php
+            $no = 1;
             foreach ($kategorikomponen_data as $kategorikomponen)
             {
                 ?>
                 <tr>
-		      <td><?php echo ++$start ?></td>
+		      <td><?php echo $no++ ?></td>
 		      <td><?php echo $kategorikomponen->jenis_komponen ?></td>
 		      <td><?php echo $kategorikomponen->nama_kategori ?></td>
 		      <td><?php echo $kategorikomponen->keterangan ?></td>	

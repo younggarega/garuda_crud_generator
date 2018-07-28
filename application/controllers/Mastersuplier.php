@@ -10,7 +10,7 @@ class Mastersuplier extends CI_Controller
         parent::__construct();
         $this->load->model('Master_Suplier_Model');
         $this->load->library('form_validation');        
-	    $this->load->library('datatables');
+	    $this->load->library('pdf');
     }
 
     public function index()
@@ -184,6 +184,40 @@ class Mastersuplier extends CI_Controller
 
         xlsEOF();
         exit();
+    }
+
+     public function pdf(){
+        $pdf = new FPDF('l','mm','A4');
+        // membuat halaman baru
+        $pdf->AddPage();
+        // setting jenis font yang akan digunakan
+        $pdf->SetFont('Arial','B',16);
+        // mencetak string 
+        $pdf->Cell(190,7,'Master Komponen',0,1,'C');
+
+        // Memberikan space kebawah agar tidak terlalu rapat
+        $pdf->Cell(10,7,'',0,1);
+        $pdf->SetFont('Arial','B',10);
+        //$pdf->Cell(10,6,'No',1,0,'C');
+        $pdf->Cell(25,6,'No',1,0,'C');
+        $pdf->Cell(35,6,'Id Suplier',1,0,'C');
+        $pdf->Cell(35,6,'Nama Suplier',1,0,'C');
+        $pdf->Cell(30,6,'Alamat',1,1,'C');
+       
+        $pdf->SetFont('Arial','',10);
+        $data = $this->Master_Suplier_Model->get_all();
+        $no = 1;
+        foreach ($data as $row){
+            
+            $pdf->Cell(25,6, $no++,1,0);
+            $pdf->Cell(35,6,$row->id_suplier,1,0); 
+            $pdf->Cell(35,6,$row->nama_suplier,1,0); 
+            $pdf->Cell(30,6,$row->alamat,1,1);
+ 
+            
+        }
+
+        $pdf->Output();
     }
 
     public function word()

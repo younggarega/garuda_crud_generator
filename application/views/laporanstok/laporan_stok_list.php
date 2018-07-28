@@ -12,7 +12,7 @@
                         <div style="padding-bottom: 10px;"'>
                         <?php echo anchor(site_url('laporanstok/excel'), ' <i class="fa fa-file-excel-o"></i> Export Ms Excel', 'class="btn btn-success btn-sm"'); ?>
                           <?php echo anchor(site_url('laporanstok/word'), '<i class="fa fa-file-word-o" aria-hidden="true"></i> Export Ms Word', 'class="btn btn-primary btn-sm"'); ?>
-                          <?php echo anchor(site_url('laporanstok/pdf'), '<i class="btn btn-danger btn-sm ">PDF</i>',array('target'=>'_blank')); ?>
+                          <?php echo anchor(site_url('laporanstok/pdf'), '<i class="btn btn-danger btn-sm "> Export To PDF</i>',array('target'=>'_blank')); ?>
                           <?php echo anchor(site_url('laporanstok/'), ' <i class="fa fa-refresh"></i> ', 'class="btn btn-primary btn-sm"'); ?>
                         </div>
                 

@@ -12,29 +12,52 @@
                           <?php echo anchor(site_url('Laporanretur/excel'), ' <i class="fa fa-file-excel-o"></i> Export To Excel', 'class="btn btn-primary btn-sm"'); ?>
                           <?php echo anchor(site_url('Laporanretur/word'), '<i class="fa fa-file-word-o"></i> Export To Word', 'class="btn btn-success btn-sm"'); ?>
                           <?php echo anchor(site_url('Laporanretur/pdf'), '<i class="btn btn-danger btn-sm">Export To PDF</i>',array('target'=>'_blank')); ?>
+                           <?php echo anchor(site_url('Laporanretur/'), ' <i class="fa fa-refresh"></i> ', 'class="btn btn-primary btn-sm"'); ?>
                   </div>
-                <form>
               
-                <table class='table table-bordered table-striped' id="tabel">
+                <table class='table table-bordered table-striped' id="mytable">
                     <thead>
                         <tr>
-                           <th>  Id Aktivitas</th>
-                           <th> Nama Suplier </th>
-                            <th> Nama Komponen</th>
-                            <th> ID Komponen</th>
-                            <th> Nama Komponen</th>
-                            <th> Jumlah Komponen</th>
+                           <th width="10">  No </th>
+                           <th width="20"> ID Aktivitas </th>
+                           <th width="20"> Nama Suplier </th>
+                           <th width="20"> Nama Kategori </th>
+                            <th width="20"> ID Komponen</th>
+                            <th width="30"> Nama Komponen</th>
+                            <th width="20"> Jumlah komponen</th>
                             
 
                         </tr>
                     </thead>
-                    <tbody id="tablear">
-                       
-
+                    <tbody>
+                      <?php
+                       $no = 0;
+                       foreach ($laporan_retur_data as $laporan_retur){
+                        ?>
+                        <tr>
+                        <td> <?php echo ++$no ?> </td>
+                        <td> <?php echo $laporan_stok->id_aktivitas ?> </td>
+                        <td> <?php echo $laporan_stok->nama_suplier ?> </td>
+                        <td> <?php echo $laporan_stok->nama_kategori ?> </td>
+                        <td> <?php echo $laporan_stok->id_komponen ?> </td>
+                        <td> <?php echo $laporan_stok->nama_komponen ?> </td>
+                        <td align="center"> <?php echo $laporan_stok->jumlah_komponen ?> </td>
+                      </tr>
+                        <?php
+                       }
+                       ?>
                     </tbody>
 
                 </table>
-            </form>
+
+        <script src="<?php echo base_url('assets/js/jquery-1.11.2.min.js') ?>"></script>
+        <script src="<?php echo base_url('assets/datatables/jquery.dataTables.js') ?>"></script>
+        <script src="<?php echo base_url('assets/datatables/dataTables.bootstrap.js') ?>"></script>
+        <script type="text/javascript">
+            $(document).ready(function () {
+                $("#mytable").dataTable();
+            });
+        </script>
 
     </div><!-- /.box-body -->
               </div><!-- /.box -->
@@ -43,39 +66,11 @@
         </section><!-- /.content -->
       </div>
         
-        <script src="<?php echo base_url('assets/js/jquery-1.11.2.min.js') ?>"></script>
-        <script src="<?php echo base_url('assets/datatables/jquery.dataTables.js') ?>"></script>
-        <script src="<?php echo base_url('assets/datatables/dataTables.bootstrap.js') ?>"></script>
         <script type="text/javascript">
             $(document).ready(function(){   
                $("").dataTable();
             get_data(); 
       });
-            function get_data(){
-            $.ajax({
-                type  : 'ajax',
-                url   : '<?php echo base_url()?>index.php/Laporanretur/getall',
-                method : "POST",
-                async : false,
-                dataType : 'json',
-                success : function(all){
-                    var table = '';
-                    var i;
-                    for (i=0; i<all.length; i++){
-                       table += '<tr>'+'<td>'+all[i].id_aktivitas+'</td>'+
-                       '<td>'+ all[i].nama_suplier+'</td>'+
-                       '<td>'+ all[i].nama_kategori+'</td>'+
-                       '<td>'+ all[i].id_komponen+'</td>'+
-                       '<td>'+ all[i].nama_komponen+'</td>'+
-                       '<td>'+ all[i].jumlah_komponen+'</td>'+
-                       /*'<td>'+ '<button class="fa fa-trash-o del" idtrans="'+all[i].id_transaksi+'"></button>'+'</td>'+*/
-                       '</tr>';
-                    }
-                    $('#tablear').html(table);
-                    del();
-                }
-            });
-        }
 
             function del(){
             $('.del').on('click',function(event){

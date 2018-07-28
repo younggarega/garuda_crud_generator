@@ -18,8 +18,11 @@ class Laporanretur extends CI_Controller
 
     public function index()
     {
+        $laporan_retur = $this->Laporan_Retur_Model->getall();
         
-        $this->template->load('template','laporanretur/laporan_retur'); 
+        $data = array('laporan_retur_data'=> $laporan_retur);
+        
+        $this->template->load('template','laporanretur/laporan_retur',$data); 
         // $data=$this->Master_stok_model->getall(); 
        
         // echo json_encode($data); 
@@ -36,10 +39,11 @@ class Laporanretur extends CI_Controller
      
         echo json_encode($data);
     }
+
     public function word()
     {
         header("Content-type: application/vnd.ms-word");
-        header("Content-Disposition: attachment;Filename=TabelRetur.doc");
+        header("Content-Disposition: attachment;Filename=LaporanRetur.doc");
 
         $data = array(
             'data' => $this->Laporan_Retur_Model->getall(),
@@ -84,10 +88,56 @@ class Laporanretur extends CI_Controller
         }
         $pdf->Output();
     }
-        public function excel()
-        {
-        $query['data1'] = $this->Laporan_Retur_Model->ToExcelAll(); 
-        $this->load->view('laporanretur/laporan_retur_excel',$query);
+
+public function excel()
+    {
+        $this->load->helper('exportexcel');
+        $namaFile = "tbl_laporan_retur.xls";
+        $judul = "laporanretur";
+        $tablehead = 0;
+        $tablebody = 1;
+        $nourut = 1;
+        //penulisan header
+        header("Pragma: public");
+        header("Expires: 0");
+        header("Cache-Control: must-revalidate, post-check=0,pre-check=0");
+        header("Content-Type: application/force-download");
+        header("Content-Type: application/octet-stream");
+        header("Content-Type: application/download");
+        header("Content-Disposition: attachment;filename=" . $namaFile . "");
+        header("Content-Transfer-Encoding: binary ");
+
+        xlsBOF();
+
+        $kolomhead = 0;
+        xlsWriteLabel($tablehead, $kolomhead++, "No");
+        xlsWriteLabel($tablehead, $kolomhead++, "ID Aktivitas");
+        xlsWriteLabel($tablehead, $kolomhead++, "Nama Suplier");
+        xlsWriteLabel($tablehead, $kolomhead++, "Nama Kategori");
+        xlsWriteLabel($tablehead, $kolomhead++, "ID Komponen");
+        xlsWriteLabel($tablehead, $kolomhead++, "Nama Komponen");
+        xlsWriteLabel($tablehead, $kolomhead++, "Jumlah Komponen");
+    //xlsWriteLabel($tablehead, $kolomhead++, "Keterangan");
+
+    foreach ($this->Laporan_Stok_Model->getall() as $data) {
+            $kolombody = 0;
+
+            //ubah xlsWriteLabel menjadi xlsWriteNumber untuk kolom numeric
+        xlsWriteNumber($tablebody, $kolombody++, $nourut);
+        xlsWriteLabel($tablebody, $kolombody++, $data->id_aktivitas);
+        xlsWriteLabel($tablebody, $kolombody++, $data->nama_suplier);
+        xlsWriteLabel($tablebody, $kolombody++, $data->nama_kategori);
+        xlsWriteLabel($tablebody, $kolombody++, $data->id_komponen);
+        xlsWriteLabel($tablebody, $kolombody++, $data->nama_komponen);
+        xlsWriteLabel($tablebody, $kolombody++, $data->jumlah_komponen);
+        //xlsWriteLabel($tablebody, $kolombody++, $data->keterangan);
+
+        $tablebody++;
+            $nourut++;
+        }
+
+        xlsEOF();
+        exit();
     }
   //   public function read($id) 
   //   {

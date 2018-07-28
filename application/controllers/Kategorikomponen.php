@@ -10,7 +10,7 @@ class Kategorikomponen extends CI_Controller
         parent::__construct();
         $this->load->model('Kategori_Komponen_Model');
         $this->load->library('form_validation');        
-	    //$this->load->library('datatables');
+	    $this->load->library('pdf');
     }
 
     public function index()
@@ -142,8 +142,8 @@ class Kategorikomponen extends CI_Controller
     public function excel()
     {
         $this->load->helper('exportexcel');
-        $namaFile = "tbl_menu.xls";
-        $judul = "tbl_menu";
+        $namaFile = "tbl_kategori_komponen.xls";
+        $judul = "kategorikomponen";
         $tablehead = 0;
         $tablebody = 1;
         $nourut = 1;
@@ -160,8 +160,8 @@ class Kategorikomponen extends CI_Controller
         xlsBOF();
 
         $kolomhead = 0;
-    xlsWriteLabel($tablehead, $kolomhead++, "No");   
-	xlsWriteLabel($tablehead, $kolomhead++, "Jenis Komponen");
+        xlsWriteLabel($tablehead, $kolomhead++, "No");   
+	    xlsWriteLabel($tablehead, $kolomhead++, "Jenis Komponen");
     xlsWriteLabel($tablehead, $kolomhead++, "Nama Kategori");
 	xlsWriteLabel($tablehead, $kolomhead++, "Keterangan");
 
@@ -169,9 +169,9 @@ class Kategorikomponen extends CI_Controller
             $kolombody = 0;
 
             //ubah xlsWriteLabel menjadi xlsWriteNumber untuk kolom numeric
-        xlsWriteNumber($tablehead, $kolomhead++, $nourut);
+        xlsWriteNumber($tablebody, $kolombody++, $nourut);
 	    xlsWriteLabel($tablebody, $kolombody++, $data->jenis_komponen);
-        xlsWriteLabel($tablebody, $kolombody++, $data->nama_komponen);
+        xlsWriteLabel($tablebody, $kolombody++, $data->nama_kategori);
 	    xlsWriteNumber($tablebody, $kolombody++, $data->keterangan);
 
 	    $tablebody++;
@@ -182,10 +182,44 @@ class Kategorikomponen extends CI_Controller
         exit();
     }
 
+    public function pdf(){
+        $pdf = new FPDF('l','mm','A4');
+        // membuat halaman baru
+        $pdf->AddPage();
+        // setting jenis font yang akan digunakan
+        $pdf->SetFont('Arial','B',16);
+        // mencetak string 
+        $pdf->Cell(190,7,'Kategori Komponen',0,1,'C');
+
+        // Memberikan space kebawah agar tidak terlalu rapat
+        $pdf->Cell(10,7,'',0,1);
+        $pdf->SetFont('Arial','B',10);
+        //$pdf->Cell(10,6,'No',1,0,'C');
+        $pdf->Cell(25,6,'No',1,0,'C');
+        $pdf->Cell(35,6,'Jenis Komponen',1,0,'C');
+        $pdf->Cell(35,6,'Nama Kategori',1,0,'C');
+        $pdf->Cell(30,6,'Keterangan',1,1,'C');
+       
+        $pdf->SetFont('Arial','',10);
+        $data = $this->Kategori_Komponen_Model->get_all();
+        $no = 1;
+        foreach ($data as $row){
+            
+            $pdf->Cell(25,6, $no++,1,0);
+            $pdf->Cell(35,6,$row->jenis_komponen,1,0); 
+            $pdf->Cell(35,6,$row->nama_kategori,1,0); 
+            $pdf->Cell(30,6,$row->keterangan,1,1);
+ 
+            
+        }
+
+        $pdf->Output();
+    }
+
     public function word()
     {
         header("Content-type: application/vnd.ms-word");
-        header("Content-Disposition: attachment;Filename=tbl_menu.doc");
+        header("Content-Disposition: attachment;Filename=tbl_kategori_komponen.doc");
 
         $data = array(
             'kategorikomponen_data' => $this->Kategori_Komponen_Model->get_all(),

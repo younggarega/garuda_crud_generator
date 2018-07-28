@@ -3,66 +3,54 @@
 if (!defined('BASEPATH'))
     exit('No direct script access allowed');
 
-class Barangkeluar extends CI_Controller
+class produkrancangan extends CI_Controller
 {
     function __construct()
     {
         parent::__construct();
-        $this->load->model('Menu_model');
+        $this->load->model('Produk_Rancangan_Model');
         $this->load->library('form_validation');        
-	$this->load->library('datatables');
+	    //$this->load->library('datatables');
     }
 
     public function index()
     {
-        $data['setting'] = $this->db->get_where('tbl_setting',array('id_setting'=>1))->row_array();
-        $this->template->load('template','barangkeluar/tbl_menu_list',$data);
-    }
-    
-    function simpan_setting(){
-        $value = $this->input->post('tampil_menu');
-        $this->db->where('id_setting',1);
-        $this->db->update('tbl_setting',array('value'=>$value));
-        redirect('barangkeluar');
-    }
-    
-    public function json() {
-        header('Content-Type: application/json');
-        echo $this->Menu_model->json();
-    }
+        $produkrancangan = $this->Produk_Rancangan_Model->get_all();
 
+        $data = array(
+            'produkrancangan_data' => $produkrancangan
+        );
+
+        $this->template->load('template','produkrancangan/tbl_menu_list',$data);
+    }
     public function read($id) 
     {
-        $row = $this->Menu_model->get_by_id($id);
+        $row = $this->Produk_Rancangan_Model->get_by_id($id);
         if ($row) {
             $data = array(
-		'id_menu' => $row->id_menu,
-		'title' => $row->title,
-		'url' => $row->url,
-		'icon' => $row->icon,
-		'is_main_menu' => $row->is_main_menu,
-		'is_aktif' => $row->is_aktif,
+        'id_produk' => $row->id_produk,
+		'id_komponen' => $row->id_komponen,
+		'nama_produk' => $row->nama_produk,
+		'jml_komponen' => $row->jml_komponen,
 	    );
-            $this->template->load('template','barangkeluar/tbl_menu_read', $data);
+            $this->template->load('template','produkrancangan/tbl_menu_read', $data);
         } else {
             $this->session->set_flashdata('message', 'Record Not Found');
-            redirect(site_url('barangkeluar'));
+            redirect(site_url('produkrancangan'));
         }
     }
 
     public function create() 
     {
         $data = array(
-            'button' => 'Create',
-            'action' => site_url('pebarangkeluarnjualan/create_action'),
-	    'id_menu' => set_value('id_menu'),
-	    'title' => set_value('title'),
-	    'url' => set_value('url'),
-	    'icon' => set_value('icon'),
-	    'is_main_menu' => set_value('is_main_menu'),
-	    'is_aktif' => set_value('is_aktif'),
+        'button' => 'Create',
+        'action' => site_url('produkrancangan/create_action'),
+        'id_produk' => set_value('id_produk'),
+        'nama_produk' => set_value('nama_produk'),
+        'id_komponen' => set_value('id_komponen'),
+	    'jml_komponen' => set_value('jml_komponen'),
 	);
-        $this->template->load('template','barangkeluar/tbl_menu_form', $data);
+        $this->template->load('template','produkrancangan/tbl_menu_form', $data);
     }
     
     public function create_action() 
@@ -73,38 +61,35 @@ class Barangkeluar extends CI_Controller
             $this->create();
         } else {
             $data = array(
-		'title' => $this->input->post('title',TRUE),
-		'url' => $this->input->post('url',TRUE),
-		'icon' => $this->input->post('icon',TRUE),
-		'is_main_menu' => $this->input->post('is_main_menu',TRUE),
-		'is_aktif' => $this->input->post('is_aktif',TRUE),
+        'id_produk' => $this->input->post('id_produk',TRUE),
+        'nama_produk' => $this->input->post('nama_produk',TRUE),
+        'id_komponen' => $this->input->post('id_komponen',TRUE),
+		'jml_komponen' => $this->input->post('jml_kompoonen',TRUE),
 	    );
 
-            $this->Menu_model->insert($data);
+            $this->Produk_Rancangan_Model->insert($data);
             $this->session->set_flashdata('message', 'Create Record Success');
-            redirect(site_url('barangkeluar'));
+            redirect(site_url('produkrancangan'));
         }
     }
     
     public function update($id) 
     {
-        $row = $this->Menu_model->get_by_id($id);
+        $row = $this->Produk_Rancangan_Model->get_by_id($id);
 
         if ($row) {
             $data = array(
-                'button' => 'Update',
-                'action' => site_url('barangkeluar/update_action'),
-		'id_menu' => set_value('id_menu', $row->id_menu),
-		'title' => set_value('title', $row->title),
-		'url' => set_value('url', $row->url),
-		'icon' => set_value('icon', $row->icon),
-		'is_main_menu' => set_value('is_main_menu', $row->is_main_menu),
-		'is_aktif' => set_value('is_aktif', $row->is_aktif),
+        'button' => 'Update',
+        'action' => site_url('produkrancangan/update_action'),
+		'id_produk' => set_value('id_produk', $row->id_produk),
+        'nama_produk' => set_value('nama_produk', $row->nama_produk),
+        'id_komponen' => set_value('id_komponen', $row->id_komponen),
+        'jml_komponen' => set_value('jml_komponen', $row->jml_komponen),
 	    );
-            $this->template->load('template','barangkeluar/tbl_menu_form', $data);
+            $this->template->load('template','produkrancangan/tbl_menu_form', $data);
         } else {
             $this->session->set_flashdata('message', 'Record Not Found');
-            redirect(site_url('barangkeluar'));
+            redirect(site_url('produkrancangan'));
         }
     }
     
@@ -113,45 +98,42 @@ class Barangkeluar extends CI_Controller
         $this->_rules();
 
         if ($this->form_validation->run() == FALSE) {
-            $this->update($this->input->post('id_menu', TRUE));
+            $this->update($this->input->post('id_produk', TRUE));
         } else {
             $data = array(
-		'title' => $this->input->post('title',TRUE),
-		'url' => $this->input->post('url',TRUE),
-		'icon' => $this->input->post('icon',TRUE),
-		'is_main_menu' => $this->input->post('is_main_menu',TRUE),
-		'is_aktif' => $this->input->post('is_aktif',TRUE),
+        'id_produk' => $this->input->post('id_produk',TRUE),
+		'id_komponen' => $this->input->post('id_komponen',TRUE),
+		'nama_produk' => $this->input->post('nama_produk',TRUE),
+		'jml_komponen' => $this->input->post('jml_komponen',TRUE),
 	    );
 
-            $this->Menu_model->update($this->input->post('id_menu', TRUE), $data);
+            $this->Produk_Rancangan_Model->update($this->input->post('id_produk', TRUE), $data);
             $this->session->set_flashdata('message', 'Update Record Success');
-            redirect(site_url('barangkeluar'));
+            redirect(site_url('produkrancangan'));
         }
     }
     
     public function delete($id) 
     {
-        $row = $this->Menu_model->get_by_id($id);
+        $row = $this->Produk_Rancangan_Model->get_by_id($id);
 
         if ($row) {
-            $this->Menu_model->delete($id);
+            $this->Produk_Rancangan_Model->delete($id);
             $this->session->set_flashdata('message', 'Delete Record Success');
-            redirect(site_url('barangkeluar'));
+            redirect(site_url('produkrancangan'));
         } else {
             $this->session->set_flashdata('message', 'Record Not Found');
-            redirect(site_url('barangkeluar'));
+            redirect(site_url('produkrancangan'));
         }
     }
 
     public function _rules() 
     {
-	$this->form_validation->set_rules('title', 'title', 'trim|required');
-	$this->form_validation->set_rules('url', 'url', 'trim|required');
-	$this->form_validation->set_rules('icon', 'icon', 'trim|required');
-	$this->form_validation->set_rules('is_main_menu', 'is main menu', 'trim|required');
-	$this->form_validation->set_rules('is_aktif', 'is aktif', 'trim|required');
-
-	$this->form_validation->set_rules('id_menu', 'id_menu', 'trim');
+    $this->form_validation->set_rules('id_produk', 'ID Produk', 'trim|required');
+	$this->form_validation->set_rules('id_komponen', 'ID Komponen', 'trim|required');
+    $this->form_validation->set_rules('nama_produk', 'Nama Produk', 'trim|required');
+    $this->form_validation->set_rules('jml_komponen', 'Jml Komponen', 'trim|required');
+	
 	$this->form_validation->set_error_delimiters('<span class="text-danger">', '</span>');
     }
 

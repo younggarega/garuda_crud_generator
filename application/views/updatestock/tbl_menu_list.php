@@ -10,11 +10,11 @@
                     </div>
 
                     <div class="box-body">
-                        <div style="padding-bottom: 10px;"">
+                        <!-- <div style="padding-bottom: 10px;"">
                             <?php echo anchor(site_url('updatestock/create'), '<i class="fa fa-wpforms" aria-hidden="true"></i> Tambah Data', 'class="btn btn-danger btn-sm"'); ?>
                             <?php //echo anchor(site_url('kelolamenu/excel'), '<i class="fa fa-file-excel-o" aria-hidden="true"></i> Export Ms Excel', 'class="btn btn-success btn-sm"'); ?>
                             <?php //echo anchor(site_url('kelolamenu/word'), '<i class="fa fa-file-word-o" aria-hidden="true"></i>Export Ms Word', 'class="btn btn-primary btn-sm"'); ?>
-                        </div>
+                        </div> -->
 
                         <div class="form">
                         <form method="post" id="form1">
@@ -75,16 +75,6 @@
 <script type="text/javascript" src="<?php echo base_url() ?>/template/plugins/select2/select2.js"></script>
 <link href="<?php echo base_url() ?>/template/plugins/select2/select2.css" rel="stylesheet" />
 <script type="text/javascript">
-function nota(){
-     $.ajax({
-        url : "<?php echo base_url(); ?>index.php/updatestock/getnota",
-        dataType : 'json',
-        success : function(data){
-            
-            $('#nota_beli').val(data.gen_nota);
-                    }
-        })
-    }
      $(document).ready(function(){
          $.ajax({
             url : "<?php echo base_url();?>index.php/updatestock/getsuplier",
@@ -92,10 +82,10 @@ function nota(){
                 $('#id_suplier').html(data);
             }
 
-        });
-         nota();
+        });        
          
     });
+     
      $('#id_suplier').change(function(){
         var id_suplier = $('#id_suplier').val();
         $.ajax({
@@ -129,38 +119,27 @@ function nota(){
                     $('#jenis_komponen').html(data);
                 }
              })
-        }) 
-        $("body").on('change', '#id_produk', function(){
-            var hrg = $('#id_produk').val();
-            $.ajax({
-                url : "<?php echo base_url();?>index.php/Stok/getharga",
-                method : "POST",
-                data : {brg : hrg},
-                dataType:'json',
-                success : function(data){
-                    $('#harga_beli').val(data.harga_beli);
-                }
-             })
-        })  
+        })           
     });
+
      $('#buttonOk').on('click',function(){
         var komponen        = $('#komponen').val()
         var nama_komponen   = $('#komponen option:selected').text()
         var jenis_komponen  = $('#jenis_komponen').val()
-        var nama_jeniskomponen = $('#jenis_komponen option:selected').text()
+        var nama_kategori_komponen  = $('#jenis_komponen option:selected').text()
         //var harga_beli = $('#harga_beli').val()
         var jml_komponen = $('#jml_komponen').val()
         if(komponen != '' && jenis_komponen != '' && jml_komponen != ''){
 
         // var hargabarang = harga_beli.toString();
         // var harga = hargabarang.split('.').join('');
-         var total = jml_komponen;
-         var hrg = number_format(total,0,',','.');
+         //var total = jml_komponen;
+         //var hrg = number_format(total,0,',','.');
          //console.log(total);
 
         $('#table').append(`<tr>            
             <td>${nama_komponen}<input type="hidden" value="${komponen}" name="komponen[]"/> </td>
-             <td>${nama_jeniskomponen} <input type="hidden" value="${nama_jeniskomponen}" name="nama_jeniskomponen[]"/></td>
+             <td>${nama_kategori_komponen} <input type="hidden" value="${jenis_komponen}" name="jenis_komponen[]"/></td>
              <td>${jml_komponen} <input type="hidden" value="${jml_komponen}" name="jml_komponen[]"/></td>
                           
             <td align="center"><button class="delete">delete</button></td>
@@ -184,7 +163,7 @@ function nota(){
         $('#jml_komponen').val('');
         //$('#harga_beli').val('');
         }else{
-            alert('DATA HARUS DIISI LENGKAP');
+            alert('DATA KURANG LENGKAP');
             event.preventDefault();   
         }
      });
@@ -215,15 +194,15 @@ function nota(){
       var id_suplier    = $('#id_suplier').val();
       var komponen      = $('#komponen').val();
       var jenis_komponen  = $('#jenis_komponen').val();
-      //var nota_beli = $('#nota_beli').val();
+      var nota_beli     = $('#nota_beli').val();
       var jml_komponen  = $('#jml_komponen').val();
       //var keterangan    = $('#keterangan').val();
       
-        if(id_suplier != '' && id_komponen != '' && jenis_komponen != '' && jml_komponen != ''){
+        if(id_suplier != '' && id_komponen != '' && jenis_komponen != '' && nota_beli != '' && jml_komponen != ''){
              $.ajax({
              url : "<?php echo base_url();?>index.php/updatestock/insertstok",
                 method : "POST",
-                data : $('[name="id_suplier"], [name="komponen[]"], [name="nama_jeniskomponen[]"], [name="jml_komponen[]"]').serialize(), 
+                data : $('[name="komponen[]"], [name="jenis_komponen[]"], [name="jml_komponen[]"], [name="id_suplier"], [name="nota_beli"], [name="keterangan"]').serialize(), 
                 dataType:'json',
                 success : function(data){
                     alert('Berhasil');

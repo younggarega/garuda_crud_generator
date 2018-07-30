@@ -10,7 +10,7 @@ class Updatestock extends CI_Controller
         parent::__construct();
         $this->load->model('Updatestock_model');
         $this->load->library('form_validation');        
-		//$this->load->library('datatables');
+		$this->load->library('datatables');
     }
 
     public function index()
@@ -41,7 +41,7 @@ class Updatestock extends CI_Controller
 		'id_suplier' 	 => $row->id_suplier,
 		'keterangan' 	 => $row->keterangan,		
 	    );
-            $this->template->load('template','updatestock/updatestock_read', $data);
+            $this->template->load('template','updatestock/tbl_menu_read', $data);
         } else {
             $this->session->set_flashdata('message', 'Record Not Found');
             redirect(site_url('updatestock'));
@@ -245,13 +245,14 @@ class Updatestock extends CI_Controller
         $jenis_komponen =$this->input->post('jenis_komponen');
         $jml_komponen   =$this->input->post('jml_komponen');
         $id_suplier     =$this->input->post('id_suplier');
+        $nota_beli      =$this->input->post('nota_beli');
         //echo $tgl;exit();
 
         $keterangan=$this->input->post('keterangan');
        
         foreach ($id_komponen as $key => $value) {
 
-            $this->Updatestock_model->insertstok($id_komponen[$key],$jenis_komponen[$key],$jml_komponen[$key],$id_suplier,$keterangan);
+            $this->Updatestock_model->insertstok($id_komponen[$key],$jenis_komponen[$key],$jml_komponen[$key],$id_suplier,$nota_beli,$keterangan);
                        
            
             

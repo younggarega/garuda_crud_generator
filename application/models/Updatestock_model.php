@@ -117,20 +117,30 @@ class Updatestock_model extends CI_Model
 
      function insertstok($id_komponen,$jenis_komponen,$jml_komponen,$id_suplier,$keterangan){
       
-      $sql = $this->db->query("INSERT INTO `tbl_stok`( `id_komponen`, `jenis_komponen`, `jml_komponen`, `id_suplier`, `keterangan`) VALUES('".$id_komponen."' ,NOW(),'".$jenis_komponen."' ,'".$jml_komponen."' ,'".$id_suplier."','U')"); 
+      $sql = $this->db->query("INSERT INTO `tbl_stok`( `id_komponen`, `jenis_komponen`, `jml_komponen`, `id_suplier`, `keterangan`) VALUES('".$id_komponen."' ,'".$jenis_komponen."' ,'".$jml_komponen."' ,'".$id_suplier."','U')"); 
 
 
      $sql =$this->db->query("INSERT INTO `tbl_aktivitas`( 
+        `id_aktivitas`,
         `jenis_komponen`,
         `id_komponen`,
+        `id_suplier`,
         `komponen_masuk`,
+        `id_produk`,
+        `tgl_aktivitas`,
         `nota`,
+        `status`,
         `keterangan`) 
         VALUES (
+        '".$id_aktivitas."',
         '".$jenis_komponen."',
-        '".$komponen."',
+        '".$id_komponen."',
+        '".$id_suplier."',
         '".$jml_komponen."',
-        '".$nota_beli."',
+        '".$id_produk."',
+        '".$tgl_aktivitas."',
+        '".$nota."',
+        '".$status."',
         '".$keterangan."')") ;
       
     

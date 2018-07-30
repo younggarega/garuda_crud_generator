@@ -16,24 +16,27 @@
         </style>
     </head>
     <body>
-        <h2>Tabel Kategori Komponen</h2>
+        <h2>Tbl_menu List</h2>
         <table class="word-table" style="margin-bottom: 10px">
             <tr>
                 <th>No</th>
-		<th>Jenis Komponen</th>
-		<th>Nama Kategori</th>
-		<th>Keterangan</th>
+		<th>Title</th>
+		<th>Url</th>
+		<th>Icon</th>
+		<th>Is Main Menu</th>
+		<th>Is Aktif</th>
 		
             </tr><?php
-            $no = 1;
-            foreach ($kategorikomponen_data as $kategorikomponen)
+            foreach ($produkrancangan_data as $produkrancangan)
             {
                 ?>
                 <tr>
-		      <td><?php echo $no++ ?></td>
-		      <td><?php echo $kategorikomponen->jenis_komponen ?></td>
-		      <td><?php echo $kategorikomponen->nama_kategori ?></td>
-		      <td><?php echo $kategorikomponen->keterangan ?></td>	
+		      <td><?php echo ++$start ?></td>
+		      <td><?php echo $produkrancangan->title ?></td>
+		      <td><?php echo $produkrancangan->url ?></td>
+		      <td><?php echo $produkrancangan->icon ?></td>
+		      <td><?php echo $produkrancangan->is_main_menu ?></td>
+		      <td><?php echo $produkrancangan->is_aktif ?></td>	
                 </tr>
                 <?php
             }

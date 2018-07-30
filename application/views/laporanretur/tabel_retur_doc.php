@@ -16,24 +16,28 @@
         </style>
     </head>
     <body>
-        <h2>Tabel Kategori Komponen</h2>
+        <h2>Retur Stok List</h2>
         <table class="word-table" style="margin-bottom: 10px">
             <tr>
-                <th>No</th>
-		<th>Jenis Komponen</th>
+        <th>ID Aktivitas</th>
+        <th>Nama Suplier</th>
 		<th>Nama Kategori</th>
-		<th>Keterangan</th>
+        <th>ID Komponen</th>
+		<th>Nama Komponen</th>
+		<th>Jumlah Unit</th>
+
 		
             </tr><?php
-            $no = 1;
-            foreach ($kategorikomponen_data as $kategorikomponen)
+            foreach ($data as $retur)
             {
                 ?>
                 <tr>
-		      <td><?php echo $no++ ?></td>
-		      <td><?php echo $kategorikomponen->jenis_komponen ?></td>
-		      <td><?php echo $kategorikomponen->nama_kategori ?></td>
-		      <td><?php echo $kategorikomponen->keterangan ?></td>	
+		      <td><?php echo $retur->id_aktivitas?></td>
+              <td><?php echo $retur->nama_suplier ?></td>
+		      <td><?php echo $retur->nama_kategori ?></td>
+              <td><?php echo $retur->id_komponen ?></td>
+		      <td><?php echo $retur->nama_komponen ?></td>
+              <td><?php echo $retur->jumlah_unit ?></td>
                 </tr>
                 <?php
             }

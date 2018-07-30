@@ -16,24 +16,29 @@
         </style>
     </head>
     <body>
-        <h2>Tabel Kategori Komponen</h2>
+        <h2>Laporan Stok</h2>
         <table class="word-table" style="margin-bottom: 10px">
-            <tr>
-                <th>No</th>
-		<th>Jenis Komponen</th>
-		<th>Nama Kategori</th>
-		<th>Keterangan</th>
-		
-            </tr><?php
+         <tr>
+                           <th>  No </th>
+                           <th> kategori Komponen </th>
+                            <th> ID Komponen</th>
+                            <th> Nama Komponen</th>
+                            <th> Jumlah Komponen</th>
+                            
+
+                        </tr>
+        
+            <?php
             $no = 1;
-            foreach ($kategorikomponen_data as $kategorikomponen)
+            foreach ($data as $laporan_stok)
             {
-                ?>
+             ?>
                 <tr>
-		      <td><?php echo $no++ ?></td>
-		      <td><?php echo $kategorikomponen->jenis_komponen ?></td>
-		      <td><?php echo $kategorikomponen->nama_kategori ?></td>
-		      <td><?php echo $kategorikomponen->keterangan ?></td>	
+              <td> <?php echo $no++ ?></td>
+              <td><?php echo $laporan_stok->nama_kategori ?></td>
+              <td><?php echo $laporan_stok->id_komponen ?></td>
+              <td><?php echo $laporan_stok->nama_komponen ?></td>
+              <td><?php echo $laporan_stok->jumlah_komponen ?></td>   
                 </tr>
                 <?php
             }

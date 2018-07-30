@@ -5,7 +5,7 @@
             <div class='col-xs-12'>
               <div class='box box-warning box-solid'>
                 <div class='box-header'>
-                  <h3 class='box-title'>TABEL DATA STOK &nbsp</h3>
+                  <h3 class='box-title'>LAPORAN STOK &nbsp</h3>
                 </div>
 
                       <div class='box-body'>

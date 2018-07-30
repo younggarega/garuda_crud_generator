@@ -9,8 +9,8 @@
                       
                       <div class='box-body'>
                         <div style="padding-bottom: 10px;"'>
-                          <?php echo anchor(site_url('Laporanretur/excel'), ' <i class="fa fa-file-excel-o"></i> Export To Excel', 'class="btn btn-primary btn-sm"'); ?>
-                          <?php echo anchor(site_url('Laporanretur/word'), '<i class="fa fa-file-word-o"></i> Export To Word', 'class="btn btn-success btn-sm"'); ?>
+                          <?php echo anchor(site_url('Laporanretur/excel'), ' <i class="fa fa-file-excel-o"></i> Export To Excel', 'class="btn btn-success btn-sm"'); ?>
+                          <?php echo anchor(site_url('Laporanretur/word'), '<i class="fa fa-file-word-o"></i> Export To Word', 'class="btn btn-primary btn-sm"'); ?>
                           <?php echo anchor(site_url('Laporanretur/pdf'), '<i class="btn btn-danger btn-sm">Export To PDF</i>',array('target'=>'_blank')); ?>
                            <?php echo anchor(site_url('Laporanretur/'), ' <i class="fa fa-refresh"></i> ', 'class="btn btn-primary btn-sm"'); ?>
                   </div>

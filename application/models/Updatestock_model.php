@@ -32,7 +32,7 @@ class Updatestock_model extends CI_Model
     	$query = $this->db->get('tbl_master_suplier');
     	return $query->result();
     }
-
+    
     // get all
     function get_all()
     {

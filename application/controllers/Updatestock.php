@@ -217,6 +217,15 @@ class Updatestock extends CI_Controller
         
         echo $html;
     }
+    public function detailsuplier(){
+        $id = $this->input->post('id');
+
+        $data = $this->Updatestock_model->getsuplier($id);
+
+        echo json_encode($data[0]);
+        
+    }
+
 
     public function getkomponen(){
         $data = $this->Updatestock_model->getkomponen();

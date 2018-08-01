@@ -8,27 +8,41 @@
                     <div class="box-header">
                         <h3 class="box-title">UPDATE STOCK</h3>
                     </div>
-
                     <div class="box-body">
-                        <!-- <div style="padding-bottom: 10px;"">
-                            <?php echo anchor(site_url('updatestock/create'), '<i class="fa fa-wpforms" aria-hidden="true"></i> Tambah Data', 'class="btn btn-danger btn-sm"'); ?>
-                            <?php //echo anchor(site_url('kelolamenu/excel'), '<i class="fa fa-file-excel-o" aria-hidden="true"></i> Export Ms Excel', 'class="btn btn-success btn-sm"'); ?>
-                            <?php //echo anchor(site_url('kelolamenu/word'), '<i class="fa fa-file-word-o" aria-hidden="true"></i>Export Ms Word', 'class="btn btn-primary btn-sm"'); ?>
-                        </div> -->
-
                         <div class="form">
                         <form method="post" id="form1">
                         <div class="column">    
                         <table>
                                 <tr><td width ="200"><strong>  Id Suplier </strong></td>
-                                <td width="300"><select class="select2 form-control" name="id_suplier" id="id_suplier" ></select></td></tr>
+                                <td width="300"><select class="select2 form-control" name="id_suplier" id="id_suplier" onchange="test();"></select></td></tr>
                         </table>
                         </div>
+                        <div class="column"> 
+                            <table>
+                                <tr><td width ="200"> <strong>Nama Suplier</strong> </td>
+                                <td width="300"><input type="text" class="form-control" id="nama_suplier" name="nama_suplier"/></td></tr>
+                            </table>
+                        </div>
+                        <div class="column">  
+                            <table>
+                                <tr><td width="200"><strong> Alamat </strong></td>
+                                <td width="300"> <input type="text" class="form-control" id="alamat" name="alamat"/></td></tr>
+                            </table>
+                        </div>
+                        </div>
+                    <div class="form">
                         <div class="column">
                         <table>
                                 <tr><td width ="200"><strong>  Nota Beli </strong></td>
                                 <td width="300"><input type="text" class="form-control" name="nota_beli" id="nota_beli" placeholder="Nota Beli"  /></td></tr>
                         </table>
+                        </div>
+                        <div class="column"> 
+                            <table>
+                                <tr><td width="200"> <strong> Tanggal</strong></td>
+                                <td width="300"> <input type="date" class="form-control" name="tanggal" id="tanggal" placeholder="Tanggal"  /></td></tr>
+                            </table>
+                            </div>
                         </div>
                         </form>
 
@@ -69,6 +83,7 @@
         </div>
     </section>
 </div>
+<script type="text/javascript" src="<?php echo base_url()?>/assets/datatables.min.js"></script>
 <script src="<?php echo base_url('assets/js/jquery-1.11.2.min.js') ?>"></script>
 <script src="<?php echo base_url('assets/datatables/jquery.dataTables.js') ?>"></script>
 <script src="<?php echo base_url('assets/datatables/dataTables.bootstrap.js') ?>"></script>
@@ -77,7 +92,7 @@
 <script type="text/javascript">
      $(document).ready(function(){
          $.ajax({
-            url : "<?php echo base_url();?>index.php/updatestock/getsuplier",
+            url : "<?php echo base_url();?>index.php/Updatestock/getsuplier",
             success: function(data){
                 $('#id_suplier').html(data);
             }
@@ -85,21 +100,23 @@
         });        
          
     });
-     
-     $('#id_suplier').change(function(){
-        var id_suplier = $('#id_suplier').val();
+
+     function test(){
+       var id_suplier = $('#id_suplier').val();
         $.ajax({
 
-            url : "<?php echo base_url();?>index.php/updatestock/detailsuplier",
+            url : "<?php echo base_url();?>index.php/Updatestock/detailsuplier",
             method : "POST",
             data : {id : id_suplier},
             dataType : 'json',
             success : function(data){
                 $('#nama_suplier').val(data.nama_suplier);
-                $('#alamat_suplier').val(data.alamat);
+                $('#alamat').val(data.alamat);
             }
          })
-     })
+     }
+
+   
      $(document).ready(function(){
         $('.select2').select2();
          $.ajax({
@@ -192,13 +209,15 @@
 
      $('#submit').on('click',function(event){    
       var id_suplier    = $('#id_suplier').val();
+      var nama_suplier  = $('#nama_suplier').val();
+      var alamat        = $('#alamat').val();
       var komponen      = $('#komponen').val();
       var jenis_komponen  = $('#jenis_komponen').val();
       var nota_beli     = $('#nota_beli').val();
       var jml_komponen  = $('#jml_komponen').val();
       //var keterangan    = $('#keterangan').val();
       
-        if(id_suplier != '' && id_komponen != '' && jenis_komponen != '' && nota_beli != '' && jml_komponen != ''){
+        if(id_suplier != '' && nama_suplier != '' && alamat != '' && id_komponen != '' && jenis_komponen != '' && nota_beli != '' && jml_komponen != ''){
              $.ajax({
              url : "<?php echo base_url();?>index.php/updatestock/insertstok",
                 method : "POST",
@@ -364,7 +383,7 @@ return false;
             .column2{
                 float: left;
                 width: 70%;
-                padding: 15px;
+                padding: 10px;
                 padding-top: 30px;
 
             }

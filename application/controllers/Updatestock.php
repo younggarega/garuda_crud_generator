@@ -39,6 +39,8 @@ class Updatestock extends CI_Controller
 		'jenis_komponen' => $row->jenis_komponen,
 		'jml_komponen'   => $row->jml_komponen,
 		'id_suplier' 	 => $row->id_suplier,
+        'nota'           => $row->nota_beli,
+        'tgl_aktivitas'  => $row->tanggal,
 		'keterangan' 	 => $row->keterangan,		
 	    );
             $this->template->load('template','updatestock/tbl_menu_read', $data);
@@ -57,6 +59,8 @@ class Updatestock extends CI_Controller
         'jenis_komponen'  => set_value('jenis_komponen'),
 	    'jml_komponen'    => set_value('jml_komponen'),
 	    'id_suplier'      => set_value('id_suplier'),
+        'nota'            => set_value('nota_beli'),
+        'tgl_aktivitas'   => set_value('tanggal'),
         'keterangan'      => set_value('keterangan'),
 	    
         //Kiri value form  => Field di database (Keterangan)
@@ -247,7 +251,7 @@ class Updatestock extends CI_Controller
     }
 
 
-    public function insertstok(){
+    public function insertstok(){        
         //echo json_encode($this->input->post());exit();
 
         $id_komponen    =$this->input->post('komponen');
@@ -255,13 +259,14 @@ class Updatestock extends CI_Controller
         $jml_komponen   =$this->input->post('jml_komponen');
         $id_suplier     =$this->input->post('id_suplier');
         $nota_beli      =$this->input->post('nota_beli');
+        $tgl_aktivitas  =$this->input->post('tanggal');
         //echo $tgl;exit();
 
-        $keterangan=$this->input->post('keterangan');
+        //$keterangan=$this->input->post('keterangan');
        
         foreach ($id_komponen as $key => $value) {
 
-            $this->Updatestock_model->insertstok($id_komponen[$key],$jenis_komponen[$key],$jml_komponen[$key],$id_suplier,$nota_beli,$keterangan);
+            $this->Updatestock_model->insertstok($id_komponen[$key],$jenis_komponen[$key],$jml_komponen[$key],$id_suplier,$nota_beli,$tgl_aktivitas);
                        
            
             

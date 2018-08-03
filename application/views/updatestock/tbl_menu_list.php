@@ -48,11 +48,11 @@
 
                         <form id="form2">
                         <div class="column2">
-                            <strong>Komponen</strong>
+                            <strong>Jenis Komponen</strong>
                             <select class="select2 form-control" id="komponen"></select>
                         </div>
                         <div class="column2">
-                            <strong>Jenis Komponen</strong>
+                            <strong>ID Komponen</strong>
                             <select class="select2 form-control" id="jenis_komponen"></select>
                         </div>
                         <div class="column2">
@@ -66,15 +66,15 @@
                         <table class="table table-bordered table-striped" id="table">
                             <thead>
                                 <tr>                                                                        
-                                    <th>Nama Komponen</th>
                                     <th>Jenis Komponen</th>
+                                    <th>ID Komponen</th>
                                     <th>Jumlah Komponen</th>
                                     <th>Action</th>                                    
                                 </tr>
                             </thead>
                         </table>                        
-                        <button class="btn btn-primary" id="submit">Add All Item</button>
-                        <button class="btn btn-default" id="submit">Cancel</button>
+                        <button class="btn btn-primary" id="submit" onclick="onklik();">Add All Item</button>
+                        <button class="btn btn-default" id="Cancel">Cancel</button>
                         </form>
                        
                     </div>
@@ -83,7 +83,7 @@
         </div>
     </section>
 </div>
-<script type="text/javascript" src="<?php echo base_url()?>/assets/datatables.min.js"></script>
+
 <script src="<?php echo base_url('assets/js/jquery-1.11.2.min.js') ?>"></script>
 <script src="<?php echo base_url('assets/datatables/jquery.dataTables.js') ?>"></script>
 <script src="<?php echo base_url('assets/datatables/dataTables.bootstrap.js') ?>"></script>
@@ -92,7 +92,7 @@
 <script type="text/javascript">
      $(document).ready(function(){
          $.ajax({
-            url : "<?php echo base_url();?>index.php/Updatestock/getsuplier",
+            url : "<?php echo base_url();?>index.php/updatestock/getsuplier",
             success: function(data){
                 $('#id_suplier').html(data);
             }
@@ -105,7 +105,7 @@
        var id_suplier = $('#id_suplier').val();
         $.ajax({
 
-            url : "<?php echo base_url();?>index.php/Updatestock/detailsuplier",
+            url : "<?php echo base_url();?>index.php/updatestock/detailsuplier",
             method : "POST",
             data : {id : id_suplier},
             dataType : 'json',
@@ -156,8 +156,8 @@
 
         $('#table').append(`<tr>            
             <td>${nama_komponen}<input type="hidden" value="${komponen}" name="komponen[]"/> </td>
-             <td>${nama_kategori_komponen} <input type="hidden" value="${jenis_komponen}" name="jenis_komponen[]"/></td>
-             <td>${jml_komponen} <input type="hidden" value="${jml_komponen}" name="jml_komponen[]"/></td>
+             <td>${nama_kategori_komponen}<input type="hidden" value="${jenis_komponen}" name="jenis_komponen[]"/></td>
+             <td>${jml_komponen}<input type="hidden" value="${jml_komponen}" name="jml_komponen[]"/></td>
                           
             <td align="center"><button class="delete">delete</button></td>
             </tr>`)
@@ -207,21 +207,25 @@
         })
      }
 
-     $('#submit').on('click',function(event){    
+     function onklik(){
+
+        //$('#submit').on('click',function(event){    
       var id_suplier    = $('#id_suplier').val();
       var nama_suplier  = $('#nama_suplier').val();
       var alamat        = $('#alamat').val();
       var komponen      = $('#komponen').val();
       var jenis_komponen  = $('#jenis_komponen').val();
       var nota_beli     = $('#nota_beli').val();
-      var jml_komponen  = $('#jml_komponen').val();
+      //var jml_komponen  = $('#jml_komponen').val();
       //var keterangan    = $('#keterangan').val();
       
-        if(id_suplier != '' && nama_suplier != '' && alamat != '' && id_komponen != '' && jenis_komponen != '' && nota_beli != '' && jml_komponen != ''){
-             $.ajax({
+
+        if(id_suplier != '' && nama_suplier != '' && alamat != '' && komponen != '' && jenis_komponen != '' && nota_beli != '' && jml_komponen != ''){
+
+             $.ajax({                
              url : "<?php echo base_url();?>index.php/updatestock/insertstok",
                 method : "POST",
-                data : $('[name="komponen[]"], [name="jenis_komponen[]"], [name="jml_komponen[]"], [name="id_suplier"], [name="nota_beli"], [name="keterangan"]').serialize(), 
+                data : $('[name="komponen[]"], [name="nama_suplier"], [name="jenis_komponen[]"], [name="jml_komponen[]"], [name="id_suplier"], [name="alamat"], [name="nota_beli"], [name="tanggal"]').serialize(), 
                 dataType:'json',
                 success : function(data){
                     alert('Berhasil');
@@ -230,16 +234,15 @@
                     nota();
                     $('#form2')[0].reset();
                     $('#table').html('');
-                   return false  
+                 
                 } 
                  
-        })
-        return false
-        }else{  
-            alert('DATA HARUS DIISI LENGKAP');
+            })
+        }else{
+            alert('DATA HARUS DIISI LENGKAP BRO');
             event.preventDefault();   
     }
-     })
+     }
      
     $('#Cancel').on('click', function(){
         // event.preventDefault()

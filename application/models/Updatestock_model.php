@@ -53,6 +53,8 @@ class Updatestock_model extends CI_Model
 	$this->db->or_like('jenis_komponen', $q);
 	$this->db->or_like('jml_komponen', $q);
 	$this->db->or_like('id_suplier', $q);
+    $this->db->or_like('nota', $q);
+    $this->db->or_like('tgl_aktivitas', $q);
 	$this->db->or_like('keterangan', $q);	
 	$this->db->from($this->table);
         return $this->db->count_all_results();
@@ -65,6 +67,8 @@ class Updatestock_model extends CI_Model
 	$this->db->or_like('jenis_komponen', $q);
 	$this->db->or_like('jml_komponen', $q);
 	$this->db->or_like('id_suplier', $q);
+    $this->db->or_like('nota', $q);
+    $this->db->or_like('tgl_aktivitas', $q);
 	$this->db->or_like('keterangan', $q);
         return $this->db->get($this->table)->result();
     }
@@ -115,40 +119,49 @@ class Updatestock_model extends CI_Model
               return $sql->result();
            }
 
-     function insertstok($id_komponen,$jenis_komponen,$jml_komponen,$id_suplier,$keterangan){
+     function insertstok($jenis_komponen,$id_komponen,$jml_komponen,$id_suplier,$nota_beli,$keterangan){
       
-      $sql = $this->db->query("INSERT INTO `tbl_stok`( `id_komponen`, `jenis_komponen`, `jml_komponen`, `id_suplier`, `keterangan`) VALUES('".$id_komponen."' ,'".$jenis_komponen."' ,'".$jml_komponen."' ,'".$id_suplier."','U')"); 
-
-
-     $sql =$this->db->query("INSERT INTO `tbl_aktivitas`( 
-        `id_aktivitas`,
+      $sql = $this->db->query("INSERT INTO `tbl_aktivitas`( 
         `jenis_komponen`,
         `id_komponen`,
         `id_suplier`,
+        `komponen_keluar`,
         `komponen_masuk`,
-        `id_produk`,
         `tgl_aktivitas`,
         `nota`,
         `status`,
         `keterangan`) 
         VALUES (
-        '".$id_aktivitas."',
         '".$jenis_komponen."',
-        '".$id_komponen."',
+        '".$id_komponen."',        
         '".$id_suplier."',
+        '".'0'."',
         '".$jml_komponen."',
-        '".$id_produk."',
-        '".$tgl_aktivitas."',
-        '".$nota."',
-        '".$status."',
-        '".$keterangan."')") ;
-      
-    
+        '".$keterangan."',
+        '".$nota_beli."',
+        '".'T'."',
+        '".$keterangan."')");
+
+      $sql = $this->db->query("INSERT INTO `tbl_stok`( 
+        `id_komponen`,
+        `jenis_komponen`,
+        `jml_komponen`,
+        `id_suplier`,
+        `tanggal`,
+        `nota_beli`)
+        VALUES('".$id_komponen."' ,
+        '".$jenis_komponen."' ,
+        '".$jml_komponen."' ,
+        '".$id_suplier."',
+        '".$keterangan."',
+        '".$nota_beli."')"); 
+
+
+             
+
       return $sql;
 
-
-    }
-
+    } 
 
 }//END
 

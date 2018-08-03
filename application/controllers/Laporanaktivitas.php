@@ -2,44 +2,44 @@
 if (!defined('BASEPATH'))
     exit('No direct script access allowed');
 
-class Laporanstok extends CI_Controller
+class Laporanaktivitas extends CI_Controller
 {
 	function __construct(){
 		parent::__construct();
-		$this->load->model('Laporan_Stok_Model');
+		$this->load->model('Laporan_Aktivitas_Model');
 		$this->load->library('form_validation');
 		$this->load->library('pdf');
 	}
 	public function index()
 	{
-		$laporan_stok = $this->Laporan_Stok_Model->getall();
+		$laporanaktivitas = $this->Laporan_Aktivitas_Model->getall();
         
-        $data = array('laporan_stok_data'=> $laporan_stok);
+        $data = array('laporanaktivitas_data'=> $laporanaktivitas);
 
-		$this->template->load('template','laporanstok/laporan_stok_list',$data);
+		$this->template->load('template','laporanaktivitas/laporan_aktivitas_list',$data);
 	}
 	public function getall()
 	{
-		$data['all']= $this->Laporan_Stok_Model->getall();
+		$data['all']= $this->Laporan_Aktivitas_Model->getall();
 		echo json_encode($data['all']);
 	}
 	public function word()
     {
         header("Content-type: application/vnd.ms-word");
-        header("Content-Disposition: attachment;Filename=LaporanStok.doc");
+        header("Content-Disposition: attachment;Filename=LaporanAktivitas.doc");
 
         $data = array(
-            'data' => $this->Laporan_Stok_Model->getall(),
+            'data' => $this->Laporan_Aktivitas_Model->getall(),
             'start' => 0
         );
         
-        $this->load->view('laporanstok/laporan_stok_doc',$data);
+        $this->load->view('laporanaktivitas/laporan_aktivitas_doc',$data);
     }
     public function excel()
     {
         $this->load->helper('exportexcel');
-        $namaFile = "tbl_laporan_stok.xls";
-        $judul = "laporanstok";
+        $namaFile = "tbl_laporan_aktivitas.xls";
+        $judul = "laporanaktivitas";
         $tablehead = 0;
         $tablebody = 1;
         $nourut = 1;
@@ -71,7 +71,7 @@ class Laporanstok extends CI_Controller
         xlsWriteLabel($tablebody, $kolombody++, $data->nama_kategori);
         xlsWriteLabel($tablebody, $kolombody++, $data->id_komponen);
         xlsWriteLabel($tablebody, $kolombody++, $data->nama_komponen);
-        xlsWriteLabel($tablebody, $kolombody++, $data->jml_komponen);
+        xlsWriteLabel($tablebody, $kolombody++, $data->jumlah_komponen);
         //xlsWriteLabel($tablebody, $kolombody++, $data->keterangan);
 
         $tablebody++;
@@ -110,7 +110,7 @@ class Laporanstok extends CI_Controller
             $pdf->Cell(35,6,$row->nama_kategori,1,0);
             $pdf->Cell(35,6,$row->id_komponen,1,0); 
             $pdf->Cell(35,6,$row->nama_komponen,1,0); 
-            $pdf->Cell(30,6,$row->jml_komponen,1,1);
+            $pdf->Cell(30,6,$row->jumlah_komponen,1,1);
  
             
         }

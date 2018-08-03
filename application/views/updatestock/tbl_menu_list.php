@@ -214,7 +214,7 @@
       var nama_suplier  = $('#nama_suplier').val();
       var alamat        = $('#alamat').val();
       var komponen      = $('#komponen').val();
-      var jenis_komponen  = $('#jenis_komponen').val();
+      var jenis_komponen= $('#jenis_komponen').val();
       var nota_beli     = $('#nota_beli').val();
       //var jml_komponen  = $('#jml_komponen').val();
       //var keterangan    = $('#keterangan').val();

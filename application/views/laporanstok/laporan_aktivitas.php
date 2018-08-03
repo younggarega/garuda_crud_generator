@@ -5,7 +5,7 @@
             <div class='col-xs-12'>
               <div class='box box-warning box-solid'>
                 <div class='box-header'>
-                  <h3 class='box-title'>LAPORAN STOK &nbsp</h3>
+                  <h3 class='box-title'>TABEL DATA STOK &nbsp</h3>
                 </div>
 
                       <div class='box-body'>
@@ -38,7 +38,7 @@
                         <td> <?php echo $laporanstok->nama_kategori ?> </td>
                         <td> <?php echo $laporanstok->id_komponen ?> </td>
                         <td> <?php echo $laporanstok->nama_komponen ?> </td>
-                        <td align="center"> <?php echo $laporanstok->jml_komponen ?> </td>
+                        <td align="center"> <?php echo $laporanstok->jumlah_komponen ?> </td>
                       </tr>
                         <?php
                        }

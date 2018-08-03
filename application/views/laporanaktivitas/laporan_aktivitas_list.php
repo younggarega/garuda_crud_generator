@@ -5,25 +5,33 @@
             <div class='col-xs-12'>
               <div class='box box-warning box-solid'>
                 <div class='box-header'>
-                  <h3 class='box-title'>LAPORAN STOK &nbsp</h3>
+                  <h3 class='box-title'>TABEL AKTIVITAS &nbsp</h3>
                 </div>
 
                       <div class='box-body'>
                         <div style="padding-bottom: 10px;"'>
-                        <?php echo anchor(site_url('laporanstok/excel'), ' <i class="fa fa-file-excel-o"></i> Export Ms Excel', 'class="btn btn-success btn-sm"'); ?>
-                          <?php echo anchor(site_url('laporanstok/word'), '<i class="fa fa-file-word-o" aria-hidden="true"></i> Export Ms Word', 'class="btn btn-primary btn-sm"'); ?>
-                          <?php echo anchor(site_url('laporanstok/pdf'), '<i class="btn btn-danger btn-sm "> Export To PDF</i>',array('target'=>'_blank')); ?>
-                          <?php echo anchor(site_url('laporanstok/'), ' <i class="fa fa-refresh"></i> ', 'class="btn btn-primary btn-sm"'); ?>
+                        <?php echo anchor(site_url('laporanaktivitas/excel'), ' <i class="fa fa-file-excel-o"></i> Export Ms Excel', 'class="btn btn-success btn-sm"'); ?>
+                          <?php echo anchor(site_url('laporanaktivitas/word'), '<i class="fa fa-file-word-o" aria-hidden="true"></i> Export Ms Word', 'class="btn btn-primary btn-sm"'); ?>
+                          <?php echo anchor(site_url('laporanaktivitas/pdf'), '<i class="btn btn-danger btn-sm "> Export To PDF</i>',array('target'=>'_blank')); ?>
+                          <?php echo anchor(site_url('laporanaktivitas/'), ' <i class="fa fa-refresh"></i> ', 'class="btn btn-primary btn-sm"'); ?>
                         </div>
                 
                 <table class='table table-bordered table-striped' id="mytable">
                     <thead>
                         <tr>
                            <th width="10">  No </th>
-                           <th width="20"> kategori komponen </th>
-                            <th width="20"> Id Komponen</th>
+                           <th width="20"> Id AKtivitas </th>
+                            <th width="20"> Jenis Komponen</th>
                             <th width="30"> Nama Komponen</th>
-                            <th width="20"> Jumlah komponen</th>
+                            <th width="20"> Nama Suplier </th>
+                            <th width="20"> Komponen Keluar </th>
+                            <th width="20"> Komponen Masuk </th>
+                            <th width="20"> Nama Produk </th>
+                            <th width="20"> Tgl AKtivitas </th>
+                            <th width="20"> Nota </th>
+                            <th width="20"> Status </th>
+                            <th width="20"> Keterangan </th>
+                            <th width="20"> Action </th>
                             
 
                         </tr>
@@ -31,14 +39,21 @@
                     <tbody>
                       <?php
                        $no = 0;
-                       foreach ($laporan_stok_data as $laporanstok){
+                       foreach ($laporanaktivitas_data as $laporanaktivitas){
                         ?>
                         <tr>
                         <td> <?php echo ++$no ?> </td>
-                        <td> <?php echo $laporanstok->nama_kategori ?> </td>
-                        <td> <?php echo $laporanstok->id_komponen ?> </td>
-                        <td> <?php echo $laporanstok->nama_komponen ?> </td>
-                        <td align="center"> <?php echo $laporanstok->jml_komponen ?> </td>
+                        <td> <?php echo $laporanaktivitas->id_aktivitas ?> </td>
+                        <td> <?php echo $laporanaktivitas->jenis_komponen ?> </td>
+                        <td> <?php echo $laporanaktivitas->nama_komponen ?> </td>
+                        <td> <?php echo $laporanaktivitas->nama_suplier ?> </td>
+                        <td> <?php echo $laporanaktivitas->komponen_keluar ?> </td>
+                        <td> <?php echo $laporanaktivitas->komponen_masuk ?> </td>
+                        <td> <?php echo $laporanaktivitas->nama_produk ?> </td>
+                        <td> <?php echo $laporanaktivitas->tgl_aktivitas ?> </td>
+                        <td> <?php echo $laporanaktivitas->nota ?> </td>
+                        <td> <?php echo $laporanaktivitas->status ?> </td>
+                        <td> <?php echo $laporanaktivitas->keterangan ?> </td>
                       </tr>
                         <?php
                        }
@@ -70,7 +85,7 @@
         //     function get_data(){
         //     $.ajax({
         //         type  : 'ajax',
-        //         url   : '<?php echo base_url()?>index.php/LaporanStok/getall',
+        //         url   : '<?php echo base_url()?>index.php/Laporanaktivitas/getall',
         //         method : "POST",
         //         async : false,
         //         dataType : 'json',

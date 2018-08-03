@@ -10,20 +10,24 @@
 
                       <div class='box-body'>
                         <div style="padding-bottom: 10px;"'>
-                        <?php echo anchor(site_url('laporanstok/excel'), ' <i class="fa fa-file-excel-o"></i> Export Ms Excel', 'class="btn btn-success btn-sm"'); ?>
-                          <?php echo anchor(site_url('laporanstok/word'), '<i class="fa fa-file-word-o" aria-hidden="true"></i> Export Ms Word', 'class="btn btn-primary btn-sm"'); ?>
-                          <?php echo anchor(site_url('laporanstok/pdf'), '<i class="btn btn-danger btn-sm "> Export To PDF</i>',array('target'=>'_blank')); ?>
-                          <?php echo anchor(site_url('laporanstok/'), ' <i class="fa fa-refresh"></i> ', 'class="btn btn-primary btn-sm"'); ?>
+                        <?php echo anchor(site_url('laporanupdatestok/excel'), ' <i class="fa fa-file-excel-o"></i> Export Ms Excel', 'class="btn btn-success btn-sm"'); ?>
+                          <?php echo anchor(site_url('laporanupdatestok/word'), '<i class="fa fa-file-word-o" aria-hidden="true"></i> Export Ms Word', 'class="btn btn-primary btn-sm"'); ?>
+                          <?php echo anchor(site_url('laporanupdatestok/pdf'), '<i class="btn btn-danger btn-sm "> Export To PDF</i>',array('target'=>'_blank')); ?>
+                          <?php echo anchor(site_url('laporanupdatestok/'), ' <i class="fa fa-refresh"></i> ', 'class="btn btn-primary btn-sm"'); ?>
                         </div>
                 
                 <table class='table table-bordered table-striped' id="mytable">
                     <thead>
                         <tr>
-                           <th width="10">  No </th>
-                           <th width="20"> kategori komponen </th>
-                            <th width="20"> Id Komponen</th>
-                            <th width="30"> Nama Komponen</th>
-                            <th width="20"> Jumlah komponen</th>
+                           <th width="10">  ID Aktivitas </th>
+                           <th width="10">  Nama Suplier </th>
+                           <th width="10">  Nama Kategori </th>
+                           <th width="10">  Nama Komponen </th>
+                           <th width="10">  Jumlah Komponen </th>
+                           <th width="20"> Tanggal </th>
+                            <th width="20"> Nota Beli</th>
+                            <th width="20"> Keterangan</th>
+
                             
 
                         </tr>
@@ -31,14 +35,17 @@
                     <tbody>
                       <?php
                        $no = 0;
-                       foreach ($laporan_stok_data as $laporanstok){
+                       foreach ($laporan_update_data as $laporanupdate){
                         ?>
                         <tr>
-                        <td> <?php echo ++$no ?> </td>
-                        <td> <?php echo $laporanstok->nama_kategori ?> </td>
-                        <td> <?php echo $laporanstok->id_komponen ?> </td>
-                        <td> <?php echo $laporanstok->nama_komponen ?> </td>
-                        <td align="center"> <?php echo $laporanstok->jml_komponen ?> </td>
+                        <td> <?php echo $laporanupdate->id_aktivitas ?> </td>
+                        <td> <?php echo $laporanupdate->nama_suplier ?> </td>
+                        <td> <?php echo $laporanupdate->nama_kategori ?> </td>
+                        <td> <?php echo $laporanupdate->nama_komponen ?> </td>
+                        <td align="center"> <?php echo $laporanupdate->jml_komponen ?> </td>
+                        <td> <?php echo $laporanupdate->tanggal ?> </td>
+                        <td> <?php echo $laporanupdate->nota_beli ?> </td>
+                        <td> <?php echo $laporanupdate->keterangan ?> </td>
                       </tr>
                         <?php
                        }

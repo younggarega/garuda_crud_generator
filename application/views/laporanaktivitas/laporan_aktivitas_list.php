@@ -4,8 +4,7 @@
           <div class='row'>
             <div class='col-xs-12'>
               <div class='box box-warning box-solid'>
-                <div class='box-header'>
-                  <h3 class='box-title'>TABEL AKTIVITAS &nbsp</h3>
+                <div class='box-header'> <h3 class='box-title'>TABEL AKTIVITAS &nbsp</h3>
                 </div>
 
                       <div class='box-body'>
@@ -19,8 +18,7 @@
                 <table class='table table-bordered table-striped' id="mytable">
                     <thead>
                         <tr>
-                           <th width="10">  No </th>
-                           <th width="20"> Id AKtivitas </th>
+                           <th width="5"> Id AKtivitas </th>
                             <th width="20"> Jenis Komponen</th>
                             <th width="30"> Nama Komponen</th>
                             <th width="20"> Nama Suplier </th>
@@ -31,7 +29,6 @@
                             <th width="20"> Nota </th>
                             <th width="20"> Status </th>
                             <th width="20"> Keterangan </th>
-                            <th width="20"> Action </th>
                             
 
                         </tr>
@@ -42,7 +39,6 @@
                        foreach ($laporanaktivitas_data as $laporanaktivitas){
                         ?>
                         <tr>
-                        <td> <?php echo ++$no ?> </td>
                         <td> <?php echo $laporanaktivitas->id_aktivitas ?> </td>
                         <td> <?php echo $laporanaktivitas->jenis_komponen ?> </td>
                         <td> <?php echo $laporanaktivitas->nama_komponen ?> </td>

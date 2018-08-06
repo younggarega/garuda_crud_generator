@@ -35,6 +35,8 @@ class Laporanupdatestok extends CI_Controller
         
         $this->load->view('laporanupdatestok/laporan_update_doc',$data);
     }
+
+
     public function excel()
     {
         $this->load->helper('exportexcel');
@@ -57,7 +59,7 @@ class Laporanupdatestok extends CI_Controller
 
         $kolomhead = 0;
 
-        xlsWriteLabel($tablehead, $kolomhead++, "ID Aktivitas");
+    xlsWriteLabel($tablehead, $kolomhead++, "ID Aktivitas");
     xlsWriteLabel($tablehead, $kolomhead++, "Nama Suplier");
     xlsWriteLabel($tablehead, $kolomhead++, "Nama Kategori");
     xlsWriteLabel($tablehead, $kolomhead++, "Nama Komponen");

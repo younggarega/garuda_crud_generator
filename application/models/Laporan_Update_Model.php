@@ -17,6 +17,7 @@ class Laporan_Update_Model extends CI_Model
         $sql = $this->db->query("SELECT tbl_aktivitas.id_aktivitas,tbl_master_suplier.nama_suplier,tbl_kategori_komponen.nama_kategori, tbl_master_komponen.nama_komponen, tbl_aktivitas.komponen_masuk AS jml_komponen,tbl_aktivitas.tgl_aktivitas AS tanggal, tbl_aktivitas.nota AS nota_beli, tbl_aktivitas.keterangan
                 FROM  `tbl_aktivitas` JOIN tbl_master_suplier ON tbl_aktivitas.id_suplier = tbl_master_suplier.id_suplier JOIN tbl_kategori_komponen ON tbl_aktivitas.jenis_komponen = tbl_kategori_komponen.jenis_komponen JOIN tbl_master_komponen ON tbl_aktivitas.id_komponen = tbl_master_komponen.id_komponen 
                 ORDER BY tbl_aktivitas.id_aktivitas DESC");
+        
 
              //$this->db->join('kategori_barang', 'master_gudang.jenis_produk = kategori_barang.jenis_produk', 'inner');
             
@@ -30,6 +31,7 @@ class Laporan_Update_Model extends CI_Model
         $this->db->where($this->id, $id);
         return $this->db->get($this->table)->row();
     }
+
     function total_rows($q = NULL) {
         $this->db->like('nama_kategori', $q);
     $this->db->or_like('id_komponen', $q);

@@ -83,7 +83,7 @@ class Laporanretur extends CI_Controller
             $pdf->Cell(35,6,$row->nama_kategori,1,0); 
             $pdf->Cell(35,6,$row->id_komponen,1,0); 
             $pdf->Cell(35,6,$row->nama_komoponen,1,0); 
-            $pdf->Cell(30,6,$row->jumlah_komponen,1,1);
+            $pdf->Cell(30,6,$row->jml_komponen,1,1);
 
         }
         $pdf->Output();
@@ -129,7 +129,7 @@ public function excel()
         xlsWriteLabel($tablebody, $kolombody++, $data->nama_kategori);
         xlsWriteLabel($tablebody, $kolombody++, $data->id_komponen);
         xlsWriteLabel($tablebody, $kolombody++, $data->nama_komponen);
-        xlsWriteLabel($tablebody, $kolombody++, $data->jumlah_komponen);
+        xlsWriteLabel($tablebody, $kolombody++, $data->jml_komponen);
         //xlsWriteLabel($tablebody, $kolombody++, $data->keterangan);
 
         $tablebody++;

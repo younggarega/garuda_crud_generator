@@ -36,12 +36,12 @@
                         ?>
                         <tr>
                         <td> <?php echo ++$no ?> </td>
-                        <td> <?php echo $laporan_stok->id_aktivitas ?> </td>
-                        <td> <?php echo $laporan_stok->nama_suplier ?> </td>
-                        <td> <?php echo $laporan_stok->nama_kategori ?> </td>
-                        <td> <?php echo $laporan_stok->id_komponen ?> </td>
-                        <td> <?php echo $laporan_stok->nama_komponen ?> </td>
-                        <td align="center"> <?php echo $laporan_stok->jumlah_komponen ?> </td>
+                        <td> <?php echo $laporan_retur->id_aktivitas ?> </td>
+                        <td> <?php echo $laporan_retur->nama_suplier ?> </td>
+                        <td> <?php echo $laporan_retur->nama_kategori ?> </td>
+                        <td> <?php echo $laporan_retur->id_komponen ?> </td>
+                        <td> <?php echo $laporan_retur->nama_komponen ?> </td>
+                        <td align="center"> <?php echo $laporan_retur->jml_komponen ?> </td>
                       </tr>
                         <?php
                        }

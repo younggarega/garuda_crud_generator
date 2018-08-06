@@ -5,7 +5,7 @@
             <div class='col-xs-12'>
               <div class='box box-warning box-solid'>
                 <div class='box-header'>
-                  <h3 class='box-title'>LAPORAN STOK &nbsp</h3>
+                  <h3 class='box-title'>LAPORAN UPDATE STOK &nbsp</h3>
                 </div>
 
                       <div class='box-body'>
@@ -15,6 +15,23 @@
                           <?php echo anchor(site_url('laporanupdatestok/pdf'), '<i class="btn btn-danger btn-sm "> Export To PDF</i>',array('target'=>'_blank')); ?>
                           <?php echo anchor(site_url('laporanupdatestok/'), ' <i class="fa fa-refresh"></i> ', 'class="btn btn-primary btn-sm"'); ?>
                         </div>
+                        <div class="column"> 
+                            <table>
+                              <tr>
+                                <td width="250"></td>
+                                <td width="200"> <input type="date" class="form-control" name="tgl_awal" id="tgl_awal" placeholder="Tanggal"  /></td>
+                                <td width="10" ></td>
+                                <td width="10"> <strong>-</strong></td>
+                                <td width="10"></td>
+                                <td width="200"> <input type="date" class="form-control" name="tgl_akhir" id="tgl_akhir" placeholder="Tanggal"  /></td>
+                                <td width="5"></td>
+                                <td><button class="btn btn-primary" id="submit">Filter</button></td>
+                              </tr>
+                            </table>
+                            </div>
+
+
+
                 
                 <table class='table table-bordered table-striped' id="mytable">
                     <thead>
@@ -25,8 +42,8 @@
                            <th width="10">  Nama Komponen </th>
                            <th width="10">  Jumlah Komponen </th>
                            <th width="20"> Tanggal </th>
-                            <th width="20"> Nota Beli</th>
-                            <th width="20"> Keterangan</th>
+                           <th width="20"> Nota Beli</th>
+                           <th width="20"> Keterangan</th>
 
                             
 
@@ -69,6 +86,7 @@
 </div>
 
         <script type="text/javascript">
+
       //       $(document).ready(function(){ 
       //        // get_data(); 
       //        $("mytable").dataTable();  

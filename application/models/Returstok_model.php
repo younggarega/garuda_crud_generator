@@ -3,10 +3,10 @@
 if (!defined('BASEPATH'))
     exit('No direct script access allowed');
 
-class Updatestock_model extends CI_Model
+class Returstok_model extends CI_Model
 {
 
-    public $table = 'tbl_stok';
+    public $table = 'tbl_returstok';
     public $id 	  = 'id_komponen';
     public $order = 'DESC';
 
@@ -49,13 +49,10 @@ class Updatestock_model extends CI_Model
     
     // get total rows
     function total_rows($q = NULL) {
-        $this->db->like('id_komponen', $q);
+        $this->db->like('id_aktivitas', $q);
 	$this->db->or_like('jenis_komponen', $q);
-	$this->db->or_like('jml_komponen', $q);
-	$this->db->or_like('id_suplier', $q);
-    $this->db->or_like('nota', $q);
-    $this->db->or_like('tgl_aktivitas', $q);
-	$this->db->or_like('keterangan', $q);	
+	$this->db->or_like('id_komponen', $q);
+	$this->db->or_like('jml_komponen', $q);    
 	$this->db->from($this->table);
         return $this->db->count_all_results();
     }
@@ -63,13 +60,10 @@ class Updatestock_model extends CI_Model
     // get data with limit and search
     function get_limit_data($limit, $start = 0, $q = NULL) {
         $this->db->order_by($this->id, $this->order);
-        $this->db->like('id_komponen', $q);
+        $this->db->like('id_aktivitas', $q);
 	$this->db->or_like('jenis_komponen', $q);
-	$this->db->or_like('jml_komponen', $q);
-	$this->db->or_like('id_suplier', $q);
-    $this->db->or_like('nota', $q);
-    $this->db->or_like('tgl_aktivitas', $q);
-	$this->db->or_like('keterangan', $q);
+	$this->db->or_like('id_komponen', $q);
+	$this->db->or_like('jml_komponen', $q);    
         return $this->db->get($this->table)->result();
     }
 
@@ -119,18 +113,16 @@ class Updatestock_model extends CI_Model
               return $sql->result();
            }
 
-     function insertstok($jenis_komponen,$id_komponen,$jml_komponen,$id_suplier,$nota_beli,$tgl_aktivitas){
-      
+     function insertstok($jenis_komponen,$id_komponen,$jml_komponen,$id_suplier,$tgl_aktivitas){
+
       $sql = $this->db->query("INSERT INTO `tbl_aktivitas`( 
         `jenis_komponen`,
         `id_komponen`,
         `id_suplier`,
         `komponen_keluar`,
         `komponen_masuk`,
-        `tgl_aktivitas`,
-        `nota`,
-        `status`,
-        `keterangan`) 
+        `tgl_aktivitas`,        
+        `status`) 
         VALUES (
         '".$jenis_komponen."',
         '".$id_komponen."',        
@@ -138,23 +130,16 @@ class Updatestock_model extends CI_Model
         '".'0'."',
         '".$jml_komponen."',
         '".$tgl_aktivitas."',
-        '".$nota_beli."',
-        '".'T'."',
-        '".$tgl_aktivitas."')");
+        '".'R'."')");
 
-      $sql = $this->db->query("INSERT INTO `tbl_stok`( 
-        `id_komponen`,
+      $sql = $this->db->query("INSERT INTO `tbl_retur_stok`(        
         `jenis_komponen`,
-        `jml_komponen`,
-        `id_suplier`,
-        `tanggal`,
-        `nota_beli`)
-        VALUES('".$id_komponen."' ,
-        '".$jenis_komponen."' ,
-        '".$jml_komponen."' ,
-        '".$id_suplier."',
-        '".$tgl_aktivitas."',
-        '".$nota_beli."')");
+        `id_komponen`,
+        `jml_komponen`)
+        VALUES(        
+        '".$jenis_komponen."',
+        '".$id_komponen."',
+        '".$jml_komponen."')");      
              
 
       return $sql;

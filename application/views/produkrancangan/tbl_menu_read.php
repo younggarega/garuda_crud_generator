@@ -1,23 +1,21 @@
-<!doctype html>
-<html>
-    <head>
-        <title>harviacode.com - codeigniter crud generator</title>
-        <link rel="stylesheet" href="<?php echo base_url('assets/bootstrap/css/bootstrap.min.css') ?>"/>
-        <style>
-            body{
-                padding: 15px;
-            }
-        </style>
-    </head>
-    <body>
-        <h2 style="margin-top:0px">Tbl_menu Read</h2>
-        <table class="table">
-	    <tr><td>Title</td><td><?php echo $title; ?></td></tr>
-	    <tr><td>Url</td><td><?php echo $url; ?></td></tr>
-	    <tr><td>Icon</td><td><?php echo $icon; ?></td></tr>
-	    <tr><td>Is Main Menu</td><td><?php echo $is_main_menu; ?></td></tr>
-	    <tr><td>Is Aktif</td><td><?php echo $is_aktif; ?></td></tr>
-	    <tr><td></td><td><a href="<?php echo site_url('produkrancangan') ?>" class="btn btn-default">Cancel</a></td></tr>
-	</table>
-        </body>
-</html>
+  <!-- Main content -->
+  <div class="content-wrapper">
+        <section class='content'>
+          <div class='row'>
+            <div class='col-xs-12'>
+              <div class='box'>
+                <div class='box-header'>
+                <h3 class='box-title'>Produk Rancangan Read</h3>
+        <table class="table table-bordered">
+      <tr><td>Id Produk</td><td><?php echo $id_produk; ?></td></tr>
+        <tr><td>Nama Produk</td><td><?php echo $nama_produk; ?></td></tr>
+        <tr><td>Nama Komponen</td><td><?php echo $id_komponen; ?></td></tr>
+        <tr><td>Jumlah Komponen</td><td><?php echo $jml_komponen; ?></td></tr>
+        <tr><td></td><td><a href="<?php echo site_url('produkrancangan') ?>" class="btn btn-default">Cancel</a></td></tr>
+    </table>
+        </div><!-- /.box-body -->
+              </div><!-- /.box -->
+            </div><!-- /.col -->
+          </div><!-- /.row -->
+        </section><!-- /.content -->
+        </div>

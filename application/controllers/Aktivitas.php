@@ -31,7 +31,7 @@ class Aktivitas extends CI_Controller
         $row = $this->Aktivitas_Model->get_by_id($id);
         if ($row) {
             $data = array(
-		'id_aktivitas' => $row->id_aktivitas,
+		'id_suplier' => $row->id_suplier,
 		'jenis_komponen' => $row->jenis_komponen,
 		'id_komponen' => $row->id_komponen,
 		'komponen_keluar' =>$row->komponen_keluar,
@@ -53,7 +53,7 @@ class Aktivitas extends CI_Controller
         $data = array(
             'button' => 'Create',
             'action' => site_url('aktivitas/create_action'),
-	    'id_aktivitas' => set_value('id_aktivitas'),
+	    'id_suplier' => set_value('id_suplier'),
 	    'jenis_komponen' => set_value('jenis_komponen'),
 	    'id_komponen' => set_value('id_komponen'),
 	    'komponen_keluar' => set_value('komponen_keluar'),
@@ -74,7 +74,7 @@ class Aktivitas extends CI_Controller
             $this->create();
         } else {
             $data = array(
-		'id_aktivitas' => $this->input->post('id_aktivitas',TRUE),
+		'id_suplier' => $this->input->post('id_suplier',TRUE),
 		'jenis_komponen' => $this->input->post('jenis_komponen',TRUE),
 		
 		'id_komponen' => $this->input->post('id_komponen',TRUE),
@@ -100,7 +100,7 @@ class Aktivitas extends CI_Controller
             $data = array(
                 'button' => 'Update',
                 'action' => site_url('transaksi/update_action'),
-		'id_aktivitas' => set_value('id_aktivitas', $row->id_aktivitas),
+		'id_suplier' => set_value('id_suplier', $row->id_aktivitas),
 		'jenis_komponen' => set_value('jenins_komponen', $row->jenis_komponen),
 		'id_komponen' => set_value('id_komponen', $row->id_komponen),
 		
@@ -126,7 +126,7 @@ class Aktivitas extends CI_Controller
             $this->update($this->input->post('id_transaksi', TRUE));
         } else {
             $data = array(
-                'id_aktivitas' => $this->input->post('id_aktivitas',TRUE),
+                'id_suplier' => $this->input->post('id_suplier',TRUE),
                 'jenis_komponen' => $this->input->post('jenis_komponen',TRUE),
                 
                 'id_komponen' => $this->input->post('id_komponen',TRUE),
@@ -160,7 +160,7 @@ class Aktivitas extends CI_Controller
 
     public function _rules() 
     {
-	$this->form_validation->set_rules('id_aktivitas', 'id aktivitas', 'trim|required');
+	$this->form_validation->set_rules('id_suplier', 'id suplier', 'trim|required');
 	$this->form_validation->set_rules('jenis_komponen', 'jenis_komponen', 'trim|required');
 	$this->form_validation->set_rules('id_komponen', 'id komponen', 'trim|required');
 	$this->form_validation->set_rules('komponen_keluar', 'komponen keluar', 'trim|required');
@@ -170,7 +170,7 @@ class Aktivitas extends CI_Controller
 	$this->form_validation->set_rules('status', 'status', 'trim|required');
 	$this->form_validation->set_rules('keterangan', 'keterangan', 'trim|required');
 
-	$this->form_validation->set_rules('id_aktivitas', 'id_aktivitas', 'trim');
+	$this->form_validation->set_rules('id_suplier', 'id_suplier', 'trim');
 	$this->form_validation->set_error_delimiters('<span class="text-danger">', '</span>');
     }
 
@@ -196,7 +196,8 @@ class Aktivitas extends CI_Controller
 
         $kolomhead = 0;-
         xlsWriteLabel($tablehead, $kolomhead++, "No");
-	xlsWriteLabel($tablehead, $kolomhead++, "Id Aktivitas");
+    xlsWriteLabel($tablehead, $kolomhead++, "Id Aktivitas");
+    xlsWriteLabel($tablehead, $kolomhead++, "Id Suplier");
 	xlsWriteLabel($tablehead, $kolomhead++, "Jenis Komponen");
 	xlsWriteLabel($tablehead, $kolomhead++, "Id Komponen");
     xlsWriteLabel($tablehead, $kolomhead++, "Komponen Keluar");
@@ -213,7 +214,8 @@ class Aktivitas extends CI_Controller
 
             //ubah xlsWriteLabel menjadi xlsWriteNumber untuk kolom numeric
             xlsWriteNumber($tablebody, $kolombody++, $nourut);
-	    xlsWriteLabel($tablebody, $kolombody++, $data->id_aktivitas);
+        xlsWriteLabel($tablebody, $kolombody++, $data->id_aktivitas);
+        xlsWriteLabel($tablebody, $kolombody++, $data->id_suplier);
 	    xlsWriteLabel($tablebody, $kolombody++, $data->jenis_komponen);
 	    xlsWriteLabel($tablebody, $kolombody++, $data->id_komponen);
 
@@ -287,23 +289,41 @@ class Aktivitas extends CI_Controller
         }
         $pdf->Output();
     }
+    public function getsuplier(){
+        $data = $this->Updatestock_model->getsuplier();
+        $html = "<option value=''>SELECT</option>";
+        foreach($data as $key => $value){
+                $html.='<option value="'.$value->id_suplier.'">'.$value->id_suplier.' - '.$value->nama_suplier.'</option>';
+        }
+        
+        echo $html;
+    }
     public function getjeniskomponen(){
         $data = $this->Aktivitas_Model->getjeniskomponen();
-        $html ="<option></option>";
+        $html ="<option>SELECT</option>";
         foreach($data as $key => $value){
             $html.='<option value="'.$value->jenis_komponen.'">'.$value->jenis_komponen.'</option>';
         }
         echo $html;
     }
     
-    public function detailkomponen(){
-        $id = $this->input->post('ctg');
-     $data = $this->Aktivitas_Model->detailkomponen($id);
-     $html ="<option></option>";
-     foreach($data as $key => $value){
-        $html.='<option value="'.$value->id_komponen.'">'.$value->nama_komponen.'</option>';
+     public function detailkomponen(){
+        $data = $this->Aktivitas_Model->detailkomponen();
+        $html = "<option value=''>SELECT</option>";
+        foreach($data as $key => $value){
+                $html.='<option value="'.$value->id_komponen.'">'.$value->id_komponen.' - '.$value->nama_komponen.'</option>';
+        }
+        
+        echo $html;
     }
-    echo $html;
+    public function detailproduk(){
+        $data = $this->Aktivitas_Model->detailproduk();
+        $html = "<option value=''>SELECT</option>";
+        foreach($data as $key => $value){
+                $html.='<option value="'.$value->id_produk.'">'.$value->id_produk.' - '.$value->nama_produk.'</option>';
+        }
+        
+        echo $html;
     }
     public function getnama(){
         $id = $this->input->post('prdk');

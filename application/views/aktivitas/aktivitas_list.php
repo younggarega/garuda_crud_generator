@@ -20,8 +20,8 @@
                         <form method="post" id="form1">
                         <div class="column">    
                         <table>
-                                <tr><td width ="200"><strong>  Id Aktivitas </strong></td>
-                                <td width="300"><select class="select2 form-control" name="id_aktivitas" id="id_aktivitas" ></select></td></tr>
+                                <tr><td width ="200"><strong>  Id Suplier </strong></td>
+                                <td width="300"><select class="select2 form-control" name="id_suplier" id="id_suplier" ></select></td></tr>
                         </table>
                         </div>
                         <div class="column">
@@ -43,11 +43,11 @@
                         </div>
                         <div class="column2">
                             <strong>Komponen Keluar</strong>
-                            <select class="select2 form-control" id="komponen_keluar"></select>
+                            <input type="text" class="form-control" name="komponen_keluar" id="komponen_keluar" placeholder="Komponen Keluar"/>
                             </div>
                         <div class="column2">
                             <strong>Komponen Masuk</strong>
-                            <select class="select2 form-control" id="komponen_masuk"></select>
+                            <input type="text" class="form-control" name="komponen_masuk" id="komponen_masuk" placeholder="Komponen Masuk"/>
                             </div>
                         <div class="column2">
                             <strong>Nama Produk </strong>
@@ -59,7 +59,7 @@
                         </div>
                         <div class="column2">
                             <strong>Keterangan</strong>
-                            <input type="number" class="form-control" name="keterangan" id="keterangan" placeholder=""/>
+                            <input type="text" class="form-control" name="keterangan" id="keterangan" placeholder=""/>
                         </div>
                         <div class="column2"><br>
                         <button class="btn btn-primary" type="button" id="buttonOk"> Add</button> 
@@ -70,7 +70,7 @@
                                 <tr>                                                                       
                                     <th>Jenis Komponen</th>
                                     <th>Nama Komponen</th>
-                                    <th>Komponen Keluar/th>
+                                    <th>Komponen Keluar</th>
                                     <th>Komponen Masuk</th>
                                     <th>Nama Produk</th>
                                     <th>Tanggal Aktivitas</th>
@@ -95,73 +95,19 @@
 <script type="text/javascript" src="<?php echo base_url() ?>/template/plugins/select2/select2.js"></script>
 <link href="<?php echo base_url() ?>/template/plugins/select2/select2.css" rel="stylesheet" />
 <script type="text/javascript">
-function nota(){
-     $.ajax({
-        url : "<?php echo base_url(); ?>index.php//getnota",
-        dataType : 'json',
-        success : function(data){
-            
-            $('#nota_beli').val(data.gen_nota);
-                    }
-        })
-    }
      $(document).ready(function(){
          $.ajax({
-            url : "<?php echo base_url();?>index.php/updatestock/getsuplier",
+            url : "<?php echo base_url();?>index.php/aktivitas/getsuplier",
             success: function(data){
                 $('#id_suplier').html(data);
             }
-
-        });
-         nota();
-         
     });
-     $('#id_suplier').change(function(){
-        var id_suplier = $('#id_suplier').val();
-        $.ajax({
-
-            url : "<?php echo base_url();?>index.php/updatestock/detailsuplier",
-            method : "POST",
-            data : {id : id_suplier},
-            dataType : 'json',
-            success : function(data){
-                $('#nama_suplier').val(data.nama_suplier);
-                $('#alamat_suplier').val(data.alamat);
-            }
-         })
-     })
-     $(document).ready(function(){
-        $('.select2').select2();
+    $(document).ready(function(){
          $.ajax({
-            url : "<?php echo base_url();?>index.php/updatestock/getkomponen",
+            url : "<?php echo base_url();?>index.php/aktivitas/getjeniskomponen",
             success: function(data){
-                $('#komponen').html(data);
+                $('#id_suplier').html(data);
             }
-        });
-
-        $("body").on('change', '#komponen', function(){
-            var ktg = $('#komponen').val();
-            $.ajax({
-                url : "<?php echo base_url();?>index.php/updatestock/detailkomponen",
-                method : "POST",
-                data : {ctg : ktg},
-                success : function(data){
-                    $('#jenis_komponen').html(data);
-                }
-             })
-        }) 
-        $("body").on('change', '#id_produk', function(){
-            var hrg = $('#id_produk').val();
-            $.ajax({
-                url : "<?php echo base_url();?>index.php/Stok/getharga",
-                method : "POST",
-                data : {brg : hrg},
-                dataType:'json',
-                success : function(data){
-                    $('#harga_beli').val(data.harga_beli);
-                }
-             })
-        })  
     });
      $('#buttonOk').on('click',function(){
         var komponen        = $('#komponen').val()

@@ -38,7 +38,7 @@
                         <td> <?php echo $laporanstok->nama_kategori ?> </td>
                         <td> <?php echo $laporanstok->id_komponen ?> </td>
                         <td> <?php echo $laporanstok->nama_komponen ?> </td>
-                        <td align="center"> <?php echo $laporanstok->jumlah_komponen ?> </td>
+                        <td align="center"> <?php echo $laporanstok->jml_komponen ?> </td>
                       </tr>
                         <?php
                        }

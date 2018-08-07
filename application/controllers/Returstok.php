@@ -3,19 +3,19 @@
 if (!defined('BASEPATH'))
     exit('No direct script access allowed');
 
-class Updatestock extends CI_Controller
+class Returstok extends CI_Controller
 {
     function __construct()
     {
         parent::__construct();
-        $this->load->model('Updatestock_model');
+        $this->load->model('Returstok_model');
         $this->load->library('form_validation');        
 		$this->load->library('datatables');
     }
 
     public function index()
     {        
-        $this->template->load('template','updatestock/tbl_menu_list');
+        $this->template->load('template','returstok/tbl_menu_list');
     }
     
     // function simpan_setting(){
@@ -32,21 +32,18 @@ class Updatestock extends CI_Controller
 
     public function read($id) 
     {
-        $row = $this->Updatestock_model->get_by_id($id);
+        $row = $this->returstok_model->get_by_id($id);
         if ($row) {
             $data = array(
+        'id_aktivitas'   => $row->id_aktivitas,
+        'jenis_komponen' => $row->jenis_komponen,
 		'id_komponen'    => $row->id_komponen,
-		'jenis_komponen' => $row->jenis_komponen,
-		'jml_komponen'   => $row->jml_komponen,
-		'id_suplier' 	 => $row->id_suplier,
-        'nota'           => $row->nota_beli,
-        'tgl_aktivitas'  => $row->tanggal,
-		'keterangan' 	 => $row->keterangan,		
+		'jml_komponen'   => $row->jml_komponen,	
 	    );
-            $this->template->load('template','updatestock/tbl_menu_read', $data);
+            $this->template->load('template','returstok/tbl_menu_read', $data);
         } else {
             $this->session->set_flashdata('message', 'Record Not Found');
-            redirect(site_url('updatestock'));
+            redirect(site_url('returstok'));
         }
     }
 
@@ -54,18 +51,14 @@ class Updatestock extends CI_Controller
     {
         $data = array(
             'button'  => 'Create',
-            'action'  => site_url('updatestock/create_action'),
-	    'id_komponen'     => set_value('id_komponen'),
+            'action'  => site_url('returstok/create_action'),
         'jenis_komponen'  => set_value('jenis_komponen'),
+	    'id_komponen'     => set_value('id_komponen'),
 	    'jml_komponen'    => set_value('jml_komponen'),
-	    'id_suplier'      => set_value('id_suplier'),
-        'nota'            => set_value('nota_beli'),
-        'tgl_aktivitas'   => set_value('tanggal'),
-        'keterangan'      => set_value('keterangan'),
 	    
         //Kiri value form  => Field di database (Keterangan)
 	);
-        $this->template->load('template','updatestock/tbl_menu_form', $data);
+        $this->template->load('template','returstok/tbl_menu_form', $data);
     }
     
     public function create_action() 
@@ -77,35 +70,32 @@ class Updatestock extends CI_Controller
         } else {
             $data = array(
 		'jenis_komponen'  => $this->input->post('jenis_komponen',TRUE),
-        'jml_komponen'    => $this->input->post('jml_komponen',TRUE),
-        'id_suplier' 	  => $this->input->post('id_suplier',TRUE),
-		'keterangan' 	  => $this->input->post('keterangan',TRUE),		
+        'id_komponen'     => $this->input->post('id_komponen',TRUE),
+        'jml_komponen'    => $this->input->post('jml_komponen',TRUE),        		
 	    );
 
-            $this->Updatestock_model->insert($data);
+            $this->Returstok_model->insert($data);
             $this->session->set_flashdata('message', 'Create Record Success');
-            redirect(site_url('updatestock'));
+            redirect(site_url('returstok'));
         }
     }
     
     public function update($id) 
     {
-        $row = $this->Updatestock_model->get_by_id($id);
+        $row = $this->Returstok_model->get_by_id($id);
 
         if ($row) {
             $data = array(
                 'button' => 'Update',
-                'action' => site_url('updatestock/update_action'),
+                'action' => site_url('returstok/update_action'),
+        'jenis_komponen' => set_value('jenis_komponen', $row->jenis_komponen),
 		'id_komponen' 	 => set_value('id_komponen', $row->id_komponen),
-		'jenis_komponen' => set_value('jenis_komponen', $row->jenis_komponen),
-		'jml_komponen' 	 => set_value('jml_komponen', $row->jml_komponen),
-		'id_suplier' 	 => set_value('id_suplier', $row->id_suplier),
-		'keterangan' 	 => set_value('keterangan', $row->keterangan),		
+		'jml_komponen' 	 => set_value('jml_komponen', $row->jml_komponen),		
 	    );
-            $this->template->load('template','updatestock/tbl_menu_form', $data);
+            $this->template->load('template','returstok/tbl_menu_form', $data);
         } else {
             $this->session->set_flashdata('message', 'Record Not Found');
-            redirect(site_url('updatestock'));
+            redirect(site_url('returstok'));
         }
     }
     
@@ -118,28 +108,27 @@ class Updatestock extends CI_Controller
         } else {
             $data = array(
 		'jenis_komponen' => $this->input->post('jenis_komponen',TRUE),
-		'jml_komponen'   => $this->input->post('jml_komponen',TRUE),
-		'id_suplier'     => $this->input->post('id_suplier',TRUE),
-		'keterangan'     => $this->input->post('keterangan',TRUE),		
+		'id_komponen'    => $this->input->pos('id_komponen',TRUE),
+        'jml_komponen'   => $this->input->post('jml_komponen',TRUE),		
 	    );
 
-            $this->Updatestock_model->update($this->input->post('id_komponen', TRUE), $data);
+            $this->Returstok_model->update($this->input->post('id_komponen', TRUE), $data);
             $this->session->set_flashdata('message', 'Update Record Success');
-            redirect(site_url('updatestock'));
+            redirect(site_url('returstok'));
         }
     }
     
     public function delete($id) 
     {
-        $row = $this->Updatestock_model->get_by_id($id);
+        $row = $this->Returstok_model->get_by_id($id);
 
         if ($row) {
-            $this->Updatestock_model->delete($id);
+            $this->Returstok_model->delete($id);
             $this->session->set_flashdata('message', 'Delete Record Success');
-            redirect(site_url('updatestock'));
+            redirect(site_url('returstok'));
         } else {
             $this->session->set_flashdata('message', 'Record Not Found');
-            redirect(site_url('updatestock'));
+            redirect(site_url('returstok'));
         }
     }
 
@@ -148,9 +137,9 @@ class Updatestock extends CI_Controller
 	$this->form_validation->set_rules('jenis_komponen', 'jenis komponen', 'trim|required');
 	$this->form_validation->set_rules('jml_komponen', 'jumlah komponen', 'trim|required');
 	$this->form_validation->set_rules('id_suplier', 'id suplier', 'trim|required');
-	$this->form_validation->set_rules('keterangan', 'keterangan', 'trim|required');	
+	//$this->form_validation->set_rules('keterangan', 'keterangan', 'trim|required');	
 
-	$this->form_validation->set_rules('id_komponen', 'id_komponen', 'trim');
+	//$this->form_validation->set_rules('id_komponen', 'id_komponen', 'trim');
 	$this->form_validation->set_error_delimiters('<span class="text-danger">', '</span>');
     }
 
@@ -181,7 +170,7 @@ class Updatestock extends CI_Controller
 	xlsWriteLabel($tablehead, $kolomhead++, "Jumlah Komponen");
 	xlsWriteLabel($tablehead, $kolomhead++, "Tanggal");
 
-	foreach ($this->Updatestock_model->get_all() as $data) {
+	foreach ($this->Returstok_model->get_all() as $data) {
             $kolombody = 0;
 
             //ubah xlsWriteLabel menjadi xlsWriteNumber untuk kolom numeric
@@ -205,15 +194,15 @@ class Updatestock extends CI_Controller
         header("Content-Disposition: attachment;Filename=tbl_menu.doc");
 
         $data = array(
-            'tbl_menu_data' => $this->Updatestock_model->get_all(),
+            'tbl_menu_data' => $this->Returstok_model->get_all(),
             'start' => 0
         );
         
-        $this->load->view('updatestock/tbl_menu_doc',$data);
+        $this->load->view('returstok/tbl_menu_doc',$data);
     }
 
     public function getsuplier(){
-        $data = $this->Updatestock_model->getsuplier();
+        $data = $this->Returstok_model->getsuplier();
         $html = "<option value=''>SELECT</option>";
         foreach($data as $key => $value){
                 $html.='<option value="'.$value->id_suplier.'">'.$value->id_suplier.' - '.$value->nama_suplier.'</option>';
@@ -224,7 +213,7 @@ class Updatestock extends CI_Controller
     public function detailsuplier(){
         $id = $this->input->post('id');
 
-        $data = $this->Updatestock_model->getsuplier($id);
+        $data = $this->Returstok_model->getsuplier($id);
 
         echo json_encode($data[0]);
         
@@ -232,7 +221,7 @@ class Updatestock extends CI_Controller
 
 
     public function getkomponen(){
-        $data = $this->Updatestock_model->getkomponen();
+        $data = $this->Returstok_model->getkomponen();
         $html = "<option value=''>SELECT</option>";
         foreach($data as $key => $value){
             $html.='<option value="'.$value->jenis_komponen.'">'.$value->nama_kategori.'</option>';
@@ -242,7 +231,7 @@ class Updatestock extends CI_Controller
 
     public function detailkomponen(){
      $id   = $this->input->post('ctg');
-     $data = $this->Updatestock_model->detailkomponen($id);
+     $data = $this->Returstok_model->detailkomponen($id);
      $html = "<option value=''>SELECT</option>";
      foreach($data as $key => $value){
         $html.='<option value="'.$value->id_komponen.'">'.$value->id_komponen.' - '.$value->nama_komponen.'</option>';
@@ -254,21 +243,23 @@ class Updatestock extends CI_Controller
     public function insertstok(){        
         //echo json_encode($this->input->post());exit();
 
-        $id_komponen    =$this->input->post('komponen');
         $jenis_komponen =$this->input->post('jenis_komponen');
+        $id_komponen    =$this->input->post('komponen');
         $jml_komponen   =$this->input->post('jml_komponen');
         $id_suplier     =$this->input->post('id_suplier');
-        $nota_beli      =$this->input->post('nota_beli');
-        $tgl_aktivitas  =$this->input->post('tanggal');
+        $tgl_aktivitas  =$this->input->post('tgl_aktivitas');
         //echo $tgl;exit();
 
         //$keterangan=$this->input->post('keterangan');
        
         foreach ($id_komponen as $key => $value) {
 
-            $this->Updatestock_model->insertstok($id_komponen[$key],$jenis_komponen[$key],$jml_komponen[$key],$id_suplier,$nota_beli,$tgl_aktivitas);
-                       
-           
+            $this->Returstok_model->insertstok(
+                $id_komponen[$key],
+                $jenis_komponen[$key],
+                $jml_komponen[$key],
+                $id_suplier,                
+                $tgl_aktivitas);       
             
         }
         //echo '<pre>' . print_r($data2, TRUE) . '</pre>'; 

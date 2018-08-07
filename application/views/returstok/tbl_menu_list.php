@@ -6,7 +6,7 @@
                 <div class="box box-warning box-solid">
 
                     <div class="box-header">
-                        <h3 class="box-title">UPDATE STOCK</h3>
+                        <h3 class="box-title">RETUR STOK</h3>
                     </div>
                     <div class="box-body">
                         <div class="form">
@@ -23,24 +23,12 @@
                                 <td width="300"><input type="text" class="form-control" id="nama_suplier" name="nama_suplier"/></td></tr>
                             </table>
                         </div>
-                        <div class="column">  
-                            <table>
-                                <tr><td width="200"><strong> Alamat </strong></td>
-                                <td width="300"> <input type="text" class="form-control" id="alamat" name="alamat"/></td></tr>
-                            </table>
                         </div>
-                        </div>
-                    <div class="form">
-                        <div class="column">
-                        <table>
-                                <tr><td width ="200"><strong>  Nota Beli </strong></td>
-                                <td width="300"><input type="text" class="form-control" name="nota_beli" id="nota_beli" placeholder="Nota Beli"  /></td></tr>
-                        </table>
-                        </div>
+                    <div class="form">                        
                         <div class="column"> 
                             <table>
                                 <tr><td width="200"> <strong> Tanggal</strong></td>
-                                <td width="300"> <input type="date" class="form-control" name="tanggal" id="tanggal" placeholder="Tanggal"  /></td></tr>
+                                <td width="300"> <input type="date" class="form-control" name="tgl_aktivitas" id="tgl_aktivitas" placeholder="Tanggal"  /></td></tr>
                             </table>
                             </div>
                         </div>
@@ -92,7 +80,7 @@
 <script type="text/javascript">
      $(document).ready(function(){
          $.ajax({
-            url : "<?php echo base_url();?>index.php/updatestock/getsuplier",
+            url : "<?php echo base_url();?>index.php/returstok/getsuplier",
             success: function(data){
                 $('#id_suplier').html(data);
             }
@@ -105,7 +93,7 @@
        var id_suplier = $('#id_suplier').val();
         $.ajax({
 
-            url : "<?php echo base_url();?>index.php/updatestock/detailsuplier",
+            url : "<?php echo base_url();?>index.php/returstok/detailsuplier",
             method : "POST",
             data : {id : id_suplier},
             dataType : 'json',
@@ -120,7 +108,7 @@
      $(document).ready(function(){
         $('.select2').select2();
          $.ajax({
-            url : "<?php echo base_url();?>index.php/updatestock/getkomponen",
+            url : "<?php echo base_url();?>index.php/returstok/getkomponen",
             success: function(data){
                 $('#komponen').html(data);
             }
@@ -129,7 +117,7 @@
         $("body").on('change', '#komponen', function(){
             var ktg = $('#komponen').val();
             $.ajax({
-                url : "<?php echo base_url();?>index.php/updatestock/detailkomponen",
+                url : "<?php echo base_url();?>index.php/returstok/detailkomponen",
                 method : "POST",
                 data : {ctg : ktg},
                 success : function(data){
@@ -210,25 +198,25 @@
      function onklik(){
 
         //$('#submit').on('click',function(event){    
-      var id_suplier    = $('#id_suplier').val();
+      var id_suplier     = $('#id_suplier').val();
       var nama_suplier  = $('#nama_suplier').val();
-      var alamat        = $('#alamat').val();
-      var komponen      = $('#komponen').val();
-      var jenis_komponen= $('#jenis_komponen').val();
-      var nota_beli     = $('#nota_beli').val();
+      //var alamat        = $('#alamat').val();
+      var komponen       = $('#komponen').val();
+      var jenis_komponen = $('#jenis_komponen').val();
+      var tgl_aktivitas  = $('#tgl_aktivitas').val();
       //var jml_komponen  = $('#jml_komponen').val();
       //var keterangan    = $('#keterangan').val();
       
 
-        if(id_suplier != '' && nama_suplier != '' && alamat != '' && komponen != '' && jenis_komponen != '' && nota_beli != '' && jml_komponen != ''){
+        if(id_suplier != '' && nama_suplier != '' && komponen != '' && jenis_komponen != ''  && jml_komponen != ''){
 
              $.ajax({                
-             url : "<?php echo base_url();?>index.php/updatestock/insertstok",
+             url : "<?php echo base_url();?>index.php/returstok/insertstok",
                 method : "POST",
-                data : $('[name="komponen[]"], [name="nama_suplier"], [name="jenis_komponen[]"], [name="jml_komponen[]"], [name="id_suplier"], [name="alamat"], [name="nota_beli"], [name="tanggal"]').serialize(), 
+                data : $('[name="komponen[]"], [name="nama_suplier"], [name="jenis_komponen[]"], [name="jml_komponen[]"], [name="id_suplier"], [name="tgl_aktivitas"]').serialize(), 
                 dataType:'json',
                 success : function(data){
-                    alert('Update Stock Berhasil');
+                    alert('Retur Stok Berhasil');
                      $('#notif').html('');
                     $('#form1')[0].reset();
                     nota();
@@ -239,7 +227,7 @@
                  
             })
         }else{
-            alert('DATA HARUS DIISI LENGKAP BRO');
+            alert('DATA HARUS DIISI LENGKAP');
             event.preventDefault();   
     }
      }

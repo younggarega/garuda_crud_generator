@@ -75,9 +75,9 @@ $query_builder = TRUE;
 
 $db['default'] = array(
 	'dsn'	=> '',
-	'hostname' => '192.168.5.35',
-	'username' => 'rizal',
-	'password' => 'rizal',
+	'hostname' => 'localhost',//192.168.5.35
+	'username' => 'root',//rizal
+	'password' => '',//rizal
 	'database' => 'cigenerator',
 	'dbdriver' => 'mysqli',
 	'dbprefix' => '',

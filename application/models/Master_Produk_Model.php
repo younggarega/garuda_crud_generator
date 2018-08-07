@@ -3,11 +3,11 @@
 if (!defined('BASEPATH'))
     exit('No direct script access allowed');
 
-class Produk_Rancangan_Model extends CI_Model
+class Master_Produk_Model extends CI_Model
 {
 
     public $table = 'tbl_produk_rancangan';
-    public $id = 'id_produk';
+    public $id = 'id_komponen';
     public $order = 'DESC';
 
     function __construct()
@@ -39,11 +39,8 @@ class Produk_Rancangan_Model extends CI_Model
         $this->db->order_by($this->id, $this->order);
         return $this->db->get($this->table)->result();
     } 
-    public function get_komponen()
-    {
-      $sql =  $this->db->get('tbl_master_komponen');
-      return $sql->result();
-    }
+
+
     // get data by id
     function get_by_id($id)
     {
@@ -96,6 +93,37 @@ class Produk_Rancangan_Model extends CI_Model
         $this->db->where($this->id, $id);
         $this->db->delete($this->table);
     }
+
+        function getkomponen(){
+        $sql = $this->db->get("tbl_kategori_komponen");
+        return $sql->result();
+    }
+
+    function detailkomponen($id='')
+           {
+              if($id){
+                  $this->db->where('jenis_komponen',$id);
+              }
+              $sql = $this->db->get('tbl_master_komponen');
+              return $sql->result();
+           }
+
+         function insertstok($id_produk,$nama_produk,$id_komponen,$jml_komponen){
+      
+      $sql = $this->db->query("INSERT INTO `tbl_produk_rancangan`( 
+        `id_produk`,
+        `nama_produk`,
+        `id_komponen`,
+        `jml_komponen`) 
+        VALUES (
+        '".$id_produk."',
+        '".$nama_produk."',
+        '".$id_komponen."',        
+        '".$jml_komponen."')");       
+
+      return $sql;
+
+    } 
 
 }
 

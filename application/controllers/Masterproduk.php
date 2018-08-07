@@ -3,29 +3,25 @@
 if (!defined('BASEPATH'))
     exit('No direct script access allowed');
 
-class produkrancangan extends CI_Controller
+class Masterproduk extends CI_Controller
 {
     function __construct()
     {
         parent::__construct();
-        $this->load->model('Produk_Rancangan_Model');
+        $this->load->model('Master_Produk_Model');
         $this->load->library('form_validation');        
 	    //$this->load->library('datatables');
     }
 
     public function index()
     {
-        $produkrancangan = $this->Produk_Rancangan_Model->get_all();
 
-        $data = array(
-            'produkrancangan_data' => $produkrancangan
-        );
-
-        $this->template->load('template','produkrancangan/tbl_menu_list',$data);
+        $this->template->load('template','masterproduk/tbl_menu_list');
     }
+
     public function read($id) 
     {
-        $row = $this->Produk_Rancangan_Model->get_by_id($id);
+        $row = $this->Master_Produk_Model->get_by_id($id);
         if ($row) {
             $data = array(
         'id_produk' => $row->id_produk,
@@ -33,7 +29,7 @@ class produkrancangan extends CI_Controller
 		'nama_produk' => $row->nama_produk,
 		'jml_komponen' => $row->jml_komponen,
 	    );
-            $this->template->load('template','produkrancangan/tbl_menu_read', $data);
+            $this->template->load('template','masterproduk/tbl_menu_read', $data);
         } else {
             $this->session->set_flashdata('message', 'Record Not Found');
             redirect(site_url('produkrancangan'));
@@ -50,7 +46,7 @@ class produkrancangan extends CI_Controller
         'id_komponen' => set_value('id_komponen'),
 	    'jml_komponen' => set_value('jml_komponen'),
 	);
-        $this->template->load('template','produkrancangan/tbl_menu_form', $data);
+        $this->template->load('template','masterproduk/tbl_menu_form', $data);
     }
     
     public function create_action() 
@@ -67,7 +63,7 @@ class produkrancangan extends CI_Controller
 		'jml_komponen' => $this->input->post('jml_kompoonen',TRUE),
 	    );
 
-            $this->Produk_Rancangan_Model->insert($data);
+            $this->Master_Produk_Model->insert($data);
             $this->session->set_flashdata('message', 'Create Record Success');
             redirect(site_url('produkrancangan'));
         }
@@ -75,7 +71,7 @@ class produkrancangan extends CI_Controller
     
     public function update($id) 
     {
-        $row = $this->Produk_Rancangan_Model->get_by_id($id);
+        $row = $this->Master_Produk_Model->get_by_id($id);
 
         if ($row) {
             $data = array(
@@ -107,7 +103,7 @@ class produkrancangan extends CI_Controller
 		'jml_komponen' => $this->input->post('jml_komponen',TRUE),
 	    );
 
-            $this->Produk_Rancangan_Model->update($this->input->post('id_produk', TRUE), $data);
+            $this->Master_Produk_Model->update($this->input->post('id_produk', TRUE), $data);
             $this->session->set_flashdata('message', 'Update Record Success');
             redirect(site_url('produkrancangan'));
         }
@@ -115,7 +111,7 @@ class produkrancangan extends CI_Controller
     
     public function delete($id) 
     {
-        $row = $this->Produk_Rancangan_Model->get_by_id($id);
+        $row = $this->Master_Produk_Model->get_by_id($id);
 
         if ($row) {
             $this->Produk_Rancangan_Model->delete($id);
@@ -190,11 +186,53 @@ class produkrancangan extends CI_Controller
         header("Content-Disposition: attachment;Filename=tbl_menu.doc");
 
         $data = array(
-            'tbl_menu_data' => $this->Menu_model->get_all(),
+            'tbl_menu_data' => $this->Master_Produk_Model->get_all(),
             'start' => 0
         );
         
         $this->load->view('barangkeluar/tbl_menu_doc',$data);
+    }
+
+        public function getkomponen(){
+        $data = $this->Master_Produk_Model->getkomponen();
+        $html = "<option value=''>SELECT</option>";
+        foreach($data as $key => $value){
+            $html.='<option value="'.$value->jenis_komponen.'">'.$value->nama_kategori.'</option>';
+        }
+        echo $html;
+    }
+
+    public function detailkomponen(){
+     $id   = $this->input->post('ctg');
+     $data = $this->Master_Produk_Model->detailkomponen($id);
+     $html = "<option value=''>SELECT</option>";
+     foreach($data as $key => $value){
+        $html.='<option value="'.$value->id_komponen.'">'.$value->id_komponen.' - '.$value->nama_komponen.'</option>';
+        }
+        echo $html;
+    }
+
+        public function insertstok(){        
+        //echo json_encode($this->input->post());exit();
+
+        $id_produk    =$this->input->post('id_produk');
+        $nama_produk =$this->input->post('nama_produk');
+        $id_komponen    =$this->input->post('id_komponen');
+        $jml_komponen   =$this->input->post('jml_komponen');
+        //echo $tgl;exit();
+
+        //$keterangan=$this->input->post('keterangan');
+       
+        foreach ($id_komponen as $key => $value) {
+
+            $this->Master_Produk_Model->insertstok($id_produk,$nama_produk,$id_komponen[$key],$jml_komponen[$key]);
+                       
+           
+            
+        }
+        //echo '<pre>' . print_r($data2, TRUE) . '</pre>'; 
+        //echo $data2; exit();
+        echo json_encode(true);
     }
 
 }

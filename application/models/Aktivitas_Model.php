@@ -120,7 +120,7 @@ class Aktivitas_Model extends CI_Model
            }
 
     function getproduk(){
-        $sql = $this->db->get("tbl_produk_rancangan");
+        $sql = $this->db->query("SELECT DISTINCT tbl_produk_rancangan.id_produk, tbl_produk_rancangan.nama_produk FROM  `tbl_produk_rancangan` ");
         return $sql->result();
     }
 

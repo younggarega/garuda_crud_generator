@@ -12,12 +12,6 @@
                         <div class="form">
                         <form method="post" id="form1">
                     <div class="form">
-                        <div class="column">
-                        <table>
-                                <tr><td width ="200"><strong>  Nota Beli </strong></td>
-                                <td width="300"><input type="text" class="form-control" name="nota_beli" id="nota_beli" placeholder="Nota Beli"  /></td></tr>
-                        </table>
-                        </div>
                         <div class="column"> 
                             <table>
                                 <tr><td width="200"> <strong> Tanggal</strong></td>

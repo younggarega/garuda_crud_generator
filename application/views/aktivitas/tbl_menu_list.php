@@ -6,7 +6,7 @@
                 <div class="box box-warning box-solid">
 
                     <div class="box-header">
-                        <h3 class="box-title">UPDATE STOCK</h3>
+                        <h3 class="box-title">AKTIVITAS</h3>
                     </div>
                     <div class="box-body">
                              <div style="padding-bottom: 10px;"'>
@@ -16,12 +16,6 @@
                         <form method="post" id="form1">
                         </div>
                     <div class="form">
-                        <div class="column">
-                        <table>
-                                <tr><td width ="200"><strong>  Nota Beli </strong></td>
-                                <td width="300"><input type="text" class="form-control" name="nota_beli" id="nota_beli" placeholder="Nota Beli"  /></td></tr>
-                        </table>
-                        </div>
                         <div class="column"> 
                             <table>
                                 <tr><td width="200"> <strong> Tanggal</strong></td>
@@ -111,13 +105,15 @@
             }
         });
 
+
         $("body").on('change', '#komponen', function(){
             var ktg = $('#komponen').val();
             $.ajax({
-                url : "<?php echo base_url();?>index.php/aktivitas/detailkomponen",
+                url : "<?php echo base_url();?>index.php/aktivitas/detailproduk",
                 method : "POST",
-                data : {ctg : ktg},
+                data : {prd : ktg},
                 success : function(data){
+                    
                     $('#jenis_komponen').html(data);
                 }
              })

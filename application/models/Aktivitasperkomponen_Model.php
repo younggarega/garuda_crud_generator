@@ -3,7 +3,7 @@
 if (!defined('BASEPATH'))
     exit('No direct script access allowed');
 
-class Aktivitas_Model extends CI_Model
+class Aktivitasperkomponen_Model extends CI_Model
 {
 
     public $table = 'tbl_aktivitas';
@@ -119,44 +119,24 @@ class Aktivitas_Model extends CI_Model
               return $sql->result();
            }
 
-    function getproduk(){
-        $sql = $this->db->get("tbl_produk_rancangan");
-        return $sql->result();
-    }
-
-    function detailproduk($id='')
-           {
-              if($id){
-                  $this->db->where('id_produk',$id);
-              }
-              $sql = $this->db->get('tbl_produk_rancangan');
-              return $sql->result();
-           }
-
-     function insertstok($jenis_komponen,$id_komponen,$jml_komponen,$id_suplier,$nota_beli,$tgl_aktivitas){
+     function insertstok($jenis_komponen,$id_komponen,$jml_komponen,$tgl_aktivitas){
       
       $sql = $this->db->query("INSERT INTO `tbl_aktivitas`( 
         `jenis_komponen`,
         `id_komponen`,
-        `id_suplier`,
         `komponen_keluar`,
-        `komponen_masuk`,
         `tgl_aktivitas`,
-        `nota`,
         `status`,
         `keterangan`) 
         VALUES (
         '".$jenis_komponen."',
         '".$id_komponen."',        
-        '".$id_suplier."',
-        '".'0'."',
         '".$jml_komponen."',
         '".$tgl_aktivitas."',
-        '".$nota_beli."',
         '".'T'."',
         '".$tgl_aktivitas."')");
 
-      $sql = $this->db->query("INSERT INTO `tbl_stok`( 
+/*      $sql = $this->db->query("INSERT INTO `tbl_stok`( 
         `id_komponen`,
         `jenis_komponen`,
         `jml_komponen`,
@@ -168,7 +148,7 @@ class Aktivitas_Model extends CI_Model
         '".$jml_komponen."' ,
         '".$id_suplier."',
         '".$tgl_aktivitas."',
-        '".$nota_beli."')");
+        '".$nota_beli."')");*/
              
 
       return $sql;

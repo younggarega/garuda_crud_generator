@@ -13,7 +13,7 @@
 
                     <div class="box-body">
                         <div style="padding-bottom: 10px;"'>
-                            <?php echo anchor(site_url('produkrancangan/create'), '<i class="fa fa-wpforms" aria-hidden="true"></i> Tambah Data', 'class="btn btn-danger btn-sm"'); ?>
+                            <?php echo anchor(site_url('masterproduk'), '<i class="" aria-hidden="true"></i> Tambah Data', 'class="btn btn-danger btn-sm"'); ?>
                             <?php echo anchor(site_url('produkrancangan/excel'), '<i class="fa fa-file-excel-o" aria-hidden="true"></i> Export Ms Excel', 'class="btn btn-success btn-sm"'); ?>
                             <?php echo anchor(site_url('produkrancangan/word'), '<i class="fa fa-file-word-o" aria-hidden="true"></i> Export Ms Word', 'class="btn btn-primary btn-sm"'); ?></div>
                         <table class="table table-bordered table-striped" id="mytable">

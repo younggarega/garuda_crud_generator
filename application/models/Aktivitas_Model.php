@@ -129,11 +129,7 @@ class Aktivitas_Model extends CI_Model
               if($id){
                   $this->db->where('id_produk',$id);
               }
-<<<<<<< HEAD
-              $sql = $this->db->get('tbl_produk_rancangan');
-=======
               $sql = $this->db->query("SELECT tbl_produk_rancangan.nama_produk,tbl_produk_rancangan.id_komponen,tbl_master_komponen.nama_komponen,tbl_produk_rancangan.jml_komponen FROM  `tbl_produk_rancangan` JOIN tbl_master_komponen ON tbl_master_komponen.id_komponen = tbl_produk_rancangan.id_komponen ");
->>>>>>> 44e0a681a321fd1a084204de920e1e1ffc4249e3
               return $sql->result();
            }
 

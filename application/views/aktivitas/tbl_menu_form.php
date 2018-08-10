@@ -3,14 +3,14 @@
     <section class="content">
         <div class="box box-warning box-solid">
             <div class="box-header with-border">
-                <h3 class="box-title">AKTIVITAS</h3>
+                <h3 class="box-title">INPUT STOCK</h3>
             </div>
             <form action="<?php echo $action; ?>" method="post">
             
 <table class='table table-bordered>'>        
 
 	    <tr>
-            <td width='200'>ID Aktivitas <?php echo form_error('id_suplier') ?></td><td><input type="text" class="form-control" name="id_suplier" id="id_suplier" placeholder="ID Suplier" value="<?php echo $id_suplier; ?>" /></td>
+            <td width='200'>ID Suplier <?php echo form_error('id_suplier') ?></td><td><input type="text" class="form-control" name="id_suplier" id="id_suplier" placeholder="ID Suplier" value="<?php echo $id_suplier; ?>" /></td>
         </tr>
         <tr>
             <td width='200'>Komponen <?php echo form_error('id_komponen') ?></td><td><input type="text" class="form-control" name="id_komponen" id="id_komponen" placeholder="ID Komponen" value="<?php echo $id_komponen; ?>" /></td>

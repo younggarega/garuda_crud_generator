@@ -15,15 +15,6 @@
                         <div class="form">
                         <form method="post" id="form1">
                         </div>
-                    <div class="form">
-                        <div class="column"> 
-                            <table>
-                                <tr><td width="200"> <strong> Tanggal</strong></td>
-                                <td width="300"> <input type="date" class="form-control" name="tanggal" id="tanggal" placeholder="Tanggal"  /></td></tr>
-                            </table>
-                            </div>
-                        </div>
-                        </form>
 
                         <form id="form2">
                         <div class="column2">
@@ -31,12 +22,8 @@
                             <select class="select2 form-control" id="komponen"></select>
                         </div>
                         <div class="column2">
-                            <strong>ID Komponen</strong>
-                            <select class="select2 form-control" id="jenis_komponen"></select>
-                        </div>
-                        <div class="column2">
-                            <strong>Jumlah Komponen</strong>
-                            <input type="number" class="form-control" name="jml_komponen" id="jml_komponen" placeholder="Jumlah Komponen"/>
+                            <strong>Tanggal</strong>
+                            <input type="date" class="form-control" name="tanggal" id="tanggal" placeholder="Tanggal"  />
                         </div>
                         <div class="column2"><br>
                         <button class="btn btn-primary" type="button" id="buttonOk"> Add</button> 
@@ -51,6 +38,9 @@
                                     <th>Action</th>                                    
                                 </tr>
                             </thead>
+                            <tbody>
+                                
+                            </tbody>
                         </table>                        
                         <button class="btn btn-primary" id="submit" onclick="onklik();">Add All Item</button>
                         <button class="btn btn-default" id="Cancel">Cancel</button>
@@ -113,8 +103,8 @@
                 method : "POST",
                 data : {prd : ktg},
                 success : function(data){
-                    
-                    $('#jenis_komponen').html(data);
+                                    
+                    $('#table').html(data);
                 }
              })
         })           
@@ -201,7 +191,7 @@
       //var keterangan    = $('#keterangan').val();
       
 
-        if(id_suplier != '' && nama_suplier != '' && alamat != '' && komponen != '' && jenis_komponen != '' && nota_beli != '' && jml_komponen != ''){
+        if(id_suplier != '' && nama_suplier != '' && tanggal != '' && komponen != '' && jenis_komponen != '' && nota_beli != '' && jml_komponen != ''){
 
              $.ajax({                
              url : "<?php echo base_url();?>index.php/aktivitas/insertstok",

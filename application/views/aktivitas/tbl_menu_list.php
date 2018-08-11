@@ -9,7 +9,7 @@
                         <h3 class="box-title">AKTIVITAS</h3>
                     </div>
                     <div class="box-body">
-                             <div style="padding-bottom: 10px;"'>
+                             <div style="padding-bottom: 10px;">
                             <?php echo anchor(site_url('aktivitasperkomponen'), '<i class="" aria-hidden="true"></i> Aktivitas Per-Komponen', 'class="btn btn-danger btn-sm"'); ?>
                             </div>
                         <div class="form">
@@ -26,24 +26,25 @@
                             <input type="date" class="form-control" name="tanggal" id="tanggal" placeholder="Tanggal"  />
                         </div>
                         <div class="column2"><br>
-                        <button class="btn btn-primary" type="button" id="buttonOk"> Add</button> 
+                        <!-- <button class="btn btn-primary" type="button" id="buttonOk"> Add</button>  -->
                         </div>
                         <div class="column2"></div>
                         <table class="table table-bordered table-striped" id="table">
                             <thead>
                                 <tr>                                                                        
-                                    <th>Jenis Komponen</th>
+                                    <th>Nama Produk</th>
                                     <th>ID Komponen</th>
-                                    <th>Jumlah Komponen</th>
-                                    <th>Action</th>                                    
+                                    <th>Nama Komponen</th>
+                                    <th>Jumlah Komponen</th>                                    
                                 </tr>
                             </thead>
-                            <tbody>
-                                
+                            <tbody id="tbody">
+                            <input type="hidden" value="${komponen}" name="komponen[]"/>
+
                             </tbody>
                         </table>                        
                         <button class="btn btn-primary" id="submit" onclick="onklik();">Add All Item</button>
-                        <button class="btn btn-default" id="Cancel">Cancel</button>
+                        <button class="btn btn-default" id="Cancel">Cancel</button>                        
                         </form>
                        
                     </div>
@@ -103,8 +104,9 @@
                 method : "POST",
                 data : {prd : ktg},
                 success : function(data){
-                                    
-                    $('#table').html(data);
+                    
+                    //var sd = '';
+                    $('#tbody').html(data);
                 }
              })
         })           
@@ -127,8 +129,8 @@
 
         $('#table').append(`<tr>            
             <td>${nama_komponen}<input type="hidden" value="${komponen}" name="komponen[]"/> </td>
-             <td>${nama_kategori_komponen}<input type="hidden" value="${jenis_komponen}" name="jenis_komponen[]"/></td>
-             <td>${jml_komponen}<input type="hidden" value="${jml_komponen}" name="jml_komponen[]"/></td>
+            <td>${nama_kategori_komponen}<input type="hidden" value="${jenis_komponen}" name="jenis_komponen[]"/></td>
+            <td>${jml_komponen}<input type="hidden" value="${jml_komponen}" name="jml_komponen[]"/></td>
                           
             <td align="center"><button class="delete">delete</button></td>
             </tr>`)
@@ -180,10 +182,7 @@
 
      function onklik(){
 
-        //$('#submit').on('click',function(event){    
-      var id_suplier    = $('#id_suplier').val();
-      var nama_suplier  = $('#nama_suplier').val();
-      var alamat        = $('#alamat').val();
+        //$('#submit').on('click',function(event){ 
       var komponen      = $('#komponen').val();
       var jenis_komponen= $('#jenis_komponen').val();
       var nota_beli     = $('#nota_beli').val();
@@ -191,12 +190,15 @@
       //var keterangan    = $('#keterangan').val();
       
 
-        if(id_suplier != '' && nama_suplier != '' && tanggal != '' && komponen != '' && jenis_komponen != '' && nota_beli != '' && jml_komponen != ''){
+        if(id_produk != '' && tanggal != '' && komponen != '' && jenis_komponen != '' && nota_beli != '' && jml_komponen != ''){
+
+            alert('asdasda');
+            return false;
 
              $.ajax({                
              url : "<?php echo base_url();?>index.php/aktivitas/insertstok",
                 method : "POST",
-                data : $('[name="komponen[]"], [name="nama_suplier"], [name="jenis_komponen[]"], [name="jml_komponen[]"], [name="id_suplier"], [name="alamat"], [name="nota_beli"], [name="tanggal"]').serialize(), 
+                data : $('[name="komponen[]"], [name="jenis_komponen[]"], [name="jml_komponen[]"], [name="id_produk"], [name="nota_beli"], [name="tanggal"]').serialize(), 
                 dataType:'json',
                 success : function(data){
                     alert('Update Stock Berhasil');

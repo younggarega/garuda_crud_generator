@@ -263,15 +263,12 @@ class Aktivitas extends CI_Controller
      $id   = $this->input->post('prd');
      $data = $this->Aktivitas_Model->detailproduk($id);
      $html = "<option value=''>SELECT</option>";
-     foreach($data as $key => $value){
      $html = "";
      foreach($data as $key => $value){
-        $html.='<option value="'.$value->id_komponen.'">'.$value->nama_produk.' - '.$value->id_komponen.' - '.$value->nama_komponen.' - '.$value->jml_komponen.'</option>';
+        $html.="<tr> <td>$value->nama_produk</td> <td>$value->id_komponen</td> <td>$value->nama_komponen</td> <td>$value->jml_komponen</td>  </tr>";
         }
         echo $html;
     }
-
-
 
     public function insertstok(){        
         //echo json_encode($this->input->post());exit();
@@ -279,7 +276,7 @@ class Aktivitas extends CI_Controller
         $id_komponen    =$this->input->post('komponen');
         $jenis_komponen =$this->input->post('jenis_komponen');
         $jml_komponen   =$this->input->post('jml_komponen');
-        $id_suplier     =$this->input->post('id_suplier');
+        $id_produk      =$this->input->post('id_produk');
         $nota_beli      =$this->input->post('nota_beli');
         $tgl_aktivitas  =$this->input->post('tanggal');
         //echo $tgl;exit();

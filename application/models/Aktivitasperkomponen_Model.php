@@ -3,12 +3,11 @@
 if (!defined('BASEPATH'))
     exit('No direct script access allowed');
 
-class Aktivitas_Model extends CI_Model
+class Aktivitasperkomponen_Model extends CI_Model
 {
 
     public $table = 'tbl_aktivitas';
-    public $id    = 'id_komponen';
-    public $id_produk = 'id_produk';
+    public $id 	  = 'id_komponen';
     public $order = 'DESC';
 
     function __construct()
@@ -120,43 +119,37 @@ class Aktivitas_Model extends CI_Model
               return $sql->result();
            }
 
-    function getproduk(){
-        $sql = $this->db->query("SELECT DISTINCT tbl_produk_rancangan.id_produk, tbl_produk_rancangan.nama_produk FROM  `tbl_produk_rancangan` ");
-        return $sql->result();
-    }
-
-    function detailproduk($id='')
-           {
-              if($id){
-                  $this->db->where('id_produk',$id);
-              }
-              $sql = $this->db->query("SELECT tbl_produk_rancangan.nama_produk,tbl_produk_rancangan.id_komponen,tbl_master_komponen.nama_komponen,tbl_produk_rancangan.jml_komponen FROM  `tbl_produk_rancangan` JOIN tbl_master_komponen ON tbl_master_komponen.id_komponen = tbl_produk_rancangan.id_komponen WHERE id_produk = '".$id."'");
-              return $sql->result();
-           }
-
-     function insertstok($jenis_komponen,$id_komponen,$jml_komponen,$id_produk,$nota_beli,$tgl_aktivitas){
+     function insertstok($jenis_komponen,$id_komponen,$jml_komponen,$tgl_aktivitas){
       
       $sql = $this->db->query("INSERT INTO `tbl_aktivitas`( 
         `jenis_komponen`,
         `id_komponen`,
         `komponen_keluar`,
-        `komponen_masuk`,
-        `id_produk`,
         `tgl_aktivitas`,
-        `nota`,
         `status`,
         `keterangan`) 
         VALUES (
         '".$jenis_komponen."',
-        '".$id_komponen."',
+        '".$id_komponen."',        
         '".$jml_komponen."',
-        '".'0'."',
-        '".$id_produk."',
         '".$tgl_aktivitas."',
-        '".$nota_beli."',
-        '".'P'."',
+        '".'T'."',
         '".$tgl_aktivitas."')");
-    
+
+/*      $sql = $this->db->query("INSERT INTO `tbl_stok`( 
+        `id_komponen`,
+        `jenis_komponen`,
+        `jml_komponen`,
+        `id_suplier`,
+        `tanggal`,
+        `nota_beli`)
+        VALUES('".$id_komponen."' ,
+        '".$jenis_komponen."' ,
+        '".$jml_komponen."' ,
+        '".$id_suplier."',
+        '".$tgl_aktivitas."',
+        '".$nota_beli."')");*/
+             
 
       return $sql;
 

@@ -3,19 +3,19 @@
 if (!defined('BASEPATH'))
     exit('No direct script access allowed');
 
-class Aktivitas extends CI_Controller
+class Aktivitasperkomponen extends CI_Controller
 {
     function __construct()
     {
         parent::__construct();
-        $this->load->model('Aktivitas_Model');
+        $this->load->model('Aktivitasperkomponen_Model');
         $this->load->library('form_validation');        
-		//$this->load->library('datatables');
+		$this->load->library('datatables');
     }
 
     public function index()
     {        
-        $this->template->load('template','aktivitas/tbl_menu_list');
+        $this->template->load('template','aktivitasperkomponen/tbl_menu_list');
     }
     
     // function simpan_setting(){
@@ -27,12 +27,12 @@ class Aktivitas extends CI_Controller
     
     // public function json() {
     //     header('Content-Type: application/json');
-    //     echo $this->Updatestock_model->json();
+    //     echo $this->Aktivitasperkomponen_Model->json();
     // }
 
     public function read($id) 
     {
-        $row = $this->Aktivitas_Model->get_by_id($id);
+        $row = $this->Aktivitasperkomponen_Model->get_by_id($id);
         if ($row) {
             $data = array(
 		'id_komponen'    => $row->id_komponen,
@@ -43,10 +43,10 @@ class Aktivitas extends CI_Controller
         'tgl_aktivitas'  => $row->tanggal,
 		'keterangan' 	 => $row->keterangan,		
 	    );
-            $this->template->load('template','aktivitas/tbl_menu_read', $data);
+            $this->template->load('template','aktivitasperkomponen/tbl_menu_read', $data);
         } else {
             $this->session->set_flashdata('message', 'Record Not Found');
-            redirect(site_url('aktivitas'));
+            redirect(site_url('aktivitasperkomponen'));
         }
     }
 
@@ -54,7 +54,7 @@ class Aktivitas extends CI_Controller
     {
         $data = array(
             'button'  => 'Create',
-            'action'  => site_url('aktivitas/create_action'),
+            'action'  => site_url('aktivitasperkomponen/create_action'),
 	    'id_komponen'     => set_value('id_komponen'),
         'jenis_komponen'  => set_value('jenis_komponen'),
 	    'jml_komponen'    => set_value('jml_komponen'),
@@ -65,7 +65,7 @@ class Aktivitas extends CI_Controller
 	    
         //Kiri value form  => Field di database (Keterangan)
 	);
-        $this->template->load('template','aktivitas/tbl_menu_form', $data);
+        $this->template->load('template','aktivitasperkomponen/tbl_menu_form', $data);
     }
     
     public function create_action() 
@@ -82,30 +82,30 @@ class Aktivitas extends CI_Controller
 		'keterangan' 	  => $this->input->post('keterangan',TRUE),		
 	    );
 
-            $this->Aktivitas_Model->insert($data);
+            $this->Aktivitasperkomponen_Model->insert($data);
             $this->session->set_flashdata('message', 'Create Record Success');
-            redirect(site_url('aktivitas'));
+            redirect(site_url('aktivitasperkomponen'));
         }
     }
     
     public function update($id) 
     {
-        $row = $this->Aktivitas_Model->get_by_id($id);
+        $row = $this->Aktivitasperkomponen_Model->get_by_id($id);
 
         if ($row) {
             $data = array(
                 'button' => 'Update',
-                'action' => site_url('aktivitas/update_action'),
+                'action' => site_url('aktivitasperkomponen/update_action'),
 		'id_komponen' 	 => set_value('id_komponen', $row->id_komponen),
 		'jenis_komponen' => set_value('jenis_komponen', $row->jenis_komponen),
 		'jml_komponen' 	 => set_value('jml_komponen', $row->jml_komponen),
 		'id_suplier' 	 => set_value('id_suplier', $row->id_suplier),
 		'keterangan' 	 => set_value('keterangan', $row->keterangan),		
 	    );
-            $this->template->load('template','aktivitas/tbl_menu_form', $data);
+            $this->template->load('template','aktivitasperkomponen/tbl_menu_form', $data);
         } else {
             $this->session->set_flashdata('message', 'Record Not Found');
-            redirect(site_url('aktivitas'));
+            redirect(site_url('aktivitasperkomponen'));
         }
     }
     
@@ -123,23 +123,23 @@ class Aktivitas extends CI_Controller
 		'keterangan'     => $this->input->post('keterangan',TRUE),		
 	    );
 
-            $this->Aktivitas_Model->update($this->input->post('id_komponen', TRUE), $data);
+            $this->Aktivitasperkomponen_Model->update($this->input->post('id_komponen', TRUE), $data);
             $this->session->set_flashdata('message', 'Update Record Success');
-            redirect(site_url('aktivitas'));
+            redirect(site_url('aktivitasperkomponen'));
         }
     }
     
     public function delete($id) 
     {
-        $row = $this->Aktivitas_Model->get_by_id($id);
+        $row = $this->Aktivitasperkomponen_Model->get_by_id($id);
 
         if ($row) {
-            $this->Aktivitas_Model->delete($id);
+            $this->Aktivitasperkomponen_Model->delete($id);
             $this->session->set_flashdata('message', 'Delete Record Success');
-            redirect(site_url('aktivitas'));
+            redirect(site_url('aktivitasperkomponen'));
         } else {
             $this->session->set_flashdata('message', 'Record Not Found');
-            redirect(site_url('aktivitas'));
+            redirect(site_url('aktivitasperkomponen'));
         }
     }
 
@@ -181,7 +181,7 @@ class Aktivitas extends CI_Controller
 	xlsWriteLabel($tablehead, $kolomhead++, "Jumlah Komponen");
 	xlsWriteLabel($tablehead, $kolomhead++, "Tanggal");
 
-	foreach ($this->Aktivitas_Model->get_all() as $data) {
+	foreach ($this->Aktivitasperkomponen_Model->get_all() as $data) {
             $kolombody = 0;
 
             //ubah xlsWriteLabel menjadi xlsWriteNumber untuk kolom numeric
@@ -205,15 +205,15 @@ class Aktivitas extends CI_Controller
         header("Content-Disposition: attachment;Filename=tbl_menu.doc");
 
         $data = array(
-            'tbl_menu_data' => $this->Aktivitas_Model->get_all(),
+            'tbl_menu_data' => $this->Aktivitasperkomponen_Model->get_all(),
             'start' => 0
         );
         
-        $this->load->view('aktivitas/tbl_menu_doc',$data);
+        $this->load->view('aktivitasperkomponen/tbl_menu_doc',$data);
     }
 
     public function getsuplier(){
-        $data = $this->Aktivitas_Model->getsuplier();
+        $data = $this->Aktivitasperkomponen_Model->getsuplier();
         $html = "<option value=''>SELECT</option>";
         foreach($data as $key => $value){
                 $html.='<option value="'.$value->id_suplier.'">'.$value->id_suplier.' - '.$value->nama_suplier.'</option>';
@@ -224,7 +224,7 @@ class Aktivitas extends CI_Controller
     public function detailsuplier(){
         $id = $this->input->post('id');
 
-        $data = $this->Aktivitas_Model->getsuplier($id);
+        $data = $this->Aktivitasperkomponen_Model->getsuplier($id);
 
         echo json_encode($data[0]);
         
@@ -232,7 +232,7 @@ class Aktivitas extends CI_Controller
 
 
     public function getkomponen(){
-        $data = $this->Aktivitas_Model->getkomponen();
+        $data = $this->Aktivitasperkomponen_Model->getkomponen();
         $html = "<option value=''>SELECT</option>";
         foreach($data as $key => $value){
             $html.='<option value="'.$value->jenis_komponen.'">'.$value->nama_kategori.'</option>';
@@ -242,7 +242,7 @@ class Aktivitas extends CI_Controller
 
     public function detailkomponen(){
      $id   = $this->input->post('ctg');
-     $data = $this->Aktivitas_Model->detailkomponen($id);
+     $data = $this->Aktivitasperkomponen_Model->detailkomponen($id);
      $html = "<option value=''>SELECT</option>";
      foreach($data as $key => $value){
         $html.='<option value="'.$value->id_komponen.'">'.$value->id_komponen.' - '.$value->nama_komponen.'</option>';
@@ -250,25 +250,6 @@ class Aktivitas extends CI_Controller
         echo $html;
     }
 
-    public function getproduk(){
-        $data = $this->Aktivitas_Model->getproduk();
-        $html = "<option value=''>SELECT</option>";
-        foreach($data as $key => $value){
-            $html.='<option value="'.$value->id_produk.'">'.$value->nama_produk.'</option>';
-        }
-        echo $html;
-    }
-
-    public function detailproduk(){
-     $id   = $this->input->post('prd');
-     $data = $this->Aktivitas_Model->detailproduk($id);
-     $html = "<option value=''>SELECT</option>";
-     $html = "";
-     foreach($data as $key => $value){
-        $html.="<tr> <td>$value->nama_produk</td> <td>$value->id_komponen</td> <td>$value->nama_komponen</td> <td>$value->jml_komponen</td>  </tr>";
-        }
-        echo $html;
-    }
 
     public function insertstok(){        
         //echo json_encode($this->input->post());exit();
@@ -276,8 +257,6 @@ class Aktivitas extends CI_Controller
         $id_komponen    =$this->input->post('komponen');
         $jenis_komponen =$this->input->post('jenis_komponen');
         $jml_komponen   =$this->input->post('jml_komponen');
-        $id_produk      =$this->input->post('id_produk');
-        $nota_beli      =$this->input->post('nota_beli');
         $tgl_aktivitas  =$this->input->post('tanggal');
         //echo $tgl;exit();
 
@@ -285,7 +264,7 @@ class Aktivitas extends CI_Controller
        
         foreach ($id_komponen as $key => $value) {
 
-            $this->Aktivitas_Model->insertstok($id_komponen[$key],$jenis_komponen[$key],$jml_komponen[$key],$id_suplier,$nota_beli,$tgl_aktivitas);
+            $this->Aktivitasperkomponen_Model->insertstok($id_komponen[$key],$jenis_komponen[$key],$jml_komponen[$key],$tgl_aktivitas);
                        
            
             

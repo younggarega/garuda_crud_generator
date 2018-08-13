@@ -26,7 +26,7 @@
                             <input type="date" class="form-control" name="tanggal" id="tanggal" placeholder="Tanggal"  />
                         </div>
                         <div class="column2"><br>
-                        <!-- <button class="btn btn-primary" type="button" id="buttonOk"> Add</button>  -->
+                        <button class="btn btn-primary" type="button" id="buttonOk"> Add</button>
                         </div>
                         <div class="column2"></div>
                         <table class="table table-bordered table-striped" id="">
@@ -41,8 +41,6 @@
                                 </tr>
                             </thead>
                             <tbody id="tbody">
-                            
-
                             </tbody>
                         </table>                        
                         <button class="btn btn-primary" id="submit" onclick="onklik();">Add All Item</button>
@@ -106,15 +104,14 @@
                 method : "POST",
                 data : {prd : ktg},
                 success : function(data){
+                    alert(data)
                     
-                    //var sd = '';
                     $('#tbody').html(data);
+                    
                 }
              })
         })           
     });
-
-
      function hapus(){
         $('.delete').on('click',function(){
             $(this).parent().parent().remove()
@@ -141,6 +138,7 @@
      function onklik(){
 
         //$('#submit').on('click',function(event){ 
+<<<<<<< HEAD
      var jenis_komponen   = $('#jenis_komponen').val();
       var id_produk   = $('#id_produk').val();
       var id_komponen   = $('#id_komponen').val();
@@ -156,7 +154,7 @@
                 method : "POST",
                 data : $('[name="jenis_komponen[]"], [name="id_komponen[]"],[name="jml_komponen[]"],[name="id_produk[]"], [name="tanggal"]').serialize(),
                 success : function(data){
-                    
+
                     alert('Update Stock Berhasil');
                      $('#notif').html('');
                     $('#form1')[0].reset();

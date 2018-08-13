@@ -261,12 +261,12 @@ class Aktivitas extends CI_Controller
 
     public function detailproduk(){
      $id   = $this->input->post('prd');
-     $data = $this->Aktivitas_Model->detailproduk($id);
-     $html = "<option value=''>SELECT</option>";
+     $data = $this->Aktivitas_Model->detailproduk($id);     
      $html = "";
      foreach($data as $key => $value){
-        $html.="<tr> <td>$value->nama_produk</td> <td>$value->id_komponen</td> <td>$value->nama_komponen</td> <td>$value->jml_komponen</td>  </tr>";
-        }
+        $html.='<option value="'.$value->nama_produk.'">'.$value->nama_produk.' - '.$value->id_komponen.' - '.$value->nama_komponen.' - '.$value->jml_komponen.' </option>';
+        }       
+
         echo $html;
     }
 

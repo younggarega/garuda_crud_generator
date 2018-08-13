@@ -26,7 +26,7 @@
                             <input type="date" class="form-control" name="tanggal" id="tanggal" placeholder="Tanggal"  />
                         </div>
                         <div class="column2"><br>
-                        <!-- <button class="btn btn-primary" type="button" id="buttonOk"> Add</button>  -->
+                        <button class="btn btn-primary" type="button" id="buttonOk"> Add</button>
                         </div>
                         <div class="column2"></div>
                         <table class="table table-bordered table-striped" id="table">
@@ -39,8 +39,7 @@
                                 </tr>
                             </thead>
                             <tbody id="tbody">
-                            <input type="hidden" value="${komponen}" name="komponen[]"/>
-
+                                <td><input type="hidden" id="nama_produk" name="nama_produk"></td>
                             </tbody>
                         </table>                        
                         <button class="btn btn-primary" id="submit" onclick="onklik();">Add All Item</button>
@@ -104,22 +103,23 @@
                 method : "POST",
                 data : {prd : ktg},
                 success : function(data){
+                    alert(data)
                     
-                    //var sd = '';
                     $('#tbody').html(data);
+                    
                 }
              })
         })           
     });
 
-     $('#buttonOk').on('click',function(){
-        var komponen        = $('#komponen').val()
-        var nama_komponen   = $('#komponen option:selected').text()
-        var jenis_komponen  = $('#jenis_komponen').val()
-        var nama_kategori_komponen  = $('#jenis_komponen option:selected').text()
-        //var harga_beli = $('#harga_beli').val()
-        var jml_komponen = $('#jml_komponen').val()
-        if(komponen != '' && jenis_komponen != '' && jml_komponen != ''){
+     $('#buttonOk').on('click',function(){        
+        
+        // var nama_komponen   = $('#tbody option:selected').text()
+        // var jenis_komponen  = $('#jenis_komponen').val()
+        // var nama_kategori_komponen  = $('#jenis_komponen option:selected').text()
+        // //var harga_beli = $('#harga_beli').val()
+        // var jml_komponen = $('#jml_komponen').val()
+        if(nama_komponen != ''){
 
         // var hargabarang = harga_beli.toString();
         // var harga = hargabarang.split('.').join('');
@@ -127,10 +127,8 @@
          //var hrg = number_format(total,0,',','.');
          //console.log(total);
 
-        $('#table').append(`<tr>            
-            <td>${nama_komponen}<input type="hidden" value="${komponen}" name="komponen[]"/> </td>
-            <td>${nama_kategori_komponen}<input type="hidden" value="${jenis_komponen}" name="jenis_komponen[]"/></td>
-            <td>${jml_komponen}<input type="hidden" value="${jml_komponen}" name="jml_komponen[]"/></td>
+        $('#tbody').append(`<tr>            
+            <td>${komponen}<input type="hidden" value="${komponen}" name="komponen[]"/> </td>
                           
             <td align="center"><button class="delete">delete</button></td>
             </tr>`)
@@ -187,13 +185,11 @@
       var jenis_komponen= $('#jenis_komponen').val();
       var nota_beli     = $('#nota_beli').val();
       //var jml_komponen  = $('#jml_komponen').val();
-      //var keterangan    = $('#keterangan').val();
+      var tanggal    = $('#tanggal').val();
       
 
-        if(id_produk != '' && tanggal != '' && komponen != '' && jenis_komponen != '' && nota_beli != '' && jml_komponen != ''){
+        if( tanggal != ''){
 
-            alert('asdasda');
-            return false;
 
              $.ajax({                
              url : "<?php echo base_url();?>index.php/aktivitas/insertstok",

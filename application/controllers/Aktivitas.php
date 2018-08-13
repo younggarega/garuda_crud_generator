@@ -10,7 +10,7 @@ class Aktivitas extends CI_Controller
         parent::__construct();
         $this->load->model('Aktivitas_Model');
         $this->load->library('form_validation');        
-		//$this->load->library('datatables');
+		$this->load->library('datatables');
     }
 
     public function index()
@@ -265,7 +265,7 @@ class Aktivitas extends CI_Controller
      $html = "<option value=''>SELECT</option>";
      $html = "";
      foreach($data as $key => $value){
-        $html.="<tr> <td>$value->nama_produk</td> <td>$value->id_komponen</td> <td>$value->nama_komponen</td> <td>$value->jml_komponen</td>  </tr>";
+        $html.="<tr> <td><input type='hidden' value='$value->id_produk' name='id_produk[]' id='id_produk'>$value->id_produk</td> <td><input type='hidden' value='$value->nama_produk' name='nama_produk[]' id='nama_produk'>$value->nama_produk</td> <td><input type='hidden' value='$value->id_komponen' name='id_komponen[]' id='id_komponen'>$value->id_komponen</td> <td><input type='hidden' value='$value->nama_komponen' name='nama_komponen[]' id='nama_komponen'>$value->nama_komponen</td> <td><input type='hidden' value='$value->jenis_komponen' name='jenis_komponen[]' id='jenis_komponen'>$value->jenis_komponen</td> <td><input type='hidden' value='$value->jml_komponen' name='jml_komponen[]' id='jml_komponen'>$value->jml_komponen</td>  </tr>";
         }
         echo $html;
     }
@@ -273,11 +273,10 @@ class Aktivitas extends CI_Controller
     public function insertstok(){        
         //echo json_encode($this->input->post());exit();
 
-        $id_komponen    =$this->input->post('komponen');
-        $jenis_komponen =$this->input->post('jenis_komponen');
+        $id_produk    =$this->input->post('id_produk');
+        $id_komponen    =$this->input->post('id_komponen');
+        $jenis_komponen  =$this->input->post('jenis_komponen');
         $jml_komponen   =$this->input->post('jml_komponen');
-        $id_produk      =$this->input->post('id_produk');
-        $nota_beli      =$this->input->post('nota_beli');
         $tgl_aktivitas  =$this->input->post('tanggal');
         //echo $tgl;exit();
 
@@ -285,7 +284,7 @@ class Aktivitas extends CI_Controller
        
         foreach ($id_komponen as $key => $value) {
 
-            $this->Aktivitas_Model->insertstok($id_komponen[$key],$jenis_komponen[$key],$jml_komponen[$key],$id_suplier,$nota_beli,$tgl_aktivitas);
+            $this->Aktivitas_Model->insertstok($jenis_komponen[$key],$id_komponen[$key],$jml_komponen[$key],$id_produk[$key],$tgl_aktivitas);
                        
            
             

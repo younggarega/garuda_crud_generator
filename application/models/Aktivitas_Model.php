@@ -130,11 +130,11 @@ class Aktivitas_Model extends CI_Model
               if($id){
                   $this->db->where('id_produk',$id);
               }
-              $sql = $this->db->query("SELECT tbl_produk_rancangan.nama_produk,tbl_produk_rancangan.id_komponen,tbl_master_komponen.nama_komponen,tbl_produk_rancangan.jml_komponen FROM  `tbl_produk_rancangan` JOIN tbl_master_komponen ON tbl_master_komponen.id_komponen = tbl_produk_rancangan.id_komponen WHERE id_produk = '".$id."'");
+              $sql = $this->db->query("SELECT tbl_produk_rancangan.id_produk,tbl_produk_rancangan.nama_produk,tbl_produk_rancangan.id_komponen,tbl_master_komponen.nama_komponen,tbl_master_komponen.jenis_komponen,tbl_produk_rancangan.jml_komponen FROM  `tbl_produk_rancangan` JOIN tbl_master_komponen ON tbl_master_komponen.id_komponen = tbl_produk_rancangan.id_komponen WHERE id_produk = '".$id."'");
               return $sql->result();
            }
 
-     function insertstok($jenis_komponen,$id_komponen,$jml_komponen,$id_produk,$nota_beli,$tgl_aktivitas){
+     function insertstok($jenis_komponen,$id_komponen,$jml_komponen,$id_produk,$tgl_aktivitas){
       
       $sql = $this->db->query("INSERT INTO `tbl_aktivitas`( 
         `jenis_komponen`,
@@ -143,7 +143,6 @@ class Aktivitas_Model extends CI_Model
         `komponen_masuk`,
         `id_produk`,
         `tgl_aktivitas`,
-        `nota`,
         `status`,
         `keterangan`) 
         VALUES (
@@ -153,8 +152,7 @@ class Aktivitas_Model extends CI_Model
         '".'0'."',
         '".$id_produk."',
         '".$tgl_aktivitas."',
-        '".$nota_beli."',
-        '".'P'."',
+        '".'T'."',
         '".$tgl_aktivitas."')");
     
 

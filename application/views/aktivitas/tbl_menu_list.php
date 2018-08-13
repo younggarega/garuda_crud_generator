@@ -19,7 +19,7 @@
                         <form id="form2">
                         <div class="column2">
                             <strong>Jenis Komponen</strong>
-                            <select class="select2 form-control" id="komponen"></select>
+                            <select class="select2 form-control" name="nama_produk"id="nama_produk"></select>
                         </div>
                         <div class="column2">
                             <strong>Tanggal</strong>
@@ -29,17 +29,19 @@
                         <!-- <button class="btn btn-primary" type="button" id="buttonOk"> Add</button>  -->
                         </div>
                         <div class="column2"></div>
-                        <table class="table table-bordered table-striped" id="table">
+                        <table class="table table-bordered table-striped" id="">
                             <thead>
-                                <tr>                                                                        
+                                <tr>       
+                                    <th>ID Produk</th>                                                                 
                                     <th>Nama Produk</th>
                                     <th>ID Komponen</th>
                                     <th>Nama Komponen</th>
+                                    <th>Jenis Komponen</th>
                                     <th>Jumlah Komponen</th>                                    
                                 </tr>
                             </thead>
                             <tbody id="tbody">
-                            <input type="hidden" value="${komponen}" name="komponen[]"/>
+                            
 
                             </tbody>
                         </table>                        
@@ -92,13 +94,13 @@
          $.ajax({
             url : "<?php echo base_url();?>index.php/aktivitas/getproduk",
             success: function(data){
-                $('#komponen').html(data);
+                $('#nama_produk').html(data);
             }
         });
 
 
-        $("body").on('change', '#komponen', function(){
-            var ktg = $('#komponen').val();
+        $("body").on('change', '#nama_produk', function(){
+            var ktg = $('#nama_produk').val();
             $.ajax({
                 url : "<?php echo base_url();?>index.php/aktivitas/detailproduk",
                 method : "POST",
@@ -112,51 +114,7 @@
         })           
     });
 
-     $('#buttonOk').on('click',function(){
-        var komponen        = $('#komponen').val()
-        var nama_komponen   = $('#komponen option:selected').text()
-        var jenis_komponen  = $('#jenis_komponen').val()
-        var nama_kategori_komponen  = $('#jenis_komponen option:selected').text()
-        //var harga_beli = $('#harga_beli').val()
-        var jml_komponen = $('#jml_komponen').val()
-        if(komponen != '' && jenis_komponen != '' && jml_komponen != ''){
 
-        // var hargabarang = harga_beli.toString();
-        // var harga = hargabarang.split('.').join('');
-         //var total = jml_komponen;
-         //var hrg = number_format(total,0,',','.');
-         //console.log(total);
-
-        $('#table').append(`<tr>            
-            <td>${nama_komponen}<input type="hidden" value="${komponen}" name="komponen[]"/> </td>
-            <td>${nama_kategori_komponen}<input type="hidden" value="${jenis_komponen}" name="jenis_komponen[]"/></td>
-            <td>${jml_komponen}<input type="hidden" value="${jml_komponen}" name="jml_komponen[]"/></td>
-                          
-            <td align="center"><button class="delete">delete</button></td>
-            </tr>`)
-        
-       hapus()
-                    var  totalhrg = 0;
-                    var el = $('[name="total[]"]');
-                    el.each(function(key, value){
-                        totalhrg += parseInt($(this).val().toString().split('.').join(''));
-                    });
-       //console.log(totalhrg);
-        $('#total_harga').html(number_format(totalhrg,0,',','.'));
-
-                    var totalbrg = 0;
-                    var tot = $('[name="jml_komponen[]"]');
-                    tot.each(function(key, value){
-                        totalbrg += parseInt($(this).val().toString().split('.').join(''));
-                    })
-        $('#total_komponen').html(number_format(totalbrg,0,',','.'));
-        $('#jml_komponen').val('');
-        //$('#harga_beli').val('');
-        }else{
-            alert('DATA KURANG LENGKAP');
-            event.preventDefault();   
-        }
-     });
      function hapus(){
         $('.delete').on('click',function(){
             $(this).parent().parent().remove()
@@ -183,24 +141,22 @@
      function onklik(){
 
         //$('#submit').on('click',function(event){ 
-      var komponen      = $('#komponen').val();
-      var jenis_komponen= $('#jenis_komponen').val();
-      var nota_beli     = $('#nota_beli').val();
-      //var jml_komponen  = $('#jml_komponen').val();
-      //var keterangan    = $('#keterangan').val();
+     var jenis_komponen   = $('#jenis_komponen').val();
+      var id_produk   = $('#id_produk').val();
+      var id_komponen   = $('#id_komponen').val();
+      var nama_komponen = $('#nama_komponen').val();
+      var jml_komponen  = $('#jml_komponen').val();
+      var tanggal    = $('#tanggal').val();
       
 
-        if(id_produk != '' && tanggal != '' && komponen != '' && jenis_komponen != '' && nota_beli != '' && jml_komponen != ''){
-
-            alert('asdasda');
-            return false;
+        if(tanggal != '' ){
 
              $.ajax({                
              url : "<?php echo base_url();?>index.php/aktivitas/insertstok",
                 method : "POST",
-                data : $('[name="komponen[]"], [name="jenis_komponen[]"], [name="jml_komponen[]"], [name="id_produk"], [name="nota_beli"], [name="tanggal"]').serialize(), 
-                dataType:'json',
+                data : $('[name="jenis_komponen[]"], [name="id_komponen[]"],[name="jml_komponen[]"],[name="id_produk[]"], [name="tanggal"]').serialize(),
                 success : function(data){
+                    
                     alert('Update Stock Berhasil');
                      $('#notif').html('');
                     $('#form1')[0].reset();

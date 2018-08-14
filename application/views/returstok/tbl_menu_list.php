@@ -11,19 +11,6 @@
                     <div class="box-body">
                         <div class="form">
                         <form method="post" id="form1">
-                        <div class="column">    
-                        <table>
-                                <tr><td width ="200"><strong>  Id Suplier </strong></td>
-                                <td width="300"><select class="select2 form-control" name="id_suplier" id="id_suplier" onchange="test();"></select></td></tr>
-                        </table>
-                        </div>
-                        <div class="column"> 
-                            <table>
-                                <tr><td width ="200"> <strong>Nama Suplier</strong> </td>
-                                <td width="300"><input type="text" class="form-control" id="nama_suplier" name="nama_suplier"/></td></tr>
-                            </table>
-                        </div>
-                        </div>
                     <div class="form">                        
                         <div class="column"> 
                             <table>
@@ -198,8 +185,8 @@
      function onklik(){
 
         //$('#submit').on('click',function(event){    
-      var id_suplier     = $('#id_suplier').val();
-      var nama_suplier  = $('#nama_suplier').val();
+      //var id_suplier     = $('#id_suplier').val();
+      //var nama_suplier  = $('#nama_suplier').val();
       //var alamat        = $('#alamat').val();
       var komponen       = $('#komponen').val();
       var jenis_komponen = $('#jenis_komponen').val();
@@ -208,12 +195,12 @@
       //var keterangan    = $('#keterangan').val();
       
 
-        if(id_suplier != '' && nama_suplier != '' && komponen != '' && jenis_komponen != ''  && jml_komponen != ''){
+        if(tgl_aktivitas != '' && komponen != '' && jenis_komponen != ''  && jml_komponen != ''){
 
              $.ajax({                
              url : "<?php echo base_url();?>index.php/returstok/insertstok",
                 method : "POST",
-                data : $('[name="komponen[]"], [name="nama_suplier"], [name="jenis_komponen[]"], [name="jml_komponen[]"], [name="id_suplier"], [name="tgl_aktivitas"]').serialize(), 
+                data : $('[name="komponen[]"], [name="jenis_komponen[]"], [name="jml_komponen[]"], [name="tgl_aktivitas"]').serialize(), 
                 dataType:'json',
                 success : function(data){
                     alert('Retur Stok Berhasil');

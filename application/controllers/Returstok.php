@@ -246,7 +246,6 @@ class Returstok extends CI_Controller
         $jenis_komponen =$this->input->post('jenis_komponen');
         $id_komponen    =$this->input->post('komponen');
         $jml_komponen   =$this->input->post('jml_komponen');
-        $id_suplier     =$this->input->post('id_suplier');
         $tgl_aktivitas  =$this->input->post('tgl_aktivitas');
         //echo $tgl;exit();
 
@@ -257,8 +256,7 @@ class Returstok extends CI_Controller
             $this->Returstok_model->insertstok(
                 $id_komponen[$key],
                 $jenis_komponen[$key],
-                $jml_komponen[$key],
-                $id_suplier,                
+                $jml_komponen[$key],               
                 $tgl_aktivitas);       
             
         }

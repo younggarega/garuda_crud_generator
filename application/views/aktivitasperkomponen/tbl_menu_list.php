@@ -50,7 +50,6 @@
                         </table>                        
                         <button class="btn btn-primary" id="submit" onclick="onklik();">Add All Item</button>
                         <button class="btn btn-default" id="Cancel">Cancel</button>
-                        <a href="<?php echo site_url('aktivitas') ?>" class="btn btn-info"><i class="fa fa-sign-out"></i> Kembali</a>
                         </form>
                        
                     </div>

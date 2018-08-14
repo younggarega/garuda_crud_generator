@@ -9,9 +9,7 @@
                         <h3 class="box-title">AKTIVITAS</h3>
                     </div>
                     <div class="box-body">
-                             <div style="padding-bottom: 10px;">
-                            <?php echo anchor(site_url('aktivitasperkomponen'), '<i class="" aria-hidden="true"></i> Aktivitas Per-Komponen', 'class="btn btn-danger btn-sm"'); ?>
-                            </div>
+
                         <div class="form">
                         <form method="post" id="form1">
                         </div>
@@ -24,9 +22,6 @@
                         <div class="column2">
                             <strong>Tanggal</strong>
                             <input type="date" class="form-control" name="tanggal" id="tanggal" placeholder="Tanggal"  />
-                        </div>
-                        <div class="column2"><br>
-                        <button class="btn btn-primary" type="button" id="buttonOk"> Add</button>
                         </div>
                         <div class="column2"></div>
                         <table class="table table-bordered table-striped" id="">
@@ -104,7 +99,6 @@
                 method : "POST",
                 data : {prd : ktg},
                 success : function(data){
-                    alert(data)
                     
                     $('#tbody').html(data);
                     
@@ -138,7 +132,6 @@
      function onklik(){
 
         //$('#submit').on('click',function(event){ 
-<<<<<<< HEAD
      var jenis_komponen   = $('#jenis_komponen').val();
       var id_produk   = $('#id_produk').val();
       var id_komponen   = $('#id_komponen').val();

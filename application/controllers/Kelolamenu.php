@@ -10,26 +10,30 @@ class Kelolamenu extends CI_Controller
         parent::__construct();
         $this->load->model('Menu_model');
         $this->load->library('form_validation');        
-	$this->load->library('datatables');
+	    //$this->load->library('datatables');
     }
 
     public function index()
     {
-        $data['setting'] = $this->db->get_where('tbl_setting',array('id_setting'=>1))->row_array();
+        $kelolamenu = $this->Menu_model->get_all();
+
+        $data = array(
+            'kelolamenu_data' => $kelolamenu
+        );
         $this->template->load('template','kelolamenu/tbl_menu_list',$data);
     }
     
-    function simpan_setting(){
+   /* function simpan_setting(){
         $value = $this->input->post('tampil_menu');
         $this->db->where('id_setting',1);
         $this->db->update('tbl_setting',array('value'=>$value));
         redirect('kelolamenu');
-    }
+    }*/
     
-    public function json() {
+   /* public function json() {
         header('Content-Type: application/json');
         echo $this->Menu_model->json();
-    }
+    }*/
 
     public function read($id) 
     {
@@ -41,7 +45,8 @@ class Kelolamenu extends CI_Controller
 		'url' => $row->url,
 		'icon' => $row->icon,
 		'is_main_menu' => $row->is_main_menu,
-		'is_aktif' => $row->is_aktif,
+        'is_aktif' => $row->is_aktif,
+        'no_urut' => $row->no_urut,
 	    );
             $this->template->load('template','kelolamenu/tbl_menu_read', $data);
         } else {
@@ -60,7 +65,8 @@ class Kelolamenu extends CI_Controller
 	    'url' => set_value('url'),
 	    'icon' => set_value('icon'),
 	    'is_main_menu' => set_value('is_main_menu'),
-	    'is_aktif' => set_value('is_aktif'),
+        'is_aktif' => set_value('is_aktif'),
+        'no_urut' => set_value('no_urut'),
 	);
         $this->template->load('template','kelolamenu/tbl_menu_form', $data);
     }
@@ -77,7 +83,8 @@ class Kelolamenu extends CI_Controller
 		'url' => $this->input->post('url',TRUE),
 		'icon' => $this->input->post('icon',TRUE),
 		'is_main_menu' => $this->input->post('is_main_menu',TRUE),
-		'is_aktif' => $this->input->post('is_aktif',TRUE),
+        'is_aktif' => $this->input->post('is_aktif',TRUE),
+        'no_order' => $this->input->post('no_order',TRUE),
 	    );
 
             $this->Menu_model->insert($data);
@@ -98,8 +105,9 @@ class Kelolamenu extends CI_Controller
 		'title' => set_value('title', $row->title),
 		'url' => set_value('url', $row->url),
 		'icon' => set_value('icon', $row->icon),
-		'is_main_menu' => set_value('is_main_menu', $row->is_main_menu),
-		'is_aktif' => set_value('is_aktif', $row->is_aktif),
+        'is_main_menu' => set_value('is_main_menu', $row->is_main_menu),
+        'is_aktif' => set_value('is_aktif', $row->is_aktif),
+        'no_urut' => set_value('no_urut', $row->no_urut),
 	    );
             $this->template->load('template','kelolamenu/tbl_menu_form', $data);
         } else {
@@ -120,7 +128,8 @@ class Kelolamenu extends CI_Controller
 		'url' => $this->input->post('url',TRUE),
 		'icon' => $this->input->post('icon',TRUE),
 		'is_main_menu' => $this->input->post('is_main_menu',TRUE),
-		'is_aktif' => $this->input->post('is_aktif',TRUE),
+        'is_aktif' => $this->input->post('is_aktif',TRUE),
+        'no_urut' => $this->input->post('no_urut',TRUE),
 	    );
 
             $this->Menu_model->update($this->input->post('id_menu', TRUE), $data);
@@ -149,7 +158,8 @@ class Kelolamenu extends CI_Controller
 	$this->form_validation->set_rules('url', 'url', 'trim|required');
 	$this->form_validation->set_rules('icon', 'icon', 'trim|required');
 	$this->form_validation->set_rules('is_main_menu', 'is main menu', 'trim|required');
-	$this->form_validation->set_rules('is_aktif', 'is aktif', 'trim|required');
+    $this->form_validation->set_rules('is_aktif', 'is aktif', 'trim|required');
+    $this->form_validation->set_rules('no_urut', 'No Urut', 'trim|required');
 
 	$this->form_validation->set_rules('id_menu', 'id_menu', 'trim');
 	$this->form_validation->set_error_delimiters('<span class="text-danger">', '</span>');

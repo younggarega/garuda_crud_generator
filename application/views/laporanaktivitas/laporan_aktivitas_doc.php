@@ -20,10 +20,17 @@
         <table class="word-table" style="margin-bottom: 10px">
          <tr>
                            <th>  No </th>
-                           <th> kategori Komponen </th>
-                            <th> ID Komponen</th>
+                           <th> ID Aktivitas </th>
+                            <th> Jenis Komponen</th>
                             <th> Nama Komponen</th>
-                            <th> Jumlah Komponen</th>
+                            <th> Nama Suplier</th>
+                            <th> Komponen Keluar </th>
+                            <th> Komponen Masuk</th>
+                            <th> Nama Produk</th>
+                            <th> Tanggal Aktivitas</th>
+                            <th> Nota Beli</th>
+                            <th> Status</th>
+                            <th> Keterangan</th>
                             
 
                         </tr>
@@ -35,10 +42,17 @@
              ?>
                 <tr>
               <td> <?php echo $no++ ?></td>
-              <td><?php echo $laporan_stok->nama_kategori ?></td>
-              <td><?php echo $laporan_stok->id_komponen ?></td>
+              <td><?php echo $laporan_stok->id_aktivitas ?></td>
+              <td><?php echo $laporan_stok->jenis_komponen ?></td>
               <td><?php echo $laporan_stok->nama_komponen ?></td>
-              <td><?php echo $laporan_stok->jumlah_komponen ?></td>   
+              <td><?php echo $laporan_stok->nama_suplier ?></td>
+              <td><?php echo $laporan_stok->komponen_keluar ?></td>
+              <td><?php echo $laporan_stok->komponen_masuk ?></td>
+              <td><?php echo $laporan_stok->nama_produk ?></td>
+              <td><?php echo $laporan_stok->tgl_aktivitas ?></td>
+              <td><?php echo $laporan_stok->nota ?></td>
+              <td><?php echo $laporan_stok->status ?></td>
+              <td><?php echo $laporan_stok->keterangan ?></td>   
                 </tr>
                 <?php
             }

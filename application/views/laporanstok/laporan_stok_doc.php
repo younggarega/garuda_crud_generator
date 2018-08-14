@@ -38,7 +38,7 @@
               <td><?php echo $laporan_stok->nama_kategori ?></td>
               <td><?php echo $laporan_stok->id_komponen ?></td>
               <td><?php echo $laporan_stok->nama_komponen ?></td>
-              <td><?php echo $laporan_stok->jumlah_komponen ?></td>   
+              <td><?php echo $laporan_stok->jml_komponen ?></td>   
                 </tr>
                 <?php
             }

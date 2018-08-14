@@ -14,8 +14,7 @@
                                     <th>ID Produk</th>
                                     <th>Nama Produk</th>
                                     <th>Nama Komponen</th>
-                                    <th>Jumlah Komponen</th>
-                                    <th>Action</th>
+                                    <th>Jumlah Komponen</th>                                   
                                    
                                 </tr>
                             </thead>
@@ -30,13 +29,13 @@
                                     <td><?php echo $read->id_produk ?></td>
                                     <td><?php echo $read->nama_produk ?></td>
                                     <td><?php  echo $read->nama_komponen?></td>
-                                    <td><?php  echo $read->jml_komponen?></td>
-                                    <td><a href="<?php echo site_url('produkrancangan') ?>" class="btn btn-default">Cancel</a></td>
+                                    <td><?php  echo $read->jml_komponen?></td>                                  
                                                             
-                                    </tr>
-                                        <?php
+                                    </tr>                                  
+                                    <?php
                                     }
                                     ?>
+                                    <tr><td colspan="5"><a href="<?php echo site_url('produkrancangan') ?>" class="btn btn-default" style="margin-left: 90%">Cancel</a></td></tr>
                                     </tbody>
 
       <!-- <tr><td>Id Produk</td><td><?php echo $id_produk; ?></td></tr>

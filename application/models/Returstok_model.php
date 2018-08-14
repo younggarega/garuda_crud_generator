@@ -113,12 +113,11 @@ class Returstok_model extends CI_Model
               return $sql->result();
            }
 
-     function insertstok($jenis_komponen,$id_komponen,$jml_komponen,$id_suplier,$tgl_aktivitas){
+     function insertstok($jenis_komponen,$id_komponen,$jml_komponen,$tgl_aktivitas){
 
       $sql = $this->db->query("INSERT INTO `tbl_aktivitas`( 
         `jenis_komponen`,
         `id_komponen`,
-        `id_suplier`,
         `komponen_keluar`,
         `komponen_masuk`,
         `tgl_aktivitas`,        
@@ -126,7 +125,6 @@ class Returstok_model extends CI_Model
         VALUES (
         '".$jenis_komponen."',
         '".$id_komponen."',        
-        '".$id_suplier."',
         '".'0'."',
         '".$jml_komponen."',
         '".$tgl_aktivitas."',

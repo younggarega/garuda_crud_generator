@@ -13,7 +13,7 @@
             <td width='200'>ID Komponen <?php echo form_error('id_komponen') ?>
             </td>
 
-            <td><input type="text" class="form-control" name="id_komponen" id="id_komponen" placeholder="ID Komponen" required value="<?php echo $id_komponen; ?>" />
+            <td><input readonly type="text" class="form-control" name="id_komponen" id="id_komponen" placeholder="ID Komponen" required value="<?php echo $id_komponen; ?>" />
             </td>
         </tr>
 

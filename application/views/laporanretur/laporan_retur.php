@@ -20,10 +20,10 @@
                         <tr>
                            <th width="10">  No </th>
                            <th width="20"> ID Aktivitas </th>
-                           <th width="20"> Nama Suplier </th>
                            <th width="20"> Nama Kategori </th>
                             <th width="20"> ID Komponen</th>
                             <th width="30"> Nama Komponen</th>
+                            <th width="30"> Tanggal</th>
                             <th width="20"> Jumlah komponen</th>
                             
 
@@ -37,10 +37,10 @@
                         <tr>
                         <td> <?php echo ++$no ?> </td>
                         <td> <?php echo $laporan_retur->id_aktivitas ?> </td>
-                        <td> <?php echo $laporan_retur->nama_suplier ?> </td>
                         <td> <?php echo $laporan_retur->nama_kategori ?> </td>
                         <td> <?php echo $laporan_retur->id_komponen ?> </td>
                         <td> <?php echo $laporan_retur->nama_komponen ?> </td>
+                        <td> <?php echo $laporan_retur->tgl_aktivitas ?> </td>
                         <td align="center"> <?php echo $laporan_retur->jml_komponen ?> </td>
                       </tr>
                         <?php

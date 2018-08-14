@@ -20,7 +20,6 @@
         <table class="word-table" style="margin-bottom: 10px">
             <tr>
         <th>ID Aktivitas</th>
-        <th>Nama Suplier</th>
 		<th>Nama Kategori</th>
         <th>ID Komponen</th>
 		<th>Nama Komponen</th>
@@ -33,11 +32,10 @@
                 ?>
                 <tr>
 		      <td><?php echo $retur->id_aktivitas?></td>
-              <td><?php echo $retur->nama_suplier ?></td>
 		      <td><?php echo $retur->nama_kategori ?></td>
               <td><?php echo $retur->id_komponen ?></td>
 		      <td><?php echo $retur->nama_komponen ?></td>
-              <td><?php echo $retur->jumlah_unit ?></td>
+              <td><?php echo $retur->jml_komponen ?></td>
                 </tr>
                 <?php
             }

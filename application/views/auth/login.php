@@ -66,9 +66,22 @@
                 </div>
                 <!-- /.col -->
 
+                <div class="row" style="margin-top: 20px;">
+                <div class="">
+                    <center>
+                            <br />
+                            <h4>SI Warehouse by :</h4>
+                            <h5>Rizal Kholif Nurrohman, Youngga Rega Nugraha, Zaka Kharis Mursydan</h5>
+                            <p><b>S1 Teknik Informatika 2015</b></p>
+                            <!-- <p><b>Youngga Rega Nugraha</b></p>
+                            <p><b>Zaka Kharis Mursydan</b></p> -->
+                    </center>
+                </div>
+                </div>
+
 
                 <!-- /.col -->
-                <div class="row" style="margin-top: 20px;">
+                <!-- <div class="row" style="margin-top: 20px;">
                     <div class="col-xs-12">
                         <div class="callout callout-info">
                             <h4>Level Super Admin</h4>
@@ -83,7 +96,7 @@
                         </div>
                     </div>
 
-                </div>
+                </div> -->
                 </form>
 
 

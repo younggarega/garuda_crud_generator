@@ -12,7 +12,7 @@
                     </div>
 
                     <div class="box-body">
-                        <div style="padding-bottom: 10px;"'>
+                        <div style="padding-bottom: 10px;">
                             <?php echo anchor(site_url('masterproduk'), '<i class="" aria-hidden="true"></i> Tambah Data', 'class="btn btn-danger btn-sm"'); ?>
                             <?php echo anchor(site_url('produkrancangan/excel'), '<i class="fa fa-file-excel-o" aria-hidden="true"></i> Export Ms Excel', 'class="btn btn-success btn-sm"'); ?>
                             <?php echo anchor(site_url('produkrancangan/word'), '<i class="fa fa-file-word-o" aria-hidden="true"></i> Export Ms Word', 'class="btn btn-primary btn-sm"'); ?></div>
@@ -22,8 +22,8 @@
                                     <th width="30px">No</th>
                                     <th>ID Produk</th>
                                     <th>Nama Produk</th>
-                                    <th>Nama Komponen</th>
-                                    <th>Jumlah Komponen</th>
+                                    <!-- <th>Nama Komponen</th>
+                                    <th>Jumlah Komponen</th> -->
                                     <th>Action</th>
                                    
                                 </tr>
@@ -38,8 +38,8 @@
                                     <td><?php echo ++$start ?></td>
                                     <td><?php echo $produkrancangan->id_produk ?></td>
                                     <td ><?php echo $produkrancangan->nama_produk ?></td>
-                                    <td><?php  echo $produkrancangan->nama_komponen?></td>
-                                    <td><?php  echo $produkrancangan->jml_komponen?></td>
+                                    <!-- <td><?php  echo $produkrancangan->nama_komponen?></td>
+                                    <td><?php  echo $produkrancangan->jml_komponen?></td> -->
                         
 
                                     <td style="text-align:center" width="140px">

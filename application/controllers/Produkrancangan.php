@@ -15,29 +15,25 @@ class produkrancangan extends CI_Controller
 
     public function index()
     {
-        $produkrancangan = $this->Produk_Rancangan_Model->get_all();
+        $produkrancangan = $this->Produk_Rancangan_Model->detailproduk();        
 
         $data = array(
             'produkrancangan_data' => $produkrancangan
         );
 
         $this->template->load('template','produkrancangan/tbl_menu_list',$data);
+
     }
+
     public function read($id) 
     {
-        $row = $this->Produk_Rancangan_Model->get_by_id($id);
-        if ($row) {
-            $data = array(
-        'id_produk' => $row->id_produk,
-		'id_komponen' => $row->id_komponen,
-		'nama_produk' => $row->nama_produk,
-		'jml_komponen' => $row->jml_komponen,
-	    );
-            $this->template->load('template','produkrancangan/tbl_menu_read', $data);
-        } else {
-            $this->session->set_flashdata('message', 'Record Not Found');
-            redirect(site_url('produkrancangan'));
-        }
+        $read = $this->Produk_Rancangan_Model->detailread($id);        
+
+        $data = array(
+            'read_data' => $read
+        );
+
+        $this->template->load('template','produkrancangan/tbl_menu_read',$data);
     }
 
     public function create() 
@@ -136,6 +132,7 @@ class produkrancangan extends CI_Controller
 	
 	$this->form_validation->set_error_delimiters('<span class="text-danger">', '</span>');
     }
+
 
     public function excel()
     {

@@ -18,7 +18,7 @@
                     </div>
 
                     <div class="box-body">
-                        <div style="padding-bottom: 10px;"'>
+                        <div style="padding-bottom: 10px;">
                             <?php echo anchor(site_url('masterkomponen/create'), '<i class="fa fa-wpforms" aria-hidden="true"></i> Tambah Data', 'class="btn btn-danger btn-sm"'); ?>
                             <?php echo anchor(site_url('masterkomponen/excel'), '<i class="fa fa-file-excel-o" aria-hidden="true"></i> Export Ms Excel', 'class="btn btn-success btn-sm"'); ?>
                             <?php echo anchor(site_url('masterkomponen/word'), '<i class="fa fa-file-word-o" aria-hidden="true"></i> Export Ms Word', 'class="btn btn-primary btn-sm"'); ?>
